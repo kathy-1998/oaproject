@@ -6,7 +6,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "SEAL_TYPE")
 public class SealType {
+    /**
+     * 章类型id
+     */
+    @Id
+    @Column(name = "SEAL_TYPE_ID")
     private Integer sealTypeId;
+
+    /**
+     * 章类型名称
+     */
+    @Column(name = "SEAL_TYPE_NAME")
     private String sealTypeName;
 
 
