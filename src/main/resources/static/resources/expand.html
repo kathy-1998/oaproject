@@ -1,0 +1,29 @@
+﻿<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" th:href="@{css/default.css}" rel="Stylesheet" />
+        <script type="text/javascript"  th:src="@{scripts/jquery-1.7.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{scripts/messagecenter.js}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+            	alert("111")
+                $('#maximizePanel').click(function () {
+                    $(this).removeClass('maximizePanelOver');
+                    $axure.messageCenter.postMessage('expandFrame');
+                });
+                $('#maximizePanel').mouseenter(function () {
+                    $(this).addClass('maximizePanelOver');
+                });
+                $('#maximizePanel').mouseout(function () {
+                    $(this).removeClass('maximizePanelOver');
+                });
+            });
+       </script>
+	</head>
+	<body style="background-color:transparent;">
+	    <div id="maximizePanel" class="maximizePanel">
+        </div>
+	</body>
+</html>
