@@ -1,9 +1,6 @@
 package cn.bdqn.oaproject.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -18,6 +15,7 @@ public class Note {
      */
     @Id
     @Column(name="NOTE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer noteId;
 
     /**

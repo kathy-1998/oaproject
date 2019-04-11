@@ -15,6 +15,7 @@ public class BoardroomType {
      */
     @Id
     @Column(name="TYPE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer typeId;
 
     /**

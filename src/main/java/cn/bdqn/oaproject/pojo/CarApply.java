@@ -15,6 +15,7 @@ public class CarApply {
      */
     @Id
     @Column(name="CAR_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer carApplyId;
 
     /**
@@ -74,7 +75,7 @@ public class CarApply {
     /**
      *用车事由
      */
-    @Column(name="THE_ORIGIN_OF_AN INCIDENT")
+    @Column(name="THE_ORIGIN_OF_AN_INCIDENT")
     private String theOriginOfAnIncident;
 
     /**

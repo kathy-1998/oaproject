@@ -14,6 +14,7 @@ public class SealType {
      */
     @Id
     @Column(name = "SEAL_TYPE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sealTypeId;
 
     /**

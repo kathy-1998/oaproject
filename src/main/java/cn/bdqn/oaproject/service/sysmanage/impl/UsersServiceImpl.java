@@ -4,6 +4,9 @@ import cn.bdqn.oaproject.dao.sysmanage.UsersDao;
 import cn.bdqn.oaproject.pojo.Users;
 import cn.bdqn.oaproject.service.sysmanage.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +34,8 @@ public class UsersServiceImpl  implements UsersService {
     }
 
 
+
+
     /**
      * 修改
      * @param userpwd
@@ -48,5 +53,18 @@ public class UsersServiceImpl  implements UsersService {
             return  false;
         }
 
+    }
+
+
+    @Override
+    public Page<Users> findAll(Specification<Users> specification, Pageable pageable) {
+
+        Page<Users> users=null;
+        try{
+            users=usersDao.findAll(specification,pageable);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  users;
     }
 }

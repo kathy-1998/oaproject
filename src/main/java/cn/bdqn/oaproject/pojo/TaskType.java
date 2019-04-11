@@ -13,6 +13,7 @@ public class TaskType {
      */
     @Id
     @Column(name = "TASK_TYPE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer taskTypeId;
 
     /**

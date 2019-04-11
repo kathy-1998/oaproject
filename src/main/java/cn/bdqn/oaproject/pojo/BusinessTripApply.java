@@ -17,6 +17,7 @@ public class BusinessTripApply {
      */
     @Id
     @Column(name="BUSINESS_TRIP_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer businessTripApplyId;
 
     /**

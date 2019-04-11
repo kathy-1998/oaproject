@@ -13,15 +13,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
+public interface UsersDao extends JpaRepository<Users,Integer>,JpaSpecificationExecutor<Users>{
 
-public interface UsersDao extends JpaRepository<Users,Integer>{
 
-/*
-
-  Page<Users> findAllByUserNameLikeAndRealNameLike(Specification<Users> specification, Pageable pageable);
-*/
 
     /**
      * 根据用户名判断用户是否存在
@@ -35,10 +32,15 @@ public interface UsersDao extends JpaRepository<Users,Integer>{
     void modify(String userpwd,Date date,Integer id);
 
 
+    @Override
+    Page<Users> findAll(Specification<Users> specification, Pageable pageable);
 
 
-
-
-
+    /**
+     * 根据角色id返回该下用户个数
+     * @param RoleId
+     * @return
+     */
+    long countUsersByRoleId(Integer RoleId);
 
 }

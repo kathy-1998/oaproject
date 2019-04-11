@@ -15,6 +15,7 @@ public class ProofOfEarningsApply {
      */
     @Id
     @Column(name = "PROOF_OF_EARNINGS_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer proofOfEarningsApplyId;
 
     /**

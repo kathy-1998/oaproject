@@ -14,6 +14,7 @@ public class LeaveApply {
      */
     @Id
     @Column(name="LEAVE_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer leaveApplyId;
 
     /**

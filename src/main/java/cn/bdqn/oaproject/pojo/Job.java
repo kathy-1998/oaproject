@@ -17,6 +17,7 @@ public class Job {
      */
     @Id
     @Column(name = "JOB_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer jobId;
 
     /**

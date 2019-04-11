@@ -17,6 +17,7 @@ public class Announce {
      */
     @Id
     @Column(name="NOTICE_NO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer noticeNo;
 
     /**
