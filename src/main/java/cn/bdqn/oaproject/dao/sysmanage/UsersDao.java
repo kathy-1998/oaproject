@@ -12,6 +12,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Repository
 
 public interface UsersDao extends JpaRepository<Users,Integer>{
@@ -29,8 +31,12 @@ public interface UsersDao extends JpaRepository<Users,Integer>{
     Users findByUserName(String UserName);
 
     @Modifying
-    @Query("update Users set userPwd = ?1 where userId = ?2")
-    void modify(String userpwd,Integer id );
+    @Query("update Users set userPwd = ?1, modifyDate = ?2,mender = ?3 where userId = ?3")
+    void modify(String userpwd,Date date,Integer id);
+
+
+
+
 
 
 

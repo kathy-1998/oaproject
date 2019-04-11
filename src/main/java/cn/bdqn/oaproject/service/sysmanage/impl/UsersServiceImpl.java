@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * 用户业务操作接口
  */
@@ -39,7 +41,7 @@ public class UsersServiceImpl  implements UsersService {
     public Boolean modify(String userpwd, Integer id) {
 
         try{
-            usersDao.modify(userpwd,id);
+            usersDao.modify(userpwd,new Date(),id);
             return  true;
         }catch (Exception e){
             e.printStackTrace();
