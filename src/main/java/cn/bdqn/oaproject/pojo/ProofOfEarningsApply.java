@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 收入证明申请记录表
+ */
 @Entity
 @Table(name = "PROOF_OF_EARNINGS_APPLY")
 public class ProofOfEarningsApply {

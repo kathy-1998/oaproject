@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 名片印制申请记录表
+ */
 @Entity
 @Table(name = "BUSINESS_CARD_APPLY")
 public class BusinessCardApply {

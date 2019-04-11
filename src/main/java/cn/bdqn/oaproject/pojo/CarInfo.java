@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * 车辆信息表
+ */
 @Entity
 @Table(name = "CAR_INFO")
 public class CarInfo {

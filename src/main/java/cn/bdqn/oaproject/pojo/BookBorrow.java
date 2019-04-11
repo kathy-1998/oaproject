@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 图书借阅申请
+ * 图书借阅申请记录表
  */
 @Entity
 @Table(name = "BOOK_BORROW")

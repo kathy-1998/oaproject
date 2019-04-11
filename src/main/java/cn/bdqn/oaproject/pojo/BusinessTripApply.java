@@ -5,6 +5,9 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * 出差申请记录表
+ */
 @Entity
 @Table(name = "BUSINESS_TRIP_APPLY")
 public class BusinessTripApply {

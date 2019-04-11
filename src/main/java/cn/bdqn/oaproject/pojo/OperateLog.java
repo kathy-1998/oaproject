@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 操作日志表
+ */
 @Entity
 @Table(name = "OPERATE_LOG")
 public class OperateLog {

@@ -2,6 +2,9 @@ package cn.bdqn.oaproject.pojo;
 
 import javax.persistence.*;
 
+/**
+ * 任务类型表
+ */
 @Entity
 @Table(name = "TASK_TYPE")
 public class TaskType {

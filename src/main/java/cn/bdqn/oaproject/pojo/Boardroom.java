@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 会议室
+ * 会议室表
  */
 @Entity
 @Table(name="BOARDROOM")

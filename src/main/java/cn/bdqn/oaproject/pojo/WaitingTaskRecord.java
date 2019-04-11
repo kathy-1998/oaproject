@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 待处理任务记录表
+ */
 @Entity
 @Table(name = "WAITING_TASK_RECORD")
 public class WaitingTaskRecord {

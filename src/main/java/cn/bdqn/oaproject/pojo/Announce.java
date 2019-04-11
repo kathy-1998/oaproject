@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * 通告
+ * 通告表
  */
 @Entity
 @Table(name="ANNOUNCE")

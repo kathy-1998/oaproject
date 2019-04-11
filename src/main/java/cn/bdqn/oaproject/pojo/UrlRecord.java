@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * 常用网址表
+ */
 @Entity
 @Table(name = "URL_RECORD")
 public class UrlRecord {

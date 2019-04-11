@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 用章申请表
+ */
 @Entity
 @Table(name = "SEAL_APPLY")
 public class SealApply {

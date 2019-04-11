@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 便签类
+ * 我的便签
  */
 @Entity
 @Table(name="NOTE")

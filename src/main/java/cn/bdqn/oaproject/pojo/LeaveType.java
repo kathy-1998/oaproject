@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * 请假类型表
+ */
 @Entity
 @Table(name = "LEAVE_TYPE")
 public class LeaveType {

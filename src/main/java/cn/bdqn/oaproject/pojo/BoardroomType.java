@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 会议类型
+ * 会议类型表
  */
 @Entity
 @Table(name = "BOARDROOM_TYPE")

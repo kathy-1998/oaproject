@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * 部门表
+ */
 @Entity
 @Table(name = "DEPT")
 public class Dept {

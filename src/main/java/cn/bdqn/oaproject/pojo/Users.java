@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 用户表
+ */
 @Entity
 @Table(name = "USERS")
 public class Users {

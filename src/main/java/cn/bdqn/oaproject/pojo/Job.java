@@ -5,6 +5,9 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * 职位表
+ */
 @Entity
 @Table(name = "JOB")
 public class Job {

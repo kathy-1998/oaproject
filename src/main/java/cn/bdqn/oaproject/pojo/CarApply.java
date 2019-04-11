@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 用车申请记录表
+ */
 @Entity
 @Table(name = "CAR_APPLY")
 public class CarApply {

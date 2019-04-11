@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 角色表
+ */
 @Entity
 @Table(name = "ROLE")
 public class Role {

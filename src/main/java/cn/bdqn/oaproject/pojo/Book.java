@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * 图书
+ * 图书表
  */
 @Entity
 @Table(name="BOOK")

@@ -3,6 +3,9 @@ package cn.bdqn.oaproject.pojo;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * 交通类型表
+ */
 @Entity
 @Table(name = "VEHICLE_TYPE")
 public class VehicleType {
