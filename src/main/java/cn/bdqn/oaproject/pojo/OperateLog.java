@@ -15,6 +15,7 @@ public class OperateLog {
      */
     @Id
     @Column(name = "LOG_NO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer logNo;
 
     /**

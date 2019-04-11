@@ -15,6 +15,7 @@ public class CarApply {
      */
     @Id
     @Column(name="CAR_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer carApplyId;
 
     /**

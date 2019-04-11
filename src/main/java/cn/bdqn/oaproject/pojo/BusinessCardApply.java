@@ -15,6 +15,7 @@ public class BusinessCardApply {
      */
     @Id
     @Column(name="BUSINESS_CARD_APPLY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer businessCardApplyId;
 
     /**

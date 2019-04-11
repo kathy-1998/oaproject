@@ -15,6 +15,7 @@ public class BookBorrow {
      */
     @Id
     @Column(name="BOOK_BORROW_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookBorrowId;
 
     /**

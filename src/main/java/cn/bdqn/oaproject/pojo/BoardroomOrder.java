@@ -15,6 +15,7 @@ public class BoardroomOrder {
      */
     @Id
     @Column(name="RESERVATION_NO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reservationNo;
 
     /**

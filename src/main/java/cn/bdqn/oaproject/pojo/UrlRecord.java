@@ -15,6 +15,7 @@ public class UrlRecord {
      */
     @Id
     @Column(name = "URL_RECORD_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer urlRecordId;
 
     /**

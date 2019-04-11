@@ -15,6 +15,7 @@ public class VehicleType {
      */
     @Id
     @Column(name = "VEHICLE_TYPE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer vehicleTypeId;
 
     /**
