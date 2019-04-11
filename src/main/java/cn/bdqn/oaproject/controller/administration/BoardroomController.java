@@ -97,5 +97,23 @@ public class BoardroomController {
         return "Conference_room_manage";
     }
 
+    /**
+     * 根据编号获取会议室对象信息
+     * @param meetingroomNo
+     * @return
+     */
+    @RequestMapping(value = "/getroombyid",method = RequestMethod.GET)
+    public String findByMettingroomNo(@RequestParam("id")String meetingroomNo){
+        try {
+            Boardroom boardroom=boardroomService.findByMeetingroomNo(3);
+            System.out.println(boardroom.getMeetingroomNo()+"\t"+boardroom.getMeetingroomName());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "Conference_room_manage";
+    }
+
+
+
 
 }

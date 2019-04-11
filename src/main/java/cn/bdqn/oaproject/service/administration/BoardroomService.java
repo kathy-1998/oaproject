@@ -36,6 +36,12 @@ public interface BoardroomService {
      */
     boolean delBoardroom(Integer id)throws  Exception;
 
+    /**
+     * 根据会议室编号获取会议室对象
+     * @param id
+     * @return
+     */
+    Boardroom findByMeetingroomNo(Integer id);
 
 
 

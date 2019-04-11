@@ -78,4 +78,20 @@ public class BoardroomServiceImpl implements BoardroomService {
         }
         return false;
     }
+
+    /**
+     * 根据会议室编号获取会议室对象
+     * @param id
+     * @return
+     */
+    @Override
+    public Boardroom findByMeetingroomNo(Integer id) {
+        Boardroom boardroom=null;
+        try{
+            boardroom=boardroomDao.findByMeetingroomNo(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return boardroom;
+    }
 }

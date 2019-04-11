@@ -34,7 +34,11 @@ public interface BoardroomDao extends JpaRepository<Boardroom,Integer> {
      */
     void  deleteByMeetingroomNo(Integer id);
 
-
-
+    /**
+     * 根据会议室编号获取会议室对象
+     * @param id
+     * @return
+     */
+    Boardroom findByMeetingroomNo(Integer id);
 
 }
