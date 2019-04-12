@@ -14,14 +14,6 @@ import java.util.Date;
 @Repository
 public interface RoleDao extends JpaRepository<Role,Integer> {
 
-    /**
-     * 添加角色
-     * @param s
-     * @param <S>
-     * @return
-     */
-    @Override
-    <S extends Role> S save(S s);
 
 
     /**

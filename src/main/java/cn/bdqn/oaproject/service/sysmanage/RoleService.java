@@ -14,12 +14,9 @@ import java.util.Date;
 public interface RoleService {
 
     /**
-     * 添加角色
-     * @param s
-     * @param <S>
-     * @return
+     * 添加角色/修改角色
      */
-    <S extends Role> S save(S s);
+   boolean Add(Role role);
 
 
     /**
@@ -28,13 +25,6 @@ public interface RoleService {
      */
 
     boolean deleteById(Integer integer);
-
-
-
-
-    boolean  modify(String roleName, Integer rolesort,Integer roleId);
-
-
 
     Page<Role> findAll(Pageable pageable);
 }

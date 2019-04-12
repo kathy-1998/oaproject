@@ -22,9 +22,7 @@ public interface DeptDao extends JpaRepository<Dept,Integer> {
     @Override
     void deleteById(Integer id);
 
-    /**
-     * 修改部门
-     */
+
 
 
 

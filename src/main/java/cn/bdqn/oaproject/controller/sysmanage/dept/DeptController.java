@@ -22,6 +22,9 @@ import java.util.List;
 @RequestMapping("/dept")
 public class DeptController {
 
+    @Autowired
+
+
    @RequestMapping("/Organizational_structure_manage.html")
     public  String Organizational_structure_manage(){
 
