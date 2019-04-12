@@ -1251,7 +1251,7 @@
 
         $("#u211").click(function () {
             $("#u195").css("visibility", "hidden");//关闭菜单
-            
+
             if(confirm("确定要删除该部门吗?")==true) {
 
                 $.getJSON("/oaproject/dept/del", "deptId=" + deptId, function (data) {
