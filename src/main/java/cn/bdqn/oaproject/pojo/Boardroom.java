@@ -15,6 +15,8 @@ public class Boardroom {
      */
     @Id
     @Column(name="MEETINGROOM_NO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_room_seq")
+    @SequenceGenerator(name = "my_room_seq",sequenceName = "boardroom_seq",initialValue = 3,allocationSize = 1)
     private Integer meetingroomNo;
 
     /**
@@ -32,14 +34,14 @@ public class Boardroom {
     /**
      * 创建者
      */
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable = false)
     private Integer creator;
 
     /**
      * 	创建日期
      *
      */
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable = false)
     private Date creationDate;
 
     /**

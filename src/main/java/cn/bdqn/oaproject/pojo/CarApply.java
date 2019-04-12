@@ -98,13 +98,13 @@ public class CarApply {
     /**
      * 创建者
      */
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable = false)
     private Integer creator;
 
     /**
      * 创建日期
      */
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable = false)
     private Date creationDate;
 
     /**
