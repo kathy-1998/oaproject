@@ -1,15 +1,18 @@
 package cn.bdqn.oaproject.pojo;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * 通告表
  */
 @Entity
 @Table(name="ANNOUNCE")
+@DynamicInsert
+@DynamicUpdate
 public class Announce {
 
     /**
@@ -17,7 +20,7 @@ public class Announce {
      */
     @Id
     @Column(name="NOTICE_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+/*    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
     private Integer noticeNo;
 
     /**
