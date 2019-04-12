@@ -28,6 +28,18 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
+    public Dept getDeptsByDeptId(Integer deptId) {
+        Dept dept=new Dept();
+        try {
+            dept=deptDao.getDeptsByDeptId(deptId);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return dept;
+    }
+
+    @Override
     public boolean deleteById(Integer id) {
 
         try {
@@ -42,6 +54,18 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public boolean Add(Dept dept) {
+        try {
+            deptDao.save(dept);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+        }
+    }
+
+
+
+    public boolean modify(Dept dept) {
         try {
             deptDao.save(dept);
             return  true;

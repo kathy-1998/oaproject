@@ -26,9 +26,15 @@ public interface DeptService {
 
 
     /**
-     * 添加或者修改
+     * 添加
      */
     boolean Add(Dept dept);
 
+    /**
+     * 修改
+     */
+    boolean modify(Dept dept);
+
+    Dept getDeptsByDeptId(Integer deptId);
 
 }

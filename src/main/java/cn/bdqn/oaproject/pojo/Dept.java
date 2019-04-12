@@ -1,5 +1,9 @@
 package cn.bdqn.oaproject.pojo;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -15,8 +19,11 @@ public class Dept {
      */
     @Id
     @Column(name = "DEPT_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_dept_sequence", initialValue = 3, allocationSize = 1)
+
     private Integer deptId;
+
 
     /**
      *部门名称
@@ -50,13 +57,13 @@ public class Dept {
     /**
      * 创建者
      */
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable=false)
     private Integer creator;
 
     /**
      * 创建日期
      */
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable=false)
     private Date creationDate;
 
     /**

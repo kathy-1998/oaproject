@@ -22,6 +22,13 @@ public interface DeptDao extends JpaRepository<Dept,Integer> {
     @Override
     void deleteById(Integer id);
 
+    /**
+     * 根据部门编号,返回部门信息
+     * @param deptId
+     * @return
+     */
+    Dept getDeptsByDeptId(Integer deptId);
+
 
 
 

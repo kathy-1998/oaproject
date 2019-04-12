@@ -69,8 +69,14 @@ public class UsersServiceImpl  implements UsersService {
     }
 
 
-
-
-
-
+    @Override
+    public Users findUsersByUserId(Integer userId) {
+       Users users=null;
+        try{
+            users=usersDao.findUsersByUserId(userId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  users;
+    }
 }
