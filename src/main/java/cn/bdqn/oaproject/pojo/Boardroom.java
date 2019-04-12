@@ -15,7 +15,6 @@ public class Boardroom {
      */
     @Id
     @Column(name="MEETINGROOM_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer meetingroomNo;
 
     /**
