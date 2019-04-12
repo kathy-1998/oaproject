@@ -96,7 +96,7 @@
       <img id="u13_img" class="img " th:src="@{/images/框架/u13.png}"/>
       <!-- Unnamed () -->
       <div id="u14" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">退</span><span style="font-family:'Applied Font Regular', 'Applied Font';">出</span></p>
+        <p><span class="logout" style="font-family:'Applied Font Regular', 'Applied Font';">退</span><span style="font-family:'Applied Font Regular', 'Applied Font';">出</span></p>
       </div>
     </div>
 
@@ -114,7 +114,7 @@
       <img id="u17_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u18" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">你好，</span><span style="font-family:'Applied Font Regular', 'Applied Font';">李四</span><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span><span style="font-family:'Applied Font Regular', 'Applied Font';">研发部</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">你好，</span><span class="userName" style="font-family:'Applied Font Regular', 'Applied Font';">李四</span><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span><span class="dept" style="font-family:'Applied Font Regular', 'Applied Font';">研发部</span></p>
       </div>
     </div>
 
@@ -383,7 +383,7 @@
           <img id="u75_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
           <!-- Unnamed () -->
           <div id="u76" class="text">
-            <p><span style="font-family:'Applied Font Bold', 'Applied Font';">修改</span></p>
+            <p><span class="update" style="font-family:'Applied Font Bold', 'Applied Font';">修改</span></p>
           </div>
         </div>
 
@@ -398,6 +398,8 @@
         <div id="u79" class="ax_文本">
           <img id="u79_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
           <!-- Unnamed () -->
+          <input type="hidden" value="" name="oldPwd" />
+          <input type="hidden" value="" name="id"/>
           <div id="u80" class="text">
             <p><span style="font-family:'Applied Font Regular', 'Applied Font';">旧密码:</span></p>
           </div>
@@ -410,4 +412,71 @@
       </div>
     </div>
   </body>
+  <script>
+      $(function () {
+        getUser();
+
+        $(".update").click(function () {
+            var oldPwd=$("#u81_input").val();//获取旧密码
+            var newPwd=$("#u69_input").val(); //获取新密码
+            var id=$("input[name='id']").val(); //获取id
+            if(oldPwd==""){
+              alert("请输入旧密码!");
+              return;
+            }
+            if(newPwd==""){
+              alert("请输入新密码!");
+              return;
+           }
+            if(newPwd!=$("#u72_input").val()){  //比较两次新密码
+              alert("两次输入的新密码不一致!");
+              return;
+            }
+            if(oldPwd!=$("input[name='oldPwd']").val()){ //判断旧密码是否正确
+              alert("旧密码不正确,请重新输入");
+              $("#u81_input").val("");
+              return;
+            }
+            $.ajax({
+              type:"GET",
+              url:"/oaproject/users/updatePwd.do",
+              data: {pwd:newPwd,pid:id},
+              dataType: "text",
+              success:function (data) {
+                if(data=="Yes"){
+                  alert("修改成功,点击确定刷新页面!");
+                  location.reload();
+                }else{
+                  alert("修改失败,请检查网络连接!");
+                }
+              }
+            });
+        });
+
+        $(".logout").click(function () {
+          if(confirm("确认退出该系统?")){
+            location.href="http://localhost:8080/oaproject/users/logout.do";
+          }
+        });
+      });
+
+      /**
+       * 获取当前登录用户名以及部门
+       */
+      function getUser() {
+        $.ajax({
+          type:"GET",  //请求方式
+          url:"/oaproject/users/sessionInfo.do",  //请求地址
+          data:null,  //参数为空
+          dataType:"json",  //返回值类型
+          success:function (data) {
+            if(data!=null){
+              $(".userName").html(data.realName);  //设置登录的用户名
+              $("input[name='oldPwd']").val(data.userPwd);  //设置隐藏的旧密码
+              $("input[name='id']").val(data.userId); //设置隐藏Id方便修改密码
+            }
+          }
+        });
+      }
+  </script>
 </html>

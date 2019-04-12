@@ -298,7 +298,7 @@ $axure.internal(function($ax) {
     };
 
     var _attachDefaultObjectEvent = function(elementIdQuery, elementId, eventName, fn) {
-        var func = function() {
+      var func = function() {
             if(!$ax.style.IsWidgetDisabled(elementId)) return fn.apply(this, arguments);
             return true;
         };
