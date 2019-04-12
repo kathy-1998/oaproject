@@ -10,7 +10,7 @@
   <link th:href="@{/data/styles.css}" type="text/css" rel="stylesheet"/>
   <link th:href="@{/files/登录/styles.css}" type="text/css" rel="stylesheet"/>
   <script th:src="@{/resources/scripts/jquery-1.7.1.min.js}"></script>
-  <script th:src="@{/resources/scripts/jquery-ui-1.8.10.custom.min.js}"></script>
+  <!--<script th:src="@{/resources/scripts/jquery-ui-1.8.10.custom.min.js}"></script>
   <script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
   <script th:src="@{/resources/scripts/prototype/globals.js}"></script>
   <script th:src="@{/resources/scripts/axutils.js}"></script>
@@ -39,7 +39,7 @@
   <script th:src="@{/resources/scripts/prototype/init.temp.js}"></script>
   <script th:src="@{/files/登录/data.js}"></script>
   <script th:src="@{/resources/scripts/prototype/legacy.js}"></script>
-  <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>
+  <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>-->
 </head>
 <body>
 
@@ -90,7 +90,7 @@
   <img id="u10_img" class="img " th:src="@{/images/登录/u10.png}"/>
   <!-- Unnamed () -->
   <div id="u11" class="text">
-    <p><span style="font-family:'Applied Font Bold', 'Applied Font';">登录</span></p>
+    <p class="login"><span style="font-family:'Applied Font Bold', 'Applied Font';">登录</span></p>
   </div>
 </div>
 
@@ -119,4 +119,42 @@
   </div>
 </div>
 </body>
+<script>
+  $(function () {
+      $(".login").click(function () {
+          var userName=$("#u4_input").val();  //获取用户名
+          var userPwd=$("#u5_input").val();   //获取密码
+          if(userName==""){
+            alert("请输入用户名!");
+            return;
+          }
+          if(userPwd==""){
+            alert("请输入密码!");
+            return;
+          }
+          $.ajax({
+            type:"POST",   //请求类型
+            url:"/oaproject/users/doLogin.do",  //请求地址
+            data:{userName:userName,userPwd:userPwd},  //请求参数
+            dataType:"json",  //返回数据类型
+            success:function (data) {
+              if(data.userId!=undefined){
+                  alert("登录成功,点击确定跳转页面!");
+                  location.href="http://localhost:8080/oaproject/index/framework.html";
+              }else{
+                alert("用户名或密码错误!");
+              }
+            },
+            error:function () {
+              alert("网络连接失败!");
+              return;
+            }
+          });
+
+        /*$.getJSON("/oaproject/users/doLogin.do","userName="+userName+"&userPwd="+userPwd,function (data) {
+          alert(data);
+        })*/
+      });
+  });
+</script>
 </html>
