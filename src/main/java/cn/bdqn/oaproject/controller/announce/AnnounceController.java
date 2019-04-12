@@ -52,12 +52,10 @@ public class AnnounceController {
         try {
             //测试
             announce=new Announce();
-            announce.setNoticeNo(3);
             announce.setNoticeTitle("关于五一放假通知");
             announce.setNoticeContent("五一改为四天假期。");
             announce.setCreationDate(new Date());
             announce.setCreator(1);
-            announce.setMender(null);
             boolean flag=announceService.addAnnounce(announce);
             System.out.println(flag);
         }catch (Exception e){
@@ -72,7 +70,7 @@ public class AnnounceController {
      * @param announce
      * @return
      */
-    @RequestMapping(value = "updateappounce.do",method = RequestMethod.POST)
+    @RequestMapping(value = "updateannounce.do",method = RequestMethod.POST)
     public String updateAnnounce(Announce announce){
         try {
             //测试
@@ -114,7 +112,7 @@ public class AnnounceController {
     public String findAnnounceById(@RequestParam("id")String noticeNo){
         try {
             Announce announce=new Announce();
-            announce=announceService.findAnnouceById(3);
+            announce=announceService.findAnnouceById(20002);
             System.out.println(announce.getNoticeTitle()+"\t"+announce.getNoticeContent());
         }catch (Exception e){
             e.printStackTrace();

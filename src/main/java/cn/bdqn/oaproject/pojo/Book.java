@@ -14,7 +14,8 @@ public class Book {
      */
     @Id
     @Column(name="BOOK_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_book_seq")
+    @SequenceGenerator(name = "my_book_seq",sequenceName = "book_seq",initialValue = 3,allocationSize = 1)
     private Integer bookId;
 
     /**

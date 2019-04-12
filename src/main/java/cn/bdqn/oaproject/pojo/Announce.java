@@ -1,6 +1,4 @@
 package cn.bdqn.oaproject.pojo;
-
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -11,8 +9,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="ANNOUNCE")
-@DynamicInsert
-@DynamicUpdate
+@DynamicUpdate(true)
 public class Announce {
 
     /**
@@ -20,7 +17,8 @@ public class Announce {
      */
     @Id
     @Column(name="NOTICE_NO")
-/*    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_announce_seq")
+    @SequenceGenerator(name = "my_announce_seq",sequenceName = "announce_seq",initialValue = 3,allocationSize = 1)
     private Integer noticeNo;
 
     /**
@@ -68,13 +66,13 @@ public class Announce {
     /**
      * 创建者
      */
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable = false)
     private Integer creator;
 
     /**
      * 创建日期
      */
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable = false)
     private Date creationDate;
 
     /**

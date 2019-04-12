@@ -15,7 +15,8 @@ public class BoardroomType {
      */
     @Id
     @Column(name="TYPE_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_roomtype_seq")
+    @SequenceGenerator(name = "my_roomtype_seq",sequenceName = "roomtype_seq",initialValue = 3,allocationSize = 1)
     private Integer typeId;
 
     /**
@@ -24,10 +25,10 @@ public class BoardroomType {
     @Column(name="TYPE_NAME")
     private String typeName;
 
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable = false)
     private Integer creator;
 
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable = false)
     private Date creationDate;
 
     @Column(name="MENDER")

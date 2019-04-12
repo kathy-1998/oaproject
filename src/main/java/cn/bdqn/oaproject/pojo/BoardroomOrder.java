@@ -15,13 +15,14 @@ public class BoardroomOrder {
      */
     @Id
     @Column(name="RESERVATION_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_roomorder_seq")
+    @SequenceGenerator(name = "my_roomorder_seq",sequenceName = "roomorder_seq",initialValue = 3,allocationSize = 1)
     private Integer reservationNo;
 
     /**
      * 会议室编号
      */
-    @Column(name="MEETINGROOM_NO")
+/*    @Column(name="MEETINGROOM_NO")*/
     private Integer meetingroomNo;
 
     /**
@@ -43,15 +44,15 @@ public class BoardroomOrder {
     private Date endTime;
 
     /**
-     * 创建者
+     * 创建者（记录人）
      */
-    @Column(name="CREATOR")
+    @Column(name="CREATOR",updatable = false)
     private Integer creator;
 
     /**
      * 创建日期
      */
-    @Column(name="CREATION_DATE")
+    @Column(name="CREATION_DATE",updatable = false)
     private Date creationDate;
 
     /**
@@ -72,6 +73,39 @@ public class BoardroomOrder {
     @Column(name="ISDELETE")
     private Integer isdelete;
 
+    /**
+     * 预订人
+     */
+    @Column(name = "ORDER_PERSON")
+    private Integer orderPerson;
+
+    /**
+     * 所关联的会议室
+     */
+    @Transient          //指定无需持久化到数据库
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="MEETINGROOM_NO")
+    private Boardroom boardroom;
+
+
+
+
+
+    public Boardroom getBoardroom() {
+        return boardroom;
+    }
+
+    public void setBoardroom(Boardroom boardroom) {
+        this.boardroom = boardroom;
+    }
+
+    public Integer getOrderPerson() {
+        return orderPerson;
+    }
+
+    public void setOrderPerson(Integer orderPerson) {
+        this.orderPerson = orderPerson;
+    }
 
     public Integer getReservationNo() {
         return reservationNo;

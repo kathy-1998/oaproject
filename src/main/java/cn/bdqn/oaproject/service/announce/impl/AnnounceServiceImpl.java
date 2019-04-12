@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service()
+@Service
 @Transactional
 public class AnnounceServiceImpl implements AnnounceService {
 
@@ -59,6 +59,20 @@ public class AnnounceServiceImpl implements AnnounceService {
     @Override
     public boolean updateAnnounce(Announce announce) throws Exception {
         try {
+           /* Announce a= this.findAnnouceById(announce.getNoticeNo()); //获取要修改的通告对象
+            a.setModifyDate(announce.getModifyDate());
+            a.setMender(announce.getMender());
+            a.setCreationDate(announce.getCreationDate());
+            a.setStartTime(announce.getStartTime());
+            a.setEndTime(a.getEndTime());
+            a.setNoticeContent(announce.getNoticeContent());
+            a.setNoticeStatus(announce.getNoticeStatus());
+            a.setNoticeNo(announce.getNoticeNo());
+            a.setIsdelete(announce.getIsdelete());
+            a.setNoticeTitle(announce.getNoticeTitle());
+            a.setCreator(announce.getCreator());
+            a.setReleaseTime(announce.getReleaseTime());*/
+
             announceDao.save(announce);
             return true;
         }catch (Exception e){
