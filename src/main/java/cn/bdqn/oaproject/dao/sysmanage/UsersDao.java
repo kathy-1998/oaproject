@@ -32,8 +32,6 @@ public interface UsersDao extends JpaRepository<Users,Integer>,JpaSpecificationE
     void modify(String userpwd,Date date,Integer id);
 
 
-    @Override
-    Page<Users> findAll(Specification<Users> specification, Pageable pageable);
 
 
     /**
@@ -41,9 +39,17 @@ public interface UsersDao extends JpaRepository<Users,Integer>,JpaSpecificationE
      * @param RoleId
      * @return
      */
-    long countUsersByRoleId(Integer RoleId);
+    long countUsersByRoleRoleId(Integer roleId);
 
     //根据用户id返回用户对象
     Users findUsersByUserId(Integer userId);
+
+
+    @Override
+    Page<Users> findAll(Specification<Users> specification, Pageable pageable);
+
+
+
+
 
 }

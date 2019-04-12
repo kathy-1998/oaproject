@@ -44,20 +44,59 @@ public class Users {
     /**
      * 部门编号
      */
-    @Column(name = "DEPT_ID")
-    private Integer deptId;
+  /*  @Column(name = "DEPT_ID")
+    private Integer deptId;*/
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dept_id")
+    private  Dept dept;
+
+
+
 
     /**
      * 角色编号
      */
-    @Column(name = "ROLE_ID")
-    private Integer roleId;
+   /* @Column(name = "ROLE_ID")
+    private Integer roleId;*/
+
+   @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_Id")
+    private  Role role;
+
+   public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+  /*  public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }*/
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
 
     /**
      * 职称编号
      */
-    @Column(name = "JOB_ID")
-    private Integer jobId;
+   /* @Column(name = "JOB_ID")
+    private Integer jobId;*/
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "job_id")
+    private  Job job;
 
     /**
      * 用户状态(0:正常、1:冻结）
@@ -140,29 +179,32 @@ public class Users {
         this.gender = gender;
     }
 
-    public Integer getDeptId() {
+/*    public Integer getDeptId() {
         return deptId;
     }
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }*/
+
+    public Dept getDept() {
+        return dept;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
 
+
+    /*
     public Integer getJobId() {
         return jobId;
     }
 
     public void setJobId(Integer jobId) {
         this.jobId = jobId;
-    }
+    }*/
 
     public Integer getStatus() {
         return status;
