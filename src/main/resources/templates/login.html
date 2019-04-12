@@ -90,7 +90,7 @@
   <img id="u10_img" class="img " th:src="@{/images/登录/u10.png}"/>
   <!-- Unnamed () -->
   <div id="u11" class="text">
-    <p><span style="font-family:'Applied Font Bold', 'Applied Font';">登录</span></p>
+    <p class="login"><span style="font-family:'Applied Font Bold', 'Applied Font';">登录</span></p>
   </div>
 </div>
 
@@ -119,4 +119,26 @@
   </div>
 </div>
 </body>
+<script>
+  $(function () {
+      $(".login").click(function () {
+          var userName=$("#u4_input").val();  //获取用户名
+          var userPwd=$("#u5_input").val();   //获取密码
+          alert("用户名:"+userName+",密码:"+userPwd);
+
+          $.ajax({
+            type:"GET",
+            url:"/users/login",
+            data:{"userName":userName,"userPwd":userPwd},
+            dataType:"String",
+            success:function (data) {
+              alert(data);
+            },
+            error:function () {
+              alert("用户名或密码错误!");
+            }
+          });
+      });
+  });
+</script>
 </html>
