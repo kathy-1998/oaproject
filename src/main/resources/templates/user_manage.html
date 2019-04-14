@@ -473,7 +473,7 @@
 
         <!-- Unnamed (HTML Button) -->
         <div id="u242" class="ax_html_button">
-          <input id="u242_input" type="file" value="浏览" class="text_sketch"/>
+          <input id="u242_input" type="file" onchange="selectImage(this);"  value="浏览" class="text_sketch" multiple/>
         </div>
 
 
@@ -1167,7 +1167,94 @@
 
 
 
+
+
+
     }
+
+
+    var image = '';
+
+    function selectImage(file) {
+      // 上传按钮可用
+      $("#uploadImageBtn").attr("disabled",false);
+
+      //清除上一次的图片
+      $("#u240").html("");
+
+      if (!file.files || !file.files[0]) {
+        return;
+      }
+
+      var fileLength = file.files.length;
+      //限制数量为8
+      if(fileLength > 8){
+        clearImage();
+        alert("请重新选择，最多添加8个文件！")
+        return
+      }
+      // 验证格式
+      for(var i = 0 ; i < fileLength ; i++){
+        if(!checkPicture(file.files[i])){
+          clearImage();
+          alert("请上传  .jpg .png .gif .bmp类型的图片文件")
+          return
+        }
+      }
+      // 图片预览（解决js闭包问题）
+      for(var i = 0 ; i < fileLength ; i++){
+        (function(i){
+          var reader = new FileReader();
+          reader.onload = function(evt) {
+            /* document.getElementById('image').src = evt.target.result; */
+            var imag = $("<img>").attr("id","image"+i).attr("src",evt.target.result).attr("style","width:100%;margin:2%");
+            $("#u240").append(imag)
+            image = evt.target.result;
+          }
+          reader.readAsDataURL(file.files[i]);
+        })(i)
+      }
+    }
+    // 文件上传
+    function uploadImage() {
+      $.ajaxFileUpload({
+        //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
+        url:"../repair_apply/uploadfile",
+        secureuri:false,                           //是否启用安全提交,默认为false
+        fileElementId:'uploadFile',               //文件选择框的id属性
+        dataType:'JSON',                           //服务器返回的格式,可以是json或xml(需要大写)等     text
+        success:function(data, status){            //服务器响应成功时的处理函数
+          data = data.replace(/<pre.*?>/g, ''); // ajaxFileUpload会对服务器响应回来的text内容加上
+          data = data.replace("</pre>", ''); // 本例中设定上传文件完毕后,服务端会返回给前台[0`filepath]
+          data = eval("("+data+")");
+          if (data.success) {
+            clearImage();
+            alert("上传成功")
+
+          } else  {
+            alert("文件为空，请重新上传！")
+          }
+        },
+        error:function(data, status, e){ //服务器响应失败时的处理函数
+          alert("上传失败");
+        }
+      });
+    }
+
+    function clearImage(){
+      $("#uploadFile").val("");
+      $("#imageArea").html('');
+      //  上传按钮不可用
+      $("#uploadImageBtn").attr("disabled",true);
+
+    }
+
+    //文件类型限制
+    function checkPicture(file){
+      return /.(jpg|png|gif|bmp|JPG|PNG|GIF|BMP)$/.test(file.name)?true:false;
+    }
+
+
 
 
   </script>
