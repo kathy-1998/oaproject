@@ -1257,6 +1257,7 @@
                 $.getJSON("/oaproject/dept/del", "deptId=" + deptId, function (data) {
                         alert("删除成功");
                         init();
+                        clear();
                 });
             }
         })

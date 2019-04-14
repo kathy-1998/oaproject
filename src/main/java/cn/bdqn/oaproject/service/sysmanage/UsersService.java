@@ -19,4 +19,6 @@ public interface UsersService {
     Page<Users> findAll(Specification<Users> specification, Pageable pageable);
 
     Users findUsersByUserId(Integer userId);
+
+    Boolean deleteById(Integer id);
 }

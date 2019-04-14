@@ -25,7 +25,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/users")
@@ -107,13 +109,34 @@ public class UsersController {
         }
     }
 
+
+    @RequestMapping("/userManage.html")
+    public  String userManage(){
+
+
+
+        return "user_manage";
+    }
+
+
+
     @RequestMapping("/userList.html")
     @ResponseBody
-    public Object UserList() {
+    public Object UserList(
+                            @RequestParam(value = "userName",required = false)String userName,
+                           @RequestParam(value = "realName",required = false)String realName,
+                            @RequestParam(value = "pageIndex",required = false)String pageindex,
+                            @RequestParam(value = "pageSize",required = false)Integer pageSize
+                           ) {
 
-        Pageable pageable = new PageRequest(0, 2);
-        String userName = "z";
-        String realName = "张";
+        //结果集合
+        Map<String,Object> resultMap=new HashMap<>();
+
+
+        if(pageindex.equals("undefined")){
+            pageindex ="1";
+        }
+        Pageable pageable = new PageRequest(Integer.parseInt(pageindex)-1, pageSize);
 
         Page<Users> list = null;
 
@@ -124,22 +147,60 @@ public class UsersController {
                 List<Predicate> predicates = new ArrayList<>();
 
                 //判断用户名
-                if (null != userName) {
+                if (!userName.equals("undefined") && !userName.equals("")) {
                     predicates.add(cb.like(root.get("userName").as(String.class), "%" + userName + "%"));
                 }
                 //判断真实姓名
-                if (null != realName) {
+                if (!realName.equals("undefined") && !realName.equals("")) {
                     predicates.add(cb.like(root.get("realName").as(String.class), "%" + realName + "%"));
                 }
 
-
+             /*   predicates.add(cb.equal(root.get("isdelete").as(Integer.class),1));*/
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
 
         list = usersService.findAll(specification, pageable);
-        return list;
+
+        resultMap.put("userList",list);
+
+        //当前页码
+        resultMap.put("pageIndex",pageindex);
+        //从页码
+        resultMap.put("pageCount",list.getTotalPages());
+
+        String json=JSON.toJSONString(resultMap,true);
+        System.out.println(json);
+        return resultMap;
 
     }
 
+
+    /**
+     * 删除
+     */
+    @RequestMapping("/del")
+    @ResponseBody
+    public  Object delUsers(@RequestParam("id") String id){
+
+
+         boolean result=usersService.deleteById(Integer.parseInt(id));
+
+        return  result;
+    }
+
+
+    @RequestMapping("/getUsersbyId")
+    @ResponseBody
+    public Object getUsersbyId(@RequestParam("userId") Integer userId) {
+        Users users=usersService.findUsersByUserId(userId);
+
+        return   users;
+    }
+
+
+
+
+
 }
+

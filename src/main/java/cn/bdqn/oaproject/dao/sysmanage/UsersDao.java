@@ -49,7 +49,6 @@ public interface UsersDao extends JpaRepository<Users,Integer>,JpaSpecificationE
     Page<Users> findAll(Specification<Users> specification, Pageable pageable);
 
 
-
-
-
+    @Override
+    void deleteById(Integer id);
 }
