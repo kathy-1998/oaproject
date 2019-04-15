@@ -275,6 +275,82 @@ public class UsersController {
     }
 
 
+    @RequestMapping(value = "/modify")
+    @ResponseBody
+    public Object modify(@RequestParam(value = "userName",required =false) String userName,
+                      @RequestParam(value = "password",required =false) String password,
+                      @RequestParam(value = "realName",required =false) String realName,
+                      @RequestParam(value = "deptId",required =false) Integer deptId,
+                      @RequestParam(value = "sex",required =false) Integer gender,
+                      @RequestParam(value = "jobId",required =false) Integer jobId,
+                      @RequestParam(value = "roleId",required =false) Integer roleId,
+                      @RequestParam(value = "userId",required =false) Integer userId,
+                         @RequestParam(value = "status",required =false) Integer status,
+
+                         @RequestParam("myfile") MultipartFile file
+    ) {
+
+        Users user=new Users();
+        user.setUserId(userId);
+        Job job=new Job();
+        job.setJobId(jobId);
+        Dept dept=new Dept();
+        dept.setDeptId(deptId);
+        Role role=new Role();
+        role.setRoleId(roleId);
+        user.setUserName(userName);
+        user.setMender(1);
+        user.setModifyDate(new Date());
+        user.setGender(gender);
+        user.setIsdelete(1);
+        user.setJob(job);
+        user.setDept(dept);
+        user.setUserPwd(password);
+        user.setStatus(status);
+        user.setRole(role);
+        user.setRealName(realName);
+
+
+        String fileName = file.getOriginalFilename();
+
+
+        if(fileName.indexOf("\\") != -1){
+            fileName = fileName.substring(fileName.lastIndexOf("\\"));
+        }
+        String filePath = "src/main/resources/static/files/images/";
+        File targetFile = new File(filePath);
+        if(!targetFile.exists()){
+            targetFile.mkdirs();
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(filePath+fileName);
+            out.write(file.getBytes());
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "上传失败";
+        }
+
+        user.setUserUrl(fileName);
+
+        //执行保存
+
+        if(usersService.add(user)){
+            return "修改成功";
+        }else{
+            return  "修改失败" ;
+        }
+
+
+
+
+
+    }
+
+
 
 
 }
