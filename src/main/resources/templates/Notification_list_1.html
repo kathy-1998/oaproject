@@ -3083,67 +3083,67 @@
         $.getJSON("/oaproject/anno/announcelist","pageIndex="+pageIndex+"&pageSize="+pageSize,function(data){
           var num=13;
           $.each(data.content,function(i,e){
-            //创建者姓名
-            var userName; //
-            //判断通告状态
-            var status;
-            if(e.noticeStatus==0){
-              status="未发布";
-            }else if(e.noticeStatus==1){
-              status="已发布";
-            }else
-            {
-              status="已过期";
-            }
-            $u2.append("<div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
-                    "            <img id=\"u"+num+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u13.png}\"/>\n" +
-                    "            <!-- Unnamed () -->\n" +
-                    "            <div id=\"u"+(num+1)+"\" class=\"text\">\n" +
-                    "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.noticeTitle+"</span></p>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- Unnamed (表格单元) -->\n" +
-                    "        <div id=\"u"+(num+2)+"\" class=\"ax_表格单元\">\n" +
-                    "            <img id=\"u"+(num+2)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u15.png}\"/>\n" +
-                    "            <!-- Unnamed () -->\n" +
-                    "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
-                    "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+userName+"</span></p>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- Unnamed (表格单元) -->\n" +
-                    "        <div id=\"u"+(num+4)+"\" class=\"ax_表格单元\">\n" +
-                    "            <img id=\"u"+(num+4)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u17.png}\"/>\n" +
-                    "            <!-- Unnamed () -->\n" +
-                    "            <div id=\"u"+(num+5)+"\" class=\"text\">\n" +
-                    "                <p>\n" +
-                    "                    <span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+status+"</span>\n" +
-                    "                </p>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- Unnamed (表格单元) -->\n" +
-                    "        <div id=\"u"+(num+6)+"\" class=\"ax_表格单元\">\n" +
-                    "            <img id=\"u"+(num+6)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u19.png}\"/>\n" +
-                    "            <!-- Unnamed () -->\n" +
-                    "            <div id=\"u"+(num+7)+"\" class=\"text\">\n" +
-                    "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.releaseTime+"</span></p>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- Unnamed (表格单元) [footnote] -->\n" +
-                    "        <div id=\"u"+(num+6)+"_ann\" class=\"annotation\"></div>\n" +
-                    "\n" +
-                    "        <!-- Unnamed (表格单元) -->\n" +
-                    "        <div id=\"u"+(num+8)+"\" class=\"ax_表格单元\">\n" +
-                    "            <img id=\"u"+(num+8)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u21.png}\"/>\n" +
-                    "            <!-- Unnamed () -->\n" +
-                    "            <div id=\"u"+(num+9)+"\" class=\"text\"></div>\n" +
-                    "        </div>\n" +
-                    "\n");
+            $.getJSON("/oaproject/users/getUsersbyId","userId="+e.creator,function(result){
+              //判断通告状态
+              var status;
+              if(e.noticeStatus==0){
+                status="未发布";
+              }else if(e.noticeStatus==1){
+                status="已发布";
+              }else
+              {
+                status="已过期";
+              }
+              $u2.append("<div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+num+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u13.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+1)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.noticeTitle+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+2)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+2)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u15.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+result.userName+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+4)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+4)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u17.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+5)+"\" class=\"text\">\n" +
+                      "                <p>\n" +
+                      "                    <span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+status+"</span>\n" +
+                      "                </p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+6)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+6)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u19.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+7)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.releaseTime+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) [footnote] -->\n" +
+                      "        <div id=\"u"+(num+6)+"_ann\" class=\"annotation\"></div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+8)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+8)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u21.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+9)+"\" class=\"text\"></div>\n" +
+                      "        </div>\n" +
+                      "\n");
 
-            num=10+Number(num);
+              num=10+Number(num);
+            });
           });/*each end*/
 
           //获取当前页码
