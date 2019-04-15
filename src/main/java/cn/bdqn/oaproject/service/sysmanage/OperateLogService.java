@@ -16,8 +16,6 @@ public interface OperateLogService{
     boolean add(OperateLog operateLog);
 
 
-    boolean modify(OperateLog operateLog);
-
     Page<OperateLog> findAll(Specification<OperateLog> specification, Pageable pageable);
 
 

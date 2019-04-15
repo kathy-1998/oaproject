@@ -31,16 +31,6 @@ public class OperateLogServiceImpl implements OperateLogService {
         }
     }
 
-    @Override
-    public boolean modify(OperateLog operateLog) {
-        try{
-            operateLogDao.save(operateLog);
-            return  true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return  false;
-        }
-    }
 
     @Override
     public Page<OperateLog> findAll(Specification<OperateLog> specification, Pageable pageable) {
