@@ -1,5 +1,6 @@
 package cn.bdqn.oaproject.pojo;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -49,18 +50,21 @@ public class Announce {
      * 起始时间
      */
     @Column(name="START_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 截至时间
      */
     @Column(name="END_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     /**
      * 发布时间
      */
     @Column(name="RELEASE_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseTime;
 
     /**
@@ -73,10 +77,11 @@ public class Announce {
      * 创建日期
      */
     @Column(name="CREATION_DATE",updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
 
     /**
-     * 创建日期
+     * 修改人
      */
     @Column(name="MENDER")
     private Integer mender;
@@ -85,6 +90,7 @@ public class Announce {
      * 修改日期
      */
     @Column(name="MODIFY_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date modifyDate;
 
     /**

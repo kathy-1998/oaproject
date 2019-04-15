@@ -2,6 +2,7 @@ package cn.bdqn.oaproject.controller.announce;
 
 import cn.bdqn.oaproject.pojo.Announce;
 import cn.bdqn.oaproject.service.announce.AnnounceService;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -24,22 +26,51 @@ public class AnnounceController {
     private AnnounceService announceService;
 
     /**
-     * 测试获取所有通告
+     * 进入通告列表页面
+     * @return
+     */
+    @RequestMapping(value="/annomain",method = RequestMethod.GET)
+    public String annoMain(){
+            return "Notification_list_1";
+    }
+
+    /**
+     * 分页获取所有通告
+     * @param pageIndex 当前页码
+     * @param pageSize 每页显示记录数
+     * @return 符合条件的通告列表
      */
     @RequestMapping(value = "/announcelist",method = RequestMethod.GET)
-    public String getAllAnnounce(Model model){
+    @ResponseBody
+    public Object getAllAnnounce(@RequestParam("pageIndex") String pageIndex,@RequestParam("pageSize") String pageSize){
+
         //封装多属性排序
         Sort sort=new Sort(Sort.Direction.ASC,"noticeType").
                 and(new Sort(Sort.Direction.DESC,"releaseTime"));
+        //判断当前页码
+        int page_index=1;
+        if(pageIndex!=null){
+            page_index=Integer.parseInt(pageIndex);
+        }
+        //判断每页显示记录数
+        int page_size=1;
+        if(pageSize!=null){
+            page_size=Integer.parseInt(pageSize);
+        }
+        System.out.println("pageIndex**********"+page_index);
+        System.out.println("pageSize**********"+page_size);
+
         //分页类
-        Pageable pageable=new PageRequest(0,2, sort);
+        Pageable pageable=new PageRequest(page_index-1,page_size, sort);
+        Page<Announce> announcePage=null;
+
         try {
-             Page<Announce> announcePage=announceService.findAllAnnounceByPage(pageable);
-             model.addAttribute("alist",announcePage);
+            announcePage=announceService.findAllAnnounceByPage(pageable);
+            System.out.println(JSON.toJSONString(announcePage,true));
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list";
+        return announcePage;
     }
 
     /**
@@ -61,7 +92,7 @@ public class AnnounceController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list";
+        return "Notification_list_1";
     }
 
 
@@ -85,7 +116,7 @@ public class AnnounceController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list";
+        return "Notification_list_1";
     }
 
     /**
@@ -101,7 +132,7 @@ public class AnnounceController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list";
+        return "Notification_list_1";
     }
 
     /**
@@ -117,7 +148,7 @@ public class AnnounceController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list";
+        return "Notification_list_1";
     }
 
 
