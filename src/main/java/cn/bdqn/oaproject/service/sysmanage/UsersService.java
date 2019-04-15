@@ -21,4 +21,7 @@ public interface UsersService {
     Users findUsersByUserId(Integer userId);
 
     Boolean deleteById(Integer id);
+
+    boolean add(Users users);
+    boolean modify(Users users);
 }

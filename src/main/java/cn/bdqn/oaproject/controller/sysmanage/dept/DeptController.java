@@ -142,4 +142,13 @@ public class DeptController {
     }
 
 
+    /**
+     * 展示所有部门
+     */
+    @RequestMapping("/deptList")
+    @ResponseBody
+    public  Object deptList(){
+        return  deptService.findAll();
+    }
+
 }

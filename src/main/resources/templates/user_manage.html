@@ -40,11 +40,13 @@
     <script th:src="@{/resources/scripts/prototype/legacy.js}"></script>
     <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>
 
-    <script th:src="@{/resources/scripts/ajaxfileupload.js}"></script>
   </head>
   <body>
 
-  <input type="hidden" id="pageCount" value="" >
+  <!-- 总页码 -->
+  <input type="hidden" id="pageCount" value="">
+  <!--表示新增还是修改-->
+  <input type="hidden" id="flag" value="0">
 
     <!-- Unnamed (形状) -->
     <div id="u0" class="ax_文本">
@@ -444,7 +446,7 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">男</span></p>
             </div>
           </label>
-          <input id="u234_input" type="radio" value="radio" name="u234" checked/>
+          <input id="u234_input" type="radio" value="0" name="u234" checked/>
         </div>
         <!-- Unnamed (单选框) -->
         <div id="u236" class="ax_单选框">
@@ -454,7 +456,7 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">女</span></p>
             </div>
           </label>
-          <input id="u236_input" type="radio" value="radio" name="u234"/>
+          <input id="u236_input" type="radio" value="1" name="u234"/>
         </div>
 
         <!-- Unnamed (形状) -->
@@ -473,7 +475,15 @@
 
         <!-- Unnamed (HTML Button) -->
         <div id="u242" class="ax_html_button">
-          <input id="u242_input" type="file" onchange="selectImage(this);"  value="浏览" class="text_sketch" multiple/>
+          <input id="u242_input" name="u242_input" type="file" onchange="selectImage(this);"  value="浏览" class="text_sketch" multiple/>
+        </div>
+
+        <div id="u243" class="ax_文本" style="">
+
+          <!-- Unnamed () -->
+          <div id="u244" class="text" style="">
+            <p><span style="font-family:'Applied Font Regular', 'Applied Font';">职位：</span></p>
+          </div>
         </div>
 
 
@@ -495,7 +505,7 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">正常</span></p>
             </div>
           </label>
-          <input id="u247_input" type="radio" value="radio" name="u247" checked/>
+          <input id="u247_input" type="radio" value="1" name="u247" checked/>
         </div>
 
         <!-- Unnamed (单选框) -->
@@ -506,9 +516,14 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">冻结</span></p>
             </div>
           </label>
-          <input id="u249_input" type="radio" value="radio" name="u247"/>
+          <input id="u249_input" type="radio" value="0" name="u247"/>
         </div>
 
+        <div id="u251" class="ax_下拉列表框">
+          <select id="u251_input" class="text_sketch">
+
+          </select>
+        </div>
 
         <!-- Unnamed (形状) -->
         <div id="u253" class="ax_文本">
@@ -920,6 +935,77 @@
 
 
 
+      var userName=$("#u220_input").val();
+     var password=$("#u223_input").val();
+     var realName= $("#u228_input").val();
+     var deptId=$("#u231_input").val();
+
+     var sex=$('input[name="u234"]:checked').val();
+
+
+      var jobId=$("#u251_input").val();
+      var roleId=$("#u255_input").val();
+
+      var status=$('input[name="u247"]:checked').val();
+
+
+
+
+      if(userName==""){
+        alert("登录名不能为空");
+      }else if(realName==""){
+        alert("真实姓名不能为空");
+      }else if(deptId=="0"){
+        alert("请选择部门");
+      } else if(jobId=="0"){
+          alert("请选择职位")
+      }else if(roleId=="0") {
+        alert("请选择角色");
+      }else {
+
+        //如果用户不输入密码,则默认密码
+        if(password==""){
+          password="123456";
+        }
+
+
+        var fromDate=new FormData();
+
+        fromDate.append("myfile",document.getElementById("u242_input").files[0]);
+        fromDate.append("userName",userName);
+        fromDate.append("password",password);
+        fromDate.append("realName",realName);
+        fromDate.append("deptId",deptId);
+        fromDate.append("jobId",jobId);
+        fromDate.append("sex",sex);
+        fromDate.append("roleId",roleId);
+        fromDate.append("status",status);
+
+
+        // 文件上传
+       $.ajax({
+          type: "POST",
+          url: "/oaproject/users/addUsers",
+          data:fromDate ,// 序列化表单值
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            alert(data);
+            if(data=="添加成功"){
+              init(); //刷新
+              //把添加页面关闭
+              $("#u201").css("visibility", "hidden");
+            }
+          },
+        });
+
+
+      }
+
+
+
+
+
 
     });
 
@@ -928,9 +1014,6 @@
     $("#u210_img").click(function () {
         $("#u201").css("visibility", "hidden");
     })
-
-
-    //点击浏览
 
 
 
@@ -1162,8 +1245,13 @@
           //下一页
           $("#u181 span").attr('id',data.pageIndex);
 
+          initDept();
+          initJob();
+        initRole();
+
 
 })
+
 
 
 
@@ -1176,8 +1264,6 @@
     var image = '';
 
     function selectImage(file) {
-      // 上传按钮可用
-      $("#uploadImageBtn").attr("disabled",false);
 
       //清除上一次的图片
       $("#u240").html("");
@@ -1187,12 +1273,7 @@
       }
 
       var fileLength = file.files.length;
-      //限制数量为8
-      if(fileLength > 8){
-        clearImage();
-        alert("请重新选择，最多添加8个文件！")
-        return
-      }
+
       // 验证格式
       for(var i = 0 ; i < fileLength ; i++){
         if(!checkPicture(file.files[i])){
@@ -1215,45 +1296,77 @@
         })(i)
       }
     }
-    // 文件上传
-    function uploadImage() {
-      $.ajaxFileUpload({
-        //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
-        url:"../repair_apply/uploadfile",
-        secureuri:false,                           //是否启用安全提交,默认为false
-        fileElementId:'uploadFile',               //文件选择框的id属性
-        dataType:'JSON',                           //服务器返回的格式,可以是json或xml(需要大写)等     text
-        success:function(data, status){            //服务器响应成功时的处理函数
-          data = data.replace(/<pre.*?>/g, ''); // ajaxFileUpload会对服务器响应回来的text内容加上
-          data = data.replace("</pre>", ''); // 本例中设定上传文件完毕后,服务端会返回给前台[0`filepath]
-          data = eval("("+data+")");
-          if (data.success) {
-            clearImage();
-            alert("上传成功")
 
-          } else  {
-            alert("文件为空，请重新上传！")
-          }
-        },
-        error:function(data, status, e){ //服务器响应失败时的处理函数
-          alert("上传失败");
-        }
-      });
-    }
 
-    function clearImage(){
-      $("#uploadFile").val("");
-      $("#imageArea").html('');
-      //  上传按钮不可用
-      $("#uploadImageBtn").attr("disabled",true);
-
-    }
 
     //文件类型限制
     function checkPicture(file){
       return /.(jpg|png|gif|bmp|JPG|PNG|GIF|BMP)$/.test(file.name)?true:false;
     }
 
+
+    //展示所有部门
+    function initDept() {
+
+      $.ajax({
+        type:"GET",//请求类型
+        url:"/oaproject/dept/deptList",//请求的url
+
+        dataType:"json",//ajax接口（请求url）返回的数据类型
+        success:function(data){//data：返回数据（json对象）
+          $("#u231_input").html("");
+          var options = "<option value='0'>--请选择--</option>";
+          for(var i = 0; i < data.length; i++){
+            options += "<option value=\""+data[i].deptId+"\">"+data[i].deptName+"</option>";
+          }
+          $("#u231_input").html(options);
+        },
+
+      });
+    }
+
+
+    //展示所有
+    function initJob() {
+
+
+      $.ajax({
+        type:"GET",//请求类型
+        url:"/oaproject/job/jobList",//请求的url
+
+        dataType:"json",//ajax接口（请求url）返回的数据类型
+        success:function(data){//data：返回数据（json对象）
+          $("#u251_input").html("");
+          var options = "<option value='0'>--请选择--</option>";
+          for(var i = 0; i < data.length; i++){
+            options += "<option value=\""+data[i].jobId+"\">"+data[i].jobName+"</option>";
+          }
+          $("#u251_input").html(options);
+        },
+
+      });
+    }
+
+    //展示所有角色
+    function initRole() {
+
+
+      $.ajax({
+        type:"GET",//请求类型
+        url:"/oaproject/role/roleList",//请求的url
+
+        dataType:"json",//ajax接口（请求url）返回的数据类型
+        success:function(data){//data：返回数据（json对象）
+          $("#u255_input").html("");
+          var options = "<option value='0'>--请选择--</option>";
+          for(var i = 0; i < data.length; i++){
+            options += "<option value=\""+data[i].roleId+"\">"+data[i].roleName+"</option>";
+          }
+          $("#u255_input").html(options);
+        },
+
+      });
+    }
 
 
 

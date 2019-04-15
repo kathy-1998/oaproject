@@ -91,4 +91,28 @@ public class UsersServiceImpl  implements UsersService {
         }
         return  users;
     }
+
+    @Override
+    public boolean add(Users users) {
+
+        try{
+            usersDao.save(users);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+        }
+
+    }
+
+    @Override
+    public boolean modify(Users users) {
+        try{
+            usersDao.save(users);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+        }
+    }
 }
