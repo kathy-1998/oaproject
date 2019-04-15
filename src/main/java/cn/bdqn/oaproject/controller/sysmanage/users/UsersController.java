@@ -212,7 +212,7 @@ public class UsersController {
                       @RequestParam(value = "jobId",required =false) Integer jobId,
                       @RequestParam(value = "roleId",required =false) Integer roleId,
                       @RequestParam(value = "status",required =false) Integer status,
-                       @RequestParam("myfile") MultipartFile file
+                      @RequestParam(value = "myfile",required = false) MultipartFile file
                       ) {
 
              Users user=new Users();
@@ -234,22 +234,22 @@ public class UsersController {
             user.setRole(role);
             user.setRealName(realName);
 
-
+        if(file!=null) {
             String fileName = file.getOriginalFilename();
 
 
-            if(fileName.indexOf("\\") != -1){
+            if (fileName.indexOf("\\") != -1) {
                 fileName = fileName.substring(fileName.lastIndexOf("\\"));
             }
             String filePath = "src/main/resources/static/files/images/";
             File targetFile = new File(filePath);
-            if(!targetFile.exists()){
+            if (!targetFile.exists()) {
                 targetFile.mkdirs();
             }
 
             FileOutputStream out = null;
             try {
-                out = new FileOutputStream(filePath+fileName);
+                out = new FileOutputStream(filePath + fileName);
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
@@ -259,7 +259,7 @@ public class UsersController {
             }
 
             user.setUserUrl(fileName);
-
+        }
             //执行保存
 
             if(usersService.add(user)){
@@ -287,7 +287,7 @@ public class UsersController {
                       @RequestParam(value = "userId",required =false) Integer userId,
                          @RequestParam(value = "status",required =false) Integer status,
 
-                         @RequestParam("myfile") MultipartFile file
+                         @RequestParam(value = "myfile",required = false) MultipartFile file
     ) {
 
         Users user=new Users();
@@ -309,6 +309,10 @@ public class UsersController {
         user.setStatus(status);
         user.setRole(role);
         user.setRealName(realName);
+
+        if(file!=null){
+
+
 
 
         String fileName = file.getOriginalFilename();
@@ -336,8 +340,8 @@ public class UsersController {
 
         user.setUserUrl(fileName);
 
-        //执行保存
-
+        //执行修改
+        }
         if(usersService.add(user)){
             return "修改成功";
         }else{

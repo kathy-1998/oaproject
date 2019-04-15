@@ -1,7 +1,15 @@
 package cn.bdqn.oaproject.pojo;
 
+import cn.bdqn.oaproject.dao.sysmanage.RoleDao;
+import cn.bdqn.oaproject.service.sysmanage.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.List;
 
 /**
  * 车辆信息表
@@ -80,5 +88,68 @@ public class CarInfo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    /**
+     * 用户业务操作接口
+     */
+    @Service("roleService")
+    @Transactional
+    public static class RoleServiceImpl implements RoleService {
+
+        @Autowired
+        RoleDao roleDao;
+
+        @Override
+        public boolean deleteById(Integer integer) {
+
+
+            try{
+                roleDao.deleteById(integer);
+                return  true;
+            }catch (Exception e){
+                e.printStackTrace();
+                return  false;
+            }
+        }
+
+
+        @Override
+        public List<Role> findAll() {
+            List<Role> roles=null;
+            try{
+                roles=roleDao.findAll();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return  roles;
+        }
+
+        @Override
+        public boolean Add(Role role){
+
+            try{
+                roleDao.save(role);
+                return  true;
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+
+            }
+
+        }
+
+        @Override
+        public Page<Role> findAll(Pageable pageable) {
+
+
+            Page<Role> roles=null;
+            try{
+                roles=roleDao.findAll(pageable);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return  roles;
+        }
     }
 }

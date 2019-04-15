@@ -15,7 +15,8 @@ public class OperateLog {
      */
     @Id
     @Column(name = "LOG_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_log_sequence", initialValue = 3, allocationSize = 1)
     private Integer logNo;
 
     /**

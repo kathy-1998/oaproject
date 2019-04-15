@@ -48,7 +48,12 @@
   <!--表示新增还是修改-->
   <input type="hidden" id="flag" value="0">
 
-    <!-- Unnamed (形状) -->
+
+  <input type="hidden" id="userId" value="">
+
+
+
+  <!-- Unnamed (形状) -->
     <div id="u0" class="ax_文本">
       <img id="u0_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
@@ -831,6 +836,9 @@
 
       init();//初始化页面
 
+      initDept();
+      initJob();
+      initRole();
         
         //点击查找时
         
@@ -849,7 +857,35 @@
 
         $(document).on("click", ".update", function() {
 
-            alert(this.id);
+          $("#u201").css("visibility", "visible");
+
+          $("#u213 span").html("修改");
+
+          $("#userId").val(this.id);
+
+         $.getJSON("/oaproject/users/getUsersbyId","userId="+this.id,function (data) {
+
+           $("#u220_input").val(data.userName);
+           $("#u223_input").val(data.userPwd);
+           $("#u228_input").val(data.realName);
+           $("#u231_input").val(data.dept.deptId);
+           $("#u231_input option[value='"+data.dept.deptId+"']").attr("selected", true);
+           $("#u251_input option[value='"+data.job.jobId+"'").attr("selected", true);
+           $("#u255_input option[value='"+data.role.roleId+"']").attr("selected", true);
+           $("input:radio[name='u234'][value="+data.gender+"]").attr('checked','true');
+           $("input:radio[name='u247'][value="+data.status+"]").attr('checked','true');
+          $("#u240_img").attr("src","/oaproject/files/images/"+data.userUrl+"");
+
+
+          //点击修改
+
+
+
+         $("#flag").val("1");
+
+
+
+         })
 
 
         });
@@ -884,6 +920,25 @@
 
     })
 
+
+    /**
+     *清空
+     */
+    function clear(){
+
+     $("#u220_input").val("");
+      $("#u223_input").val("");
+     $("#u228_input").val("");
+      $("#u231_input option[value='0']").attr("selected", true);
+      $("#u234_input").attr("checked","checked");
+      $("#u251_input option[value='0").attr("selected", true);
+      $("#u255_input option[value='0']").attr("selected", true);
+      $("#u247_input").attr("checked","checked");
+
+      $("#u240_img").attr("src","/oaproject/images/用户管理/u240.png");
+
+
+    }
 
     //上一页,下一页
 
@@ -927,6 +982,10 @@
         $("#u201").css("visibility", "hidden");
       }
 
+      $("#u213 span").html("添加");
+
+      $("#flag").val("0");
+
     })
 
 
@@ -963,41 +1022,93 @@
         alert("请选择角色");
       }else {
 
+
         //如果用户不输入密码,则默认密码
         if(password==""){
           password="123456";
         }
 
 
-        var fromDate=new FormData();
 
-        fromDate.append("myfile",document.getElementById("u242_input").files[0]);
-        fromDate.append("userName",userName);
-        fromDate.append("password",password);
-        fromDate.append("realName",realName);
-        fromDate.append("deptId",deptId);
-        fromDate.append("jobId",jobId);
-        fromDate.append("sex",sex);
-        fromDate.append("roleId",roleId);
-        fromDate.append("status",status);
+        //表示添加
+        if($("#flag").val()=="0"){
 
 
-        // 文件上传
-       $.ajax({
-          type: "POST",
-          url: "/oaproject/users/addUsers",
-          data:fromDate ,// 序列化表单值
-          processData: false,
-          contentType: false,
-          success: function (data) {
-            alert(data);
-            if(data=="添加成功"){
-              init(); //刷新
-              //把添加页面关闭
-              $("#u201").css("visibility", "hidden");
-            }
-          },
-        });
+          var fromDate=new FormData();
+
+          fromDate.append("myfile",document.getElementById("u242_input").files[0]);
+          fromDate.append("userName",userName);
+          fromDate.append("password",password);
+          fromDate.append("realName",realName);
+          fromDate.append("deptId",deptId);
+          fromDate.append("jobId",jobId);
+          fromDate.append("sex",sex);
+          fromDate.append("roleId",roleId);
+          fromDate.append("status",status);
+
+
+          // 文件上传
+          $.ajax({
+            type: "POST",
+            url: "/oaproject/users/addUsers",
+            data:fromDate ,// 序列化表单值
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              alert(data);
+              if(data=="添加成功"){
+                init(); //刷新
+                //把添加页面关闭
+                $("#u201").css("visibility", "hidden");
+
+                clear();//把表单数据清空
+              }
+            },
+          });
+
+
+
+        }else{
+          //修改
+
+          var userId=$("#userId").val();
+
+          var fromDate=new FormData();
+
+          fromDate.append("myfile",document.getElementById("u242_input").files[0]);
+          fromDate.append("userName",userName);
+          fromDate.append("password",password);
+          fromDate.append("realName",realName);
+          fromDate.append("deptId",deptId);
+          fromDate.append("jobId",jobId);
+          fromDate.append("sex",sex);
+          fromDate.append("roleId",roleId);
+          fromDate.append("status",status);
+          fromDate.append("userId",userId);
+
+          // 文件上传
+          $.ajax({
+            type: "POST",
+            url: "/oaproject/users/modify",
+            data:fromDate ,// 序列化表单值
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              alert(data);
+              if(data=="修改成功"){
+                init(); //刷新
+                //把修改页面关闭
+                $("#u201").css("visibility", "hidden");
+
+                clear();//把表单数据清空
+              }
+            },
+          });
+
+
+
+        }
+
 
 
       }
@@ -1013,6 +1124,8 @@
     //关闭按钮
     $("#u210_img").click(function () {
         $("#u201").css("visibility", "hidden");
+
+        clear();
     })
 
 
@@ -1245,12 +1358,13 @@
           //下一页
           $("#u181 span").attr('id',data.pageIndex);
 
-          initDept();
-          initJob();
-        initRole();
 
 
-})
+
+
+
+
+      })
 
 
 
