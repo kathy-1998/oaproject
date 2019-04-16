@@ -23,4 +23,8 @@ public class myDesktopController {
     public String urlRecordPage(){
         return "Commonly_used_web_site";
     }
+    @RequestMapping(value = "/waiting_task.html",method = RequestMethod.GET)
+    public String waitingPage(){
+        return "waiting_task";
+    }
 }
