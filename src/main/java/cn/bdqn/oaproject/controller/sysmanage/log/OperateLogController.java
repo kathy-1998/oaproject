@@ -5,6 +5,7 @@ import cn.bdqn.oaproject.pojo.OperateLog;
 import cn.bdqn.oaproject.pojo.Role;
 import cn.bdqn.oaproject.pojo.Users;
 import cn.bdqn.oaproject.service.sysmanage.OperateLogService;
+import cn.bdqn.oaproject.utils.stringToDateConverter;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,28 +51,21 @@ public class OperateLogController {
     @RequestMapping("/logList.html")
     @ResponseBody
     public Object logList(
-                   /*         @RequestParam(value = "userName", required = false) String userName,
+                            @RequestParam(value = "userName", required = false) String userName,
                             @RequestParam(value = "startTime", required = false) String startTime,
                             @RequestParam(value = "endTime", required = false) String endTime ,
                             @RequestParam(value = "pageIndex", required = false) String pageindex,
-                            @RequestParam(value = "pageSize", required = false) Integer pageSize*/
+                            @RequestParam(value = "pageSize", required = false) Integer pageSize
                              ) {
 
-        String pageindex="0";
 
-        String userName="";
-
-
-        Date startTime=new Date("2019/4/1");
-
-        Date endTime=new Date("2019/4/19");
 
 
 
         if (pageindex.equals("undefined")) {
             pageindex = "1";
         }
-        Pageable pageable = new PageRequest(0, 2);
+        Pageable pageable = new PageRequest(Integer.parseInt(pageindex)-1, pageSize);
 
         Page<Users> list = null;
 
@@ -85,7 +81,26 @@ public class OperateLogController {
                 }
 
 
-                predicates.add(cb.between(root.get("creationDate"),startTime,endTime));
+                if(!startTime.equals("undefined") && !startTime.equals("") &&!endTime.equals("undefined") && !endTime.equals("")){
+
+                    try{
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat sdfmat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        Date start =new  SimpleDateFormat("yyyy-mm-dd").parse(startTime);
+                        Date end =new  SimpleDateFormat("yyyy-mm-dd").parse(endTime);
+
+
+                        predicates.add(cb.between(root.get("creationDate"), sdfmat.parse(sdfmat.format(sdf.parse(startTime).getTime())),
+                                sdfmat.parse(sdfmat.format(sdf.parse(endTime).getTime() + 86400000))));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+
 
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
