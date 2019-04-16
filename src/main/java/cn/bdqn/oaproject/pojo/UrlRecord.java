@@ -15,7 +15,8 @@ public class UrlRecord {
      */
     @Id
     @Column(name = "URL_RECORD_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_urlRecord_sql")
+    @SequenceGenerator(name = "my_urlRecord_sql",sequenceName = "urlRecord_seq",initialValue = 3,allocationSize = 1)
     private Integer urlRecordId;
 
     /**
