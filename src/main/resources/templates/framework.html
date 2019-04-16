@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>框架</title>
+    <title>首页</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link th:href="@{/resources/css/jquery-ui-themes.css}" type="text/css" rel="stylesheet"/>
@@ -73,7 +73,7 @@
     </div>
 
     <!-- Unnamed (内部框架) -->
-    <iframe id="u8" baseth:src="我的桌面.html" scrolling="auto" frameborder="0"></iframe>
+    <iframe id="u8" src="我的桌面.html" scrolling="auto" frameborder="0"></iframe>
 
     <!-- Unnamed (图片) -->
     <div id="u9" class="ax_图片">
@@ -414,6 +414,7 @@
   </body>
   <script>
       $(function () {
+        $("#u8").attr("src","http://localhost:8080/oaproject/Mydesktop.html");
         getUser();
 
         $(".update").click(function () {
@@ -452,9 +453,10 @@
               }
             });
         });
-
+        //退出系统
         $(".logout").click(function () {
-          if(confirm("确认退出该系统?")){
+          var flag=confirm("确认退出该系统?");
+          if(flag){
             location.href="http://localhost:8080/oaproject/users/logout.do";
           }
         });
@@ -474,6 +476,7 @@
               $(".userName").html(data.realName);  //设置登录的用户名
               $("input[name='oldPwd']").val(data.userPwd);  //设置隐藏的旧密码
               $("input[name='id']").val(data.userId); //设置隐藏Id方便修改密码
+              $(".dept").html(data.dept.deptName); //设置登录的用户的部门
             }
           }
         });
