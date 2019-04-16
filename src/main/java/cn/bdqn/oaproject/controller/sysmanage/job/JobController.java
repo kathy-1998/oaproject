@@ -15,9 +15,17 @@ public class JobController {
     JobService jobService;
 
 
+    /**
+     * 查询所有职位
+     * @return
+     */
     @RequestMapping("/jobList")
     @ResponseBody
-        public Object jobList(){
+    public Object jobList(){
         return jobService.findAll();
     }
+
+
+
+
 }

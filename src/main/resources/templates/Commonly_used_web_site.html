@@ -324,7 +324,7 @@
         <div id="u135" class="ax_形状">
           <img id="u135_img" class="img " th:src="@{/images/我的桌面/u441.png}"/>
           <!-- Unnamed () -->
-          <div id="u136" class="text"  onclick="update();">
+          <div id="u136" class="text" onclick="update();">
             <p><span style="font-family:'Applied Font Regular', 'Applied Font';">保存</span></p>
           </div>
         </div>
@@ -334,6 +334,7 @@
           <img id="u137_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
           <!-- Unnamed () -->
           <div id="u138" class="text">
+            <input type="hidden" name="id" value=""/>
             <p><span style="font-family:'Applied Font Regular', 'Applied Font';">标题</span><span style="font-family:'Applied Font Regular', 'Applied Font';">：</span></p>
           </div>
         </div>
@@ -413,14 +414,17 @@
                   data:{rid:id},
                   dataType:"json",
                   success:function (data) {
-                    alert(data.urlRecordTitle);
                     $("#u141_input").val(data.urlRecordTitle);
                     $("#u142_input").val(data.link);
+                    $("input[name='id']").val(id);
                   }
               });
             });
+
             $(".delete").on("click",function () {
-              deleteInfo();
+              if(confirm("确认删除吗?")){
+                deleteInfo($(this).attr("id"));
+              }
             });
           }
 
@@ -444,7 +448,12 @@
         data:{urlTitle:urlTitle,urlLink:urlLink},
         dataType: "text",
         success:function (data) {
-          alert(data);
+          if(data=="Yes"){
+            alert("添加成功!");
+            location.reload();
+          }else{
+            alert("网络连接失败!");
+          }
         }
       });
     }
@@ -452,7 +461,7 @@
     function update() {
       var urlTitle=$("#u141_input").val();
       var urlLink=$("#u142_input").val();
-      var id=$(".update").attr("id");
+      var id=$("input[name='id']").val();
       if(urlTitle == null || urlTitle == ""){
         alert("标题不能为空!");
         return;
@@ -467,20 +476,29 @@
         data:{urlTitle:urlTitle,urlLink:urlLink,rid:id},
         dataType: "text",
         success:function (data) {
-          alert(data);
+          if(data=="Yes"){
+            alert("修改成功!");
+            location.reload();
+          }else{
+            alert("网络连接失败!");
+          }
         }
       });
     }
     //删除网址信息
-    function deleteInfo() {
-      var id=$(".delete").attr("id");
+    function deleteInfo(id) {
       $.ajax({
         type: "GET",
         url:"/oaproject/urlRecord/delete.do",
         data:{rid:id},
         dataType: "text",
         success:function (data) {
-          alert(data);
+          if(data=="Yes"){
+            alert("删除成功!");
+            location.reload();
+          }else{
+            alert("网络连接失败!");
+          }
         }
       });
     }
