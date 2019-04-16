@@ -70,6 +70,18 @@ public class UsersServiceImpl  implements UsersService {
 
 
     @Override
+    public Boolean deleteById(Integer id) {
+        try{
+           usersDao.deleteById(id);
+           return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    @Override
     public Users findUsersByUserId(Integer userId) {
        Users users=null;
         try{
@@ -78,5 +90,29 @@ public class UsersServiceImpl  implements UsersService {
             e.printStackTrace();
         }
         return  users;
+    }
+
+    @Override
+    public boolean add(Users users) {
+
+        try{
+            usersDao.save(users);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+        }
+
+    }
+
+    @Override
+    public boolean modify(Users users) {
+        try{
+            usersDao.save(users);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  false;
+        }
     }
 }

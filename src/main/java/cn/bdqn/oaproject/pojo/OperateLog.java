@@ -15,20 +15,33 @@ public class OperateLog {
      */
     @Id
     @Column(name = "LOG_NO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_log_sequence", initialValue = 3, allocationSize = 1)
     private Integer logNo;
 
     /**
      * 用户编号
      */
-    @Column(name = "USER_ID")
+  /*  @Column(name = "USER_ID")
     private Integer userId;
+*/
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    private  Users users;
 
     /**
      * 角色编号
      */
-    @Column(name = "ROLE_ID")
+   /* @Column(name = "ROLE_ID")
     private Integer roleId;
+*/
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_Id")
+    private  Role role;
+
+
+
 
     /**
      * 日志内容
@@ -79,7 +92,7 @@ public class OperateLog {
         this.logNo = logNo;
     }
 
-    public Integer getUserId() {
+/*    public Integer getUserId() {
         return userId;
     }
 
@@ -93,6 +106,22 @@ public class OperateLog {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }*/
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getLogContents() {

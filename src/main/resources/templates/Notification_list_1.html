@@ -12,6 +12,7 @@
     <script th:src="@{/resources/scripts/jquery-ui-1.8.10.custom.min.js}"></script>
     <script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
     <script th:src="@{/resources/scripts/prototype/globals.js}"></script>
+    <script th:src="@{/resources/scripts/prototype/convertdate.js}"></script>
     <script th:src="@{/resources/scripts/axutils.js}"></script>
     <script th:src="@{/resources/scripts/prototype/annotation.js}"></script>
     <script th:src="@{/resources/scripts/prototype/axQuery.std.js}"></script>
@@ -536,10 +537,10 @@
     <!-- Unnamed (下拉列表框) -->
     <div id="u131" class="ax_下拉列表框">
       <select id="u131_input" class="text_sketch">
-        <option selected value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
       </select>
     </div>
 
@@ -593,6 +594,8 @@
 
     <!-- Unnamed (形状) [footnote] -->
     <div id="u141_ann" class="annotation"></div>
+
+
 
     <!-- add (动态面板) -->
     <div id="u143" class="ax_动态面板" data-label="add">
@@ -2980,5 +2983,224 @@
 
     <!-- Unnamed (图片) [footnote] -->
     <div id="u669_ann" class="annotation"></div>
+
+
+    <script>
+      $(function(){
+
+        bindTitle();  //绑定标题行
+        getAllAnnounce(1);  //绑定所有通告列表，默认第一页
+        //绑定上一页的点击事件
+        $("#u135").click(function(){
+          //获取当前页码
+          var currentPage=$("#u128").attr("name");
+          if(currentPage==1){
+            alert("当前是第一页！");
+          }else {
+            bindTitle();
+            getAllAnnounce(Number(currentPage)-1);
+          }
+        });
+
+        //绑定下一页的点击事件
+        $("#u133").click(function(){
+          //获取当前页码
+          var currentPage=$("#u128").attr("name");
+          //获取总页码，判断是否是最后一页
+          var totalPage=$("#u133").find("span").attr("id");
+          if(currentPage==totalPage){
+            alert("当前是最后一页！");
+          }else
+          {
+            bindTitle();
+            getAllAnnounce(Number(currentPage)+1);
+          }
+
+        });
+      });
+
+
+
+
+      //绑定标题行的方法
+      function bindTitle(){
+        //清空展示数据的div
+        $u2=$("#u2").empty();
+        //绑定标题行
+        $u2.append("<!-- Unnamed (表格单元) -->\n" +
+                "      <div id=\"u3\" class=\"ax_表格单元\">\n" +
+                "        <img id=\"u3_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u3.png}\"/>\n" +
+                "        <!-- Unnamed () -->\n" +
+                "        <div id=\"u4\" class=\"text\">\n" +
+                "          <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">名称</span></p>\n" +
+                "        </div>\n" +
+                "      </div>\n" +
+                "\n" +
+                "      <!-- Unnamed (表格单元) -->\n" +
+                "      <div id=\"u5\" class=\"ax_表格单元\">\n" +
+                "        <img id=\"u5_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u5.png}\"/>\n" +
+                "        <!-- Unnamed () -->\n" +
+                "        <div id=\"u6\" class=\"text\">\n" +
+                "          <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">发布人</span></p>\n" +
+                "        </div>\n" +
+                "      </div>\n" +
+                "\n" +
+                "      <!-- Unnamed (表格单元) -->\n" +
+                "      <div id=\"u7\" class=\"ax_表格单元\">\n" +
+                "        <img id=\"u7_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u7.png}\"/>\n" +
+                "        <!-- Unnamed () -->\n" +
+                "        <div id=\"u8\" class=\"text\">\n" +
+                "          <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">状态</span></p>\n" +
+                "        </div>\n" +
+                "      </div>\n" +
+                "\n" +
+                "      <!-- Unnamed (表格单元) [footnote] -->\n" +
+                "      <div id=\"u7_ann\" class=\"annotation\"></div>\n" +
+                "\n" +
+                "      <!-- Unnamed (表格单元) -->\n" +
+                "      <div id=\"u9\" class=\"ax_表格单元\">\n" +
+                "        <img id=\"u9_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u9.png}\"/>\n" +
+                "        <!-- Unnamed () -->\n" +
+                "        <div id=\"u10\" class=\"text\">\n" +
+                "          <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">发布时间</span></p>\n" +
+                "        </div>\n" +
+                "      </div>\n" +
+                "\n" +
+                "      <!-- Unnamed (表格单元) -->\n" +
+                "      <div id=\"u11\" class=\"ax_表格单元\">\n" +
+                "        <img id=\"u11_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u11.png}\"/>\n" +
+                "        <!-- Unnamed () -->\n" +
+                "        <div id=\"u12\" class=\"text\">\n" +
+                "          <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">操作</span></p>\n" +
+                "        </div>\n" +
+                "      </div>\n" +
+                "\n");
+      }
+
+      //发送请求获取所有通告列表数据
+      function getAllAnnounce(pageIndex){
+        var pageSize=$("#u131_input").val();  //获取每页显示记录数
+        $.getJSON("/oaproject/anno/announcelist","pageIndex="+pageIndex+"&pageSize="+pageSize,function(data){
+          var num=13;
+          $.each(data.content,function(i,e){
+            $.getJSON("/oaproject/users/getUsersbyId","userId="+e.creator,function(result){
+              //判断通告状态
+              var status;
+              if(e.noticeStatus==0){
+                status="未发布";
+              }else if(e.noticeStatus==1){
+                status="已发布";
+              }else
+              {
+                status="已过期";
+              }
+              $u2.append("<div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+num+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u13.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+1)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.noticeTitle+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+2)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+2)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u15.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+result.userName+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+4)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+4)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u17.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+5)+"\" class=\"text\">\n" +
+                      "                <p>\n" +
+                      "                    <span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+status+"</span>\n" +
+                      "                </p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+6)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+6)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u19.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+7)+"\" class=\"text\">\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.releaseTime+"</span></p>\n" +
+                      "            </div>\n" +
+                      "        </div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) [footnote] -->\n" +
+                      "        <div id=\"u"+(num+6)+"_ann\" class=\"annotation\"></div>\n" +
+                      "\n" +
+                      "        <!-- Unnamed (表格单元) -->\n" +
+                      "        <div id=\"u"+(num+8)+"\" class=\"ax_表格单元\">\n" +
+                      "            <img id=\"u"+(num+8)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u21.png}\"/>\n" +
+                      "            <!-- Unnamed () -->\n" +
+                      "            <div id=\"u"+(num+9)+"\" class=\"text\"></div>\n" +
+                      "        </div>\n" +
+                      "\n");
+
+              num=10+Number(num);
+            });
+          });/*each end*/
+
+          //获取当前页码
+          var currentNo=((data.pageable.pageNumber)+1);
+          //绑定当前页码和总页数
+          $("#u128").find("span").html(currentNo+"/"+data.totalPages);
+          $("#u128").attr("name",currentNo);
+          //为下一页按钮绑定总页数
+          $("#u133").find("span").attr("id",data.totalPages);
+        });
+
+      }
+
+      //验证非空方法
+      function checkRequired(){
+        //获取标题
+        //获取状态:紧急、一般
+        //获取显示开始时间
+        //获取显示截至时间
+        //获取发布时间
+        //获取内容
+        //验证非空
+
+
+      }
+
+
+      //添加方法
+      function addAnnounce(){
+
+
+      }
+
+
+      //发布按钮点击事件
+      $("#180").click(function(){
+        alert("发布按钮");
+      });
+
+      //保存按钮点击事件
+      $("#158").click(function(){
+        alert("发布按钮");
+      });
+
+      //返回按钮点击事件
+      $("#178").click(function(){
+          alert("返回按钮");
+      });
+
+
+
+
+
+
+
+
+
+    </script>
   </body>
 </html>

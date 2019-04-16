@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 角色业务操作接口
@@ -27,4 +28,6 @@ public interface RoleService {
     boolean deleteById(Integer integer);
 
     Page<Role> findAll(Pageable pageable);
+
+    List<Role> findAll();
 }
