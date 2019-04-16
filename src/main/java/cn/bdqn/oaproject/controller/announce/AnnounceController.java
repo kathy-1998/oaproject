@@ -142,25 +142,52 @@ public class AnnounceController {
 
     /**
      * 修改通告
-     * @param announce
-     * @return
+     * @param noticeTitle 标题
+     * @param noticeType 通告类型
+     * @param startTime 显示起始时间
+     * @param endTime  显示截至时间
+     * @param releaseTime 发布时间
+     * @param noticeContent 通告内容
+     * @param session 获取当前登录用户
+     * @return 修改执行结果
      */
     @RequestMapping(value = "updateannounce.do",method = RequestMethod.POST)
-    public String updateAnnounce(Announce announce){
+    @ResponseBody
+    public Object updateAnnounce(@RequestParam("noticeTitle")String noticeTitle,
+                                 @RequestParam("noticeType")String noticeType,
+                                 @RequestParam("startTime")String startTime,
+                                 @RequestParam("endTime")String endTime,
+                                 @RequestParam("releaseTime")String releaseTime,
+                                 @RequestParam("noticeContent")String noticeContent,
+                                 @RequestParam("noticeNo")String noticeNo,
+                                 HttpSession session){
+        Map<String,Object> resultMap=new HashMap<String,Object>() ;
+        Announce announce=new Announce();
         try {
-            //测试
-            announce=new Announce();
-            announce.setNoticeNo(3);
-            announce.setNoticeTitle("关于五一放假通知!!!!");
-            announce.setNoticeContent("五一改为四天假期la 。");
+            announce.setNoticeNo(Integer.parseInt(noticeNo));
+            announce.setStartTime(stringToDateConverter.strToDate(startTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setEndTime(stringToDateConverter.strToDate(endTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setReleaseTime(stringToDateConverter.strToDate(releaseTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setNoticeContent(noticeContent);
+            announce.setNoticeTitle(noticeTitle);
+            announce.setNoticeType(Integer.parseInt(noticeType));
+            announce.setIsdelete(1);
+            //设置创建者为当前登录用户
             announce.setMender(2);
+            //设置修改日期
             announce.setModifyDate(new Date());
             boolean flag=announceService.updateAnnounce(announce);
-            System.out.println(flag);
+            //判断是否修改成功
+            if(flag){
+                resultMap.put("result","success");
+            }else {
+                resultMap.put("result","failed");
+            }
         }catch (Exception e){
+            resultMap.put("result","error");
             e.printStackTrace();
         }
-        return "Notification_list_1";
+        return resultMap;
     }
 
     /**
@@ -168,15 +195,23 @@ public class AnnounceController {
      * @param noticeNo
      * @return
      */
-    @RequestMapping(value = "/delannounce.do",method = RequestMethod.POST)
-    public String deleteAnnounce(@RequestParam("id")String noticeNo){
+    @RequestMapping(value = "/delannounce.do")
+    @ResponseBody
+    public Object deleteAnnounce(@RequestParam("id")String noticeNo){
+        Map<String,Object> resultMap=new HashMap<String,Object>();
         try {
-            boolean flag=announceService.delAnnounce(3);
-            System.out.println(flag);
+            boolean flag=announceService.delAnnounce(noticeNo==null?0:Integer.parseInt(noticeNo));
+            //判断是否删除成功
+            if(flag){
+                resultMap.put("result","success");
+            }else {
+                resultMap.put("result","failed");
+            }
         }catch (Exception e){
+            resultMap.put("result","error");
             e.printStackTrace();
         }
-        return "Notification_list_1";
+        return resultMap;
     }
 
     /**
@@ -184,18 +219,31 @@ public class AnnounceController {
      * @param noticeNo 通告编号
      */
     @RequestMapping(value="/getdetail",method = RequestMethod.GET)
-    public String findAnnounceById(@RequestParam("id")String noticeNo,Model model){
+    @ResponseBody
+    public Object findAnnounceById(@RequestParam("id")String noticeNo){
+        Announce announce=new Announce();
         try {
-            Announce announce=new Announce();
+            announce=announceService.findAnnouceById(Integer.parseInt(noticeNo));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return announce;
+    }
+
+    /**
+     * 获取详情
+     * @param noticeNo 通告编号
+     */
+    @RequestMapping(value="/getbyid",method = RequestMethod.GET)
+    public String findAnnounce(@RequestParam("id")String noticeNo,Model model){
+        Announce announce=new Announce();
+        try {
             announce=announceService.findAnnouceById(Integer.parseInt(noticeNo));
             model.addAttribute("announce",announce);
-            System.out.println(announce.getNoticeTitle()+"\t"+announce.getNoticeContent());
         }catch (Exception e){
             e.printStackTrace();
         }
         return "Notice_details_page";
     }
-
-
 
 }

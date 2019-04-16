@@ -537,7 +537,6 @@
         <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="5">5</option>
-        <option value="10">10</option>
       </select>
     </div>
 
@@ -549,6 +548,7 @@
         <p><span style="font-family:'Applied Font Bold', 'Applied Font';">下一页</span></p>
       </div>
     </div>
+
 
     <!-- Unnamed (形状) -->
     <div id="u134" class="ax_形状">
@@ -1919,7 +1919,7 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">紧急</span></p>
             </div>
           </label>
-          <input id="u434_input" type="checkbox" value="checkbox" checked/>
+          <input id="u434_input" type="checkbox" value="checkbox" />
         </div>
 
         <!-- Unnamed (复选框) -->
@@ -1930,7 +1930,7 @@
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">一般</span></p>
             </div>
           </label>
-          <input id="u436_input" type="checkbox" value="checkbox"/>
+          <input id="u436_input" type="checkbox"/>
         </div>
 
         <!-- Unnamed (形状) -->
@@ -2967,25 +2967,58 @@
       </div>
     </div>
 
-    <!-- Unnamed (图片) -->
-    <div id="u667" class="ax_图片">
-      <img id="u667_img" class="img " th:src="@{/images/通告列表_1/u667.png}"/>
-      <!-- Unnamed () -->
-      <div id="u668" class="text"></div>
-    </div>
 
-    <!-- Unnamed (图片) [footnote] -->
-    <div id="u667_ann" class="annotation"></div>
 
-    <!-- Unnamed (图片) -->
-    <div id="u669" class="ax_图片">
-      <img id="u669_img" class="img " th:src="@{/images/通告列表_1/u669.png}"/>
-      <!-- Unnamed () -->
-      <div id="u670" class="text"></div>
-    </div>
+    <div id="icon">
+      <!--&lt;!&ndash; Unnamed (图片) &ndash;&gt;
+      <div id="u667" class="ax_图片">
+        <img id="u667_img" class="img " th:src="@{/images/通告列表_1/u667.png}"/>
+        &lt;!&ndash; Unnamed () &ndash;&gt;
+        <div id="u668" class="text"></div>
+      </div>
 
-    <!-- Unnamed (图片) [footnote] -->
-    <div id="u669_ann" class="annotation"></div>
+      &lt;!&ndash; Unnamed (图片) [footnote] &ndash;&gt;
+      <div id="u667_ann" class="annotation"></div>
+
+      &lt;!&ndash; Unnamed (图片) &ndash;&gt;
+      <div id="u669" class="ax_图片">
+        <img id="u669_img" class="img " th:src="@{/images/通告列表_1/u669.png}"/>
+        &lt;!&ndash; Unnamed () &ndash;&gt;
+        <div id="u670" class="text"></div>
+      </div>
+
+      &lt;!&ndash; Unnamed (图片) [footnote] &ndash;&gt;
+      <div id="u669_ann" class="annotation"></div>
+
+
+
+
+      &lt;!&ndash; Unnamed (图片) &ndash;&gt;
+      <div id="u671" class="ax_图片">
+        <img id="u671_img" class="img " th:src="@{/images/通告列表_1/u667.png}"/>
+        &lt;!&ndash; Unnamed () &ndash;&gt;
+        <div id="u672" class="text"></div>
+      </div>
+
+      &lt;!&ndash; Unnamed (图片) [footnote] &ndash;&gt;
+      <div id="u671_ann" class="annotation"></div>
+
+      &lt;!&ndash; Unnamed (图片) &ndash;&gt;
+      <div id="u673" class="ax_图片">
+        <img id="u673_img" class="img " th:src="@{/images/通告列表_1/u669.png}"/>
+        &lt;!&ndash; Unnamed () &ndash;&gt;
+        <div id="u674" class="text"></div>
+      </div>
+
+      &lt;!&ndash; Unnamed (图片) [footnote] &ndash;&gt;
+      <div id="u673_ann" class="annotation"></div>-->
+
+    </div><!--icon end-->
+
+  <input type="hidden" name="totalCount" />
+  <input type="hidden" name="upNoticeNo"/>
+
+
 
 
     <script>
@@ -2993,6 +3026,7 @@
 
         bindTitle();  //绑定标题行
         getAllAnnounce(1);  //绑定所有通告列表，默认第一页
+
         //绑定上一页的点击事件
         $("#u135").click(function(){
           //获取当前页码
@@ -3002,6 +3036,7 @@
           }else {
             bindTitle();
             getAllAnnounce(Number(currentPage)-1);
+
           }
         });
 
@@ -3085,6 +3120,11 @@
         var pageSize=$("#u131_input").val();  //获取每页显示记录数
         $.getJSON("/oaproject/anno/announcelist","pageIndex="+pageIndex+"&pageSize="+pageSize,function(data){
           var num=13;
+
+          //获取显示按钮的div
+          var $icon=$("#icon").empty();
+          var no=667;
+
           $.each(data.announcePage.content,function(i,e){
             $.getJSON("/oaproject/users/getUsersbyId","userId="+e.creator,function(result){
               //判断通告状态
@@ -3147,6 +3187,32 @@
 
               num=10+Number(num);
             });
+            //绑定图标
+            $icon.append(" <!-- Unnamed (图片) -->\n" +
+                    "      <div name='"+e.noticeNo+"' id=\"u"+no+"\" class=\"ax_图片\">\n" +
+                    "        <img name='delete' id=\"u"+no+"_img\" class=\"img \" src=\"/oaproject/images/通告列表_1/u667.png\"/>\n" +
+                    "        <!-- Unnamed () -->\n" +
+                    "        <div id=\"u"+(no+1)+"\" class=\"text\"></div>\n" +
+                    "      </div>\n" +
+                    "\n" +
+                    "      <!-- Unnamed (图片) [footnote] -->\n" +
+                    "      <div id=\"u"+no+"_ann\" class=\"annotation\"></div>\n" +
+                    "\n" +
+                    "      <!-- Unnamed (图片) -->\n" +
+                    "      <div name='update' id=\"u"+(no+2)+"\" class=\"ax_图片\">\n" +
+                    "        <img name='"+e.noticeNo+"' id=\"u"+(no+2)+"_img\" class=\"img \" src=\"/oaproject/images/通告列表_1/u669.png\"/>\n" +
+                    "        <!-- Unnamed () -->\n" +
+                    "        <div id=\"u"+(no+3)+"\" class=\"text\"></div>\n" +
+                    "      </div>\n" +
+                    "\n" +
+                    "      <!-- Unnamed (图片) [footnote] -->\n" +
+                    "      <div id=\"u"+(no+2)+"_ann\" class=\"annotation\"></div>\n");
+            if(i>0){
+              $("#u"+no).find("img").css("top",124+i*29+"px");
+              $("#u"+(no+2)).css("top",123+i*29+"px");
+            }
+            no=Number(no)+4;
+
           });/*each end*/
 
           //获取当前页码
@@ -3158,8 +3224,11 @@
           $("#u133").find("span").attr("id",data.announcePage.totalPages);
           //设置添加页面中的创建者姓名
           $("#u182").find("span").html("发布人:"+data.user.realName);
+          //绑定总记录数
+          $("[name='totalCount']").val(data.announcePage.totalElements);
           //设置标题颜色
           $("div[name='title']").css("color","#0000FF");
+          // bindIcon();
         });
 
       }
@@ -3271,13 +3340,143 @@
       $(document).on("click","[name='title']",function () {
           //获取通告id
           var id=$(this).find("span").attr("id");
-          alert(id);
           //判断id是否为空
           if(id!=null&&id>0){
             //根据通告编号发送请求获取详情页
-            location.href="/oaproject/anno/getdetail?id="+id;
+            location.href="/oaproject/anno/getbyid?id="+id;
           }
       });
+
+      //修改按钮点击事件
+      $(document).on("click","[name='update']",function(){
+        alert("修改按钮");
+        //获取要修改的id
+        var id=$(this).children("img").attr("name");
+        alert(id);
+        //发送请求获取详情显示修改页面
+        $.getJSON("/oaproject/anno/getdetail","id="+id,function(data){
+          //将数据绑定到要显示的修改页面上
+          //标题
+          $("#u428_input").val(data.noticeTitle);
+          //显示起始时间
+          $("#u444_input").val(data.startTime);
+          //显示截至时间
+          $("#u447_input").val(data.endTime);
+          //发布时间
+          $("#u556_input").val(data.releaseTime);
+          //发布内容
+          $("#u433_input").val(data.noticeContent);
+          //绑定通告编号
+          $("[name='upNoticeNo']").val(data.noticeNo);
+          //判断类型 0紧急 1一般
+          if(data.noticeType==0){
+            $("#u434_input").attr("checked","checked");
+          }else
+          {
+            $("#u436_input").attr("checked","checked");
+          }
+          //发布者id
+          var id=data.creator;
+          //根据id获取姓名
+          $.getJSON("/oaproject/users/getUsersbyId","userId="+id,function(data){
+            $("#u443").find("span").text("发布人："+data.realName);
+            //设置修改页面显示
+            $("#u406").css("visibility","visible");
+          });
+        });
+      });
+
+
+
+      //修改页面的修改按钮点击事件
+      $("#u438").click(function(){
+        //验证非空
+        //获取标题
+        var noticeTitle=$("#u428_input").val();
+        //获取显示开始时间
+        var startTime=$("#u444_input").val();
+        //获取显示截至时间
+        var endTime=$("#u447_input").val();
+        //获取发布时间
+        var releaseTime=$("#u556_input").val();
+        //获取内容
+        var noticeContent=$("#u433_input").val();
+        //获取状态1
+        var noticeType1=$("#u434_input").attr("checked");
+        //获取状态2
+        var noticeType2=$("#u436_input").attr("checked");
+        //判断状态
+        var noticeType;
+        if(noticeType1!=null){
+          noticeType=0;
+        }else{
+          noticeType=1;
+        }
+        //获取通告编号
+        var noticeNo=$("[name='upNoticeNo']").val();
+        //验证非空
+        if(noticeTitle==null||noticeTitle=="") {
+          alert("标题不能为空");
+        }else if(noticeType1==null&&noticeType2==null){
+          alert("请选择通告类型！");
+        }else if(startTime==null||startTime==""){
+          alert("请选择显示起始时间!");
+        }else if(endTime==null||endTime==""){
+          alert("请选择显示截至时间!");
+        }else if(releaseTime==null||releaseTime==""){
+          alert("请选择通告发布时间!");
+        }else if(noticeContent==null||noticeContent==""){
+          alert("通告内容不能为空");
+        }else
+        {
+          //进行修改操作
+          //发送请求进行添加
+          var requestData={"noticeTitle":noticeTitle,"noticeType":noticeType,
+            "startTime":startTime,"endTime":endTime,
+            "releaseTime":releaseTime,"noticeContent":noticeContent,"noticeNo":noticeNo};
+          $.post("/oaproject/anno/updateannounce.do",requestData,
+                  function(data){
+                    if(data.result=="success"){
+                      alert("修改成功!");
+                      //隐藏修改页面
+                      $("#u406").css("visibility","hidden");
+                      //请求页面
+                      bindTitle();
+                      getAllAnnounce(1);
+                    }else
+                    {
+                      alert("修改失败!");
+                    }
+                  });
+        }
+      });
+
+
+      //修改页面中的返回按钮点击事件
+      $("#u418").click(function(){
+        alert("返回按钮");
+        $("#u406").css("visibility","hidden");
+      });
+
+
+      //删除按钮点击事件
+      $(document).on("click","[name='delete']",function(){
+        var id=$(this).parent().attr("name");
+        //询问是否确认删除
+        if(confirm("确认要删除该条通告吗？")) {
+          //发送请求删除
+          $.getJSON("/oaproject/anno/delannounce.do", "id=" + id, function (data) {
+            if (data.result == "success") {
+              alert("删除成功!");
+            } else {
+              alert("删除失败！");
+            }
+            //刷新数据
+            getAllAnnounce(1);
+          });
+        }
+      });
+
 
     </script>
   </body>
