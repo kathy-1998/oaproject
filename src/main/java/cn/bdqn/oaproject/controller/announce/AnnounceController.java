@@ -1,7 +1,9 @@
 package cn.bdqn.oaproject.controller.announce;
 
 import cn.bdqn.oaproject.pojo.Announce;
+import cn.bdqn.oaproject.pojo.Users;
 import cn.bdqn.oaproject.service.announce.AnnounceService;
+import cn.bdqn.oaproject.utils.stringToDateConverter;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,12 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/anno")
@@ -24,6 +26,8 @@ public class AnnounceController {
 
     @Autowired
     private AnnounceService announceService;
+
+
 
     /**
      * 进入通告列表页面
@@ -42,8 +46,12 @@ public class AnnounceController {
      */
     @RequestMapping(value = "/announcelist",method = RequestMethod.GET)
     @ResponseBody
-    public Object getAllAnnounce(@RequestParam("pageIndex") String pageIndex,@RequestParam("pageSize") String pageSize){
+    public Object getAllAnnounce(@RequestParam("pageIndex") String pageIndex,
+                                 @RequestParam("pageSize") String pageSize,HttpSession session){
 
+        Map<String,Object> resultMap=new HashMap<String,Object>();
+        //获取当前登录用户
+        Users user=(Users)session.getAttribute("User");
         //封装多属性排序
         Sort sort=new Sort(Sort.Direction.ASC,"noticeType").
                 and(new Sort(Sort.Direction.DESC,"releaseTime"));
@@ -57,8 +65,6 @@ public class AnnounceController {
         if(pageSize!=null){
             page_size=Integer.parseInt(pageSize);
         }
-        System.out.println("pageIndex**********"+page_index);
-        System.out.println("pageSize**********"+page_size);
 
         //分页类
         Pageable pageable=new PageRequest(page_index-1,page_size, sort);
@@ -66,33 +72,71 @@ public class AnnounceController {
 
         try {
             announcePage=announceService.findAllAnnounceByPage(pageable);
+            resultMap.put("announcePage",announcePage);
+            resultMap.put("user",user);
             System.out.println(JSON.toJSONString(announcePage,true));
         }catch (Exception e){
             e.printStackTrace();
         }
-        return announcePage;
+        return resultMap;
     }
 
     /**
      * 添加通告
-     * @param announce
-     * @return
+     * @param noticeTitle 标题
+     * @param noticeType 通告类型
+     * @param startTime 显示起始时间
+     * @param endTime  显示截至时间
+     * @param releaseTime 发布时间
+     * @param noticeContent 通告内容
+     * @param noticeStatus 通告状态
+     * @param session 获取当前登录用户
+     * @return 添加执行结果
      */
     @RequestMapping(value = "saveannounce.do",method = RequestMethod.POST)
-    public String addNewAnnounce(Announce announce){
+    @ResponseBody
+    public Object addNewAnnounce(@RequestParam("noticeTitle")String noticeTitle,
+                                 @RequestParam("noticeType")String noticeType,
+                                 @RequestParam("startTime")String startTime,
+                                 @RequestParam("endTime")String endTime,
+                                 @RequestParam("releaseTime")String releaseTime,
+                                 @RequestParam("noticeContent")String noticeContent,
+                                 @RequestParam("noticeStatus")String noticeStatus,
+                                 HttpSession session){
+        Map<String,Object> resultMap=new HashMap<String,Object>() ;
+        Announce announce=new Announce();
         try {
-            //测试
-            announce=new Announce();
-            announce.setNoticeTitle("关于五一放假通知");
-            announce.setNoticeContent("五一改为四天假期。");
-            announce.setCreationDate(new Date());
+            //获取当前登录用户
+            Users user=(Users)session.getAttribute("User");
+            //设置创建用户
+          /*  announce.setCreator(user.getUserId());*/
+            //赋值
+            announce.setStartTime(stringToDateConverter.strToDate(startTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setEndTime(stringToDateConverter.strToDate(endTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setReleaseTime(stringToDateConverter.strToDate(releaseTime,"yyyy-MM-dd HH:mm:ss"));
+            announce.setNoticeStatus(Integer.parseInt(noticeStatus));
+            announce.setNoticeContent(noticeContent);
+            announce.setNoticeTitle(noticeTitle);
+            announce.setNoticeType(Integer.parseInt(noticeType));
             announce.setCreator(1);
+            //设置创建时间
+            announce.setCreationDate(new Date());
+            announce.setIsdelete(1);
+            //进行添加操作
             boolean flag=announceService.addAnnounce(announce);
+
             System.out.println(flag);
+            //判断是否添加成功
+            if(flag){
+                resultMap.put("result","success");
+            }else {
+                resultMap.put("result","failed");
+            }
         }catch (Exception e){
+            resultMap.put("result","error");
             e.printStackTrace();
         }
-        return "Notification_list_1";
+        return resultMap;
     }
 
 
@@ -139,16 +183,17 @@ public class AnnounceController {
      * 根据通告编号获取通告对象
      * @param noticeNo 通告编号
      */
-    @RequestMapping(value="/getbyid",method = RequestMethod.GET)
-    public String findAnnounceById(@RequestParam("id")String noticeNo){
+    @RequestMapping(value="/getdetail",method = RequestMethod.GET)
+    public String findAnnounceById(@RequestParam("id")String noticeNo,Model model){
         try {
             Announce announce=new Announce();
-            announce=announceService.findAnnouceById(20002);
+            announce=announceService.findAnnouceById(Integer.parseInt(noticeNo));
+            model.addAttribute("announce",announce);
             System.out.println(announce.getNoticeTitle()+"\t"+announce.getNoticeContent());
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Notification_list_1";
+        return "Notice_details_page";
     }
 
 

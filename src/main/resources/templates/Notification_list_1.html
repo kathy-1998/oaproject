@@ -29,14 +29,11 @@
     <script th:src="@{/resources/scripts/prototype/repeater.js}"></script>
     <script th:src="@{/resources/scripts/prototype/sto.js}"></script>
     <script th:src="@{/resources/scripts/prototype/utils.temp.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/variables.js}"></script>
     <script th:src="@{/resources/scripts/prototype/drag.js}"></script>
     <script th:src="@{/resources/scripts/prototype/move.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/visibility.js}"></script>
     <script th:src="@{/resources/scripts/prototype/style.js}"></script>
     <script th:src="@{/resources/scripts/prototype/adaptive.js}"></script>
     <script th:src="@{/resources/scripts/prototype/tree.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/init.temp.js}"></script>
     <script th:src="@{/files/通告列表_1/data.js}"></script>
     <script th:src="@{/resources/scripts/prototype/legacy.js}"></script>
     <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>
@@ -716,15 +713,21 @@
         </div>
 
         <!-- Unnamed (复选框) -->
-        <div id="u170" class="ax_复选框">
+        <select id="u170" name="status">
+          <option value="0">紧急</option>
+          <option value="1">一般</option>
+        </select>
+
+
+       <!-- <div id="u170" class="ax_复选框">
           <label for="u170_input">
-            <!-- Unnamed () -->
+            &lt;!&ndash; Unnamed () &ndash;&gt;
             <div id="u171" class="text">
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">一般</span></p>
             </div>
           </label>
-          <input id="u170_input" type="checkbox" value="checkbox"/>
-        </div>
+          <input id="u170_input" type="checkbox"  name="status" value="1"checked="checked"/>
+        </div>-->
 
         <!-- Unnamed (文本框(多行)) -->
         <div id="u172" class="ax_文本框_多行_">
@@ -732,15 +735,15 @@
         </div>
 
         <!-- Unnamed (复选框) -->
-        <div id="u173" class="ax_复选框">
+      <!--  <div id="u173" class="ax_复选框">
           <label for="u173_input">
-            <!-- Unnamed () -->
+            &lt;!&ndash; Unnamed () &ndash;&gt;
             <div id="u174" class="text">
               <p><span style="font-family:'Applied Font Regular', 'Applied Font';">紧急</span></p>
             </div>
           </label>
-          <input id="u173_input" type="checkbox" value="checkbox" checked/>
-        </div>
+          <input id="u173_input" type="checkbox" name="status" value="0" checked="checked"/>
+        </div>-->
 
         <!-- Unnamed (形状) -->
         <div id="u175" class="ax_文本">
@@ -777,7 +780,7 @@
           <img id="u181_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
           <!-- Unnamed () -->
           <div id="u182" class="text">
-            <p><span style="font-family:'Applied Font Regular', 'Applied Font';">发布人：李四</span></p>
+            <p><span style="font-family:'Applied Font Regular', 'Applied Font';"></span></p>
           </div>
         </div>
 
@@ -786,18 +789,18 @@
 
         <!-- textfield - date (文本框(单行)) -->
         <div id="u183" class="ax_文本框_单行_">
-          <input id="u183_input" type="text" value="11/14/2009" class="text_sketch" data-label="textfield - date"/>
+          <input id="u183_input" type="text" value="2019-04-15 13:30:00" class="text_sketch" data-label="textfield - date"/>
         </div>
 
         <!-- textfield - date (文本框(单行)) [footnote] -->
         <div id="u183_ann" class="annotation"></div>
 
         <!-- button - date picker (图片) -->
-        <div id="u184" class="ax_图片" data-label="button - date picker">
+      <!--  <div id="u184" class="ax_图片" data-label="button - date picker">
           <img id="u184_img" class="img " th:src="@{/images/我的桌面/button_-_date_picker_u207.png}"/>
-          <!-- Unnamed () -->
+          &lt;!&ndash; Unnamed () &ndash;&gt;
           <div id="u185" class="text"></div>
-        </div>
+        </div>-->
 
         <!-- panel - calendar (动态面板) -->
         <div id="u186" class="ax_动态面板" data-label="panel - calendar">
@@ -1286,19 +1289,19 @@
 
         <!-- Date Field From (文本框(单行)) -->
         <div id="u294" class="ax_文本框_单行_">
-          <input id="u294_input" type="text" value="07/10/2007" class="text_sketch" data-label="Date Field From"/>
+          <input id="u294_input" type="text" value="2018-04-15 14:20:33" class="text_sketch" data-label="Date Field From"/>
         </div>
 
         <!-- Unnamed (图片) -->
-        <div id="u295" class="ax_图片">
+       <!-- <div id="u295" class="ax_图片">
           <img id="u295_img" class="img " th:src="@{/images/待处理任务/u6.png}"/>
-          <!-- Unnamed () -->
+          &lt;!&ndash; Unnamed () &ndash;&gt;
           <div id="u296" class="text"></div>
-        </div>
+        </div>-->
 
         <!-- Date Field To (文本框(单行)) -->
         <div id="u297" class="ax_文本框_单行_">
-          <input id="u297_input" type="text" value="07/25/2007" class="text_sketch" data-label="Date Field To"/>
+          <input id="u297_input" type="text" value="2018-04-18 14:20:33" class="text_sketch" data-label="Date Field To"/>
         </div>
 
         <!-- Calendar Picker (动态面板) -->
@@ -3082,7 +3085,7 @@
         var pageSize=$("#u131_input").val();  //获取每页显示记录数
         $.getJSON("/oaproject/anno/announcelist","pageIndex="+pageIndex+"&pageSize="+pageSize,function(data){
           var num=13;
-          $.each(data.content,function(i,e){
+          $.each(data.announcePage.content,function(i,e){
             $.getJSON("/oaproject/users/getUsersbyId","userId="+e.creator,function(result){
               //判断通告状态
               var status;
@@ -3094,11 +3097,11 @@
               {
                 status="已过期";
               }
-              $u2.append("<div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
+              $u2.append("<div  id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
                       "            <img id=\"u"+num+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u13.png}\"/>\n" +
                       "            <!-- Unnamed () -->\n" +
-                      "            <div id=\"u"+(num+1)+"\" class=\"text\">\n" +
-                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.noticeTitle+"</span></p>\n" +
+                      "            <div name='title' id=\"u"+(num+1)+"\" class=\"text\">\n" +
+                      "                <p><span id='"+e.noticeNo+"' style=\"font-family:'Applied Font Regular',font-color:'#0000FF' ,'Applied Font';\">"+e.noticeTitle+"</span></p>\n" +
                       "            </div>\n" +
                       "        </div>\n" +
                       "\n" +
@@ -3107,7 +3110,7 @@
                       "            <img id=\"u"+(num+2)+"_img\" class=\"img \" th:src=\"@{/images/通告列表_1/u15.png}\"/>\n" +
                       "            <!-- Unnamed () -->\n" +
                       "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
-                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+result.userName+"</span></p>\n" +
+                      "                <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+result.realName+"</span></p>\n" +
                       "            </div>\n" +
                       "        </div>\n" +
                       "\n" +
@@ -3147,12 +3150,16 @@
           });/*each end*/
 
           //获取当前页码
-          var currentNo=((data.pageable.pageNumber)+1);
+          var currentNo=((data.announcePage.pageable.pageNumber)+1);
           //绑定当前页码和总页数
-          $("#u128").find("span").html(currentNo+"/"+data.totalPages);
+          $("#u128").find("span").html(currentNo+"/"+data.announcePage.totalPages);
           $("#u128").attr("name",currentNo);
           //为下一页按钮绑定总页数
-          $("#u133").find("span").attr("id",data.totalPages);
+          $("#u133").find("span").attr("id",data.announcePage.totalPages);
+          //设置添加页面中的创建者姓名
+          $("#u182").find("span").html("发布人:"+data.user.realName);
+          //设置标题颜色
+          $("div[name='title']").css("color","#0000FF");
         });
 
       }
@@ -3160,46 +3167,117 @@
       //验证非空方法
       function checkRequired(){
         //获取标题
+        var noticeTitle=$("#u163_input").val();
         //获取状态:紧急、一般
+        var noticeType=$("#u170").val();
         //获取显示开始时间
+        var startTime=$("#u294_input").val();
         //获取显示截至时间
+        var endTime=$("#u297_input").val();
         //获取发布时间
+        var releaseTime=$("#u183_input").val();
         //获取内容
+        var noticeContent=$("#u172_input").val();
+        var flag=false;
         //验证非空
-
-
+        if(noticeTitle==null||noticeTitle==""){
+          alert("标题不能为空");
+        }else if(startTime==null||startTime==""){
+          alert("请选择显示起始时间!");
+        }else if(endTime==null||endTime==""){
+          alert("请选择显示截至时间!");
+        }else if(releaseTime==null||releaseTime==""){
+          alert("请选择通告发布时间!");
+        }else if(noticeContent==null||noticeContent==""){
+          alert("通告内容不能为空");
+        }else
+        {
+          flag=true;
+        }
+        return flag;
       }
 
 
       //添加方法
-      function addAnnounce(){
-
-
+      function addAnnounce(noticeStatus){
+        //根据noticeStatus判断是0保存，还是1发布
+        //判断是否符合输入，若符合输入则进行添加操作
+        if(checkRequired()){
+          //获取标题
+          var noticeTitle=$("#u163_input").val();
+          //获取状态:紧急、一般
+          var noticeType=$("#u170").val();
+          //获取显示开始时间
+          var startTime=$("#u294_input").val();
+          //获取显示截至时间
+          var endTime=$("#u297_input").val();
+          //获取发布时间
+          var releaseTime=$("#u183_input").val();
+          //获取内容
+          var noticeContent=$("#u172_input").val();
+          //发送请求进行添加
+          var requestData={"noticeTitle":noticeTitle,"noticeType":noticeType,
+                          "startTime":startTime,"endTime":endTime,
+            "releaseTime":releaseTime,"noticeContent":noticeContent,
+            "noticeStatus":noticeStatus};
+          $.post("/oaproject/anno/saveannounce.do",requestData,
+                  function(data){
+                  if(data.result=="success"){
+                    alert("添加成功!");
+                    //隐藏添加页面
+                    $("#u143").css("visibility","hidden");
+                    //请求页面
+                    bindTitle();
+                    getAllAnnounce(1);
+                  }else
+                  {
+                    alert("添加失败!");
+                  }
+          });
+        }
       }
 
 
+      //添加按钮点击事件
+      $("#u142").click(function(){
+        //设置添加页面显示
+        $("#u143").css("visibility","visible");
+      });
+
       //发布按钮点击事件
-      $("#180").click(function(){
-        alert("发布按钮");
+      $("#u180").click(function(){
+        addAnnounce(1);
       });
 
       //保存按钮点击事件
-      $("#158").click(function(){
-        alert("发布按钮");
+      $("#u158").click(function(){
+        addAnnounce(0);
       });
 
       //返回按钮点击事件
-      $("#178").click(function(){
-          alert("返回按钮");
+      $("#u178").click(function(){
+        //隐藏添加页面
+          $("#u143").css("visibility","hidden");
       });
 
+      //每页显示记录数下拉框改变事件
+      $("#u131_input").change(function(){
+        //发送请求
+        bindTitle();
+        getAllAnnounce(1);
+      });
 
-
-
-
-
-
-
+      //标题点击事件
+      $(document).on("click","[name='title']",function () {
+          //获取通告id
+          var id=$(this).find("span").attr("id");
+          alert(id);
+          //判断id是否为空
+          if(id!=null&&id>0){
+            //根据通告编号发送请求获取详情页
+            location.href="/oaproject/anno/getdetail?id="+id;
+          }
+      });
 
     </script>
   </body>
