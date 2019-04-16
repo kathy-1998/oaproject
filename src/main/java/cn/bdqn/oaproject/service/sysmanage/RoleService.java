@@ -15,9 +15,14 @@ import java.util.List;
 public interface RoleService {
 
     /**
-     * 添加角色/修改角色
+     * 添加角色/
      */
    boolean Add(Role role);
+
+    /**
+     * 修改角色
+     */
+    boolean modify(Role role);
 
 
     /**
@@ -30,4 +35,6 @@ public interface RoleService {
     Page<Role> findAll(Pageable pageable);
 
     List<Role> findAll();
+
+    Role findRoleByRoleId(Integer roleId);
 }

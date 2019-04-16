@@ -27,6 +27,7 @@ public class UsersServiceImpl  implements UsersService {
         Users users=null;
         try{
             users=usersDao.findByUserName(UserName);
+
         }catch (Exception e){
             e.printStackTrace();
         }
