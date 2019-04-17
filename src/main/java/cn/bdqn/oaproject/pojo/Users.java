@@ -140,6 +140,22 @@ public class Users {
     @Column(name="ISDELETE")
     private Integer isdelete;
 
+    /**
+     * 是否是管理员(0:是,1:不是)
+     */
+    @Column(name="ISADMIN")
+    public Integer getIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(Integer isadmin) {
+        this.isadmin = isadmin;
+    }
+
+    private  Integer isadmin;
+
+
+
     public Integer getUserId() {
         return userId;
     }

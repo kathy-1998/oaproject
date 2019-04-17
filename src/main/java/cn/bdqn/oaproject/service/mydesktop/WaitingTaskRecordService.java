@@ -36,4 +36,9 @@ public interface WaitingTaskRecordService {
     void modifyInfo(Integer userId,String applyOpinion,Integer id);
 
 
+    /**
+     * 添加待处理任务
+     */
+    boolean addInfo(WaitingTaskRecord waitingTaskRecord);
+
 }

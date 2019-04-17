@@ -40,6 +40,19 @@ public class WaitingTaskRecordServiceImpl implements WaitingTaskRecordService {
     }
 
     @Override
+    public boolean addInfo(WaitingTaskRecord waitingTaskRecord) {
+
+        try {
+          waitingTaskRecordDao.save(waitingTaskRecord);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    @Override
     public void modifyInfo(Integer userId, String applyOpinion, Integer id) {
         try {
             waitingTaskRecordDao.modifyInfo(userId, applyOpinion, id);

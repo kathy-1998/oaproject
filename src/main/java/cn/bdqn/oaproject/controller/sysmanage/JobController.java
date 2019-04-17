@@ -1,4 +1,4 @@
-package cn.bdqn.oaproject.controller.sysmanage.job;
+package cn.bdqn.oaproject.controller.sysmanage;
 
 
 import cn.bdqn.oaproject.service.sysmanage.JobService;

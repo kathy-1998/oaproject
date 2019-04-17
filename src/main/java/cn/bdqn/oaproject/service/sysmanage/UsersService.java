@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * 用户业务操作接口
  */
@@ -24,4 +26,6 @@ public interface UsersService {
 
     boolean add(Users users);
     boolean modify(Users users);
+
+    List<Users> findUsersByIsadmin(Integer isadmin);
 }

@@ -1,4 +1,4 @@
-package cn.bdqn.oaproject.controller.sysmanage.log;
+package cn.bdqn.oaproject.controller.sysmanage;
 
 
 import cn.bdqn.oaproject.pojo.OperateLog;

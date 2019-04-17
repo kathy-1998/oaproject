@@ -15,7 +15,8 @@ public class ProofOfEarningsApply {
      */
     @Id
     @Column(name = "PROOF_OF_EARNINGS_APPLY_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_incomeApply_sequence", initialValue = 3, allocationSize = 1)
     private Integer proofOfEarningsApplyId;
 
     /**
