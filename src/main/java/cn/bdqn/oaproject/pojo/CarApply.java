@@ -15,7 +15,8 @@ public class CarApply {
      */
     @Id
     @Column(name="CAR_APPLY_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_carapply_seq")
+    @SequenceGenerator(name = "my_carapply_seq",sequenceName = "carapply_seq",initialValue = 4,allocationSize = 1)
     private Integer carApplyId;
 
     /**
