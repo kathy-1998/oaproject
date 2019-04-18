@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户业务操作接口
@@ -21,6 +22,17 @@ public class UsersServiceImpl  implements UsersService {
 
     @Autowired
     UsersDao usersDao;
+
+    @Override
+    public List<Users> findUsersByIsadmin(Integer isadmin) {
+        List<Users> users=null;
+        try{
+            users=usersDao.findUsersByIsadmin(isadmin);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  users;
+    }
 
     @Override
     public Users findByUserName(String UserName) {

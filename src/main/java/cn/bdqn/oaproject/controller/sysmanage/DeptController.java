@@ -1,4 +1,4 @@
-package cn.bdqn.oaproject.controller.sysmanage.dept;
+package cn.bdqn.oaproject.controller.sysmanage;
 
 import cn.bdqn.oaproject.pojo.Dept;
 import cn.bdqn.oaproject.pojo.Users;

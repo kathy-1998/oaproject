@@ -1,4 +1,4 @@
-package cn.bdqn.oaproject.controller.sysmanage.users;
+package cn.bdqn.oaproject.controller.sysmanage;
 
 import cn.bdqn.oaproject.dao.sysmanage.UsersDao;
 import cn.bdqn.oaproject.pojo.Dept;
@@ -236,6 +236,11 @@ public class UsersController {
                 user.setRole(role);
                 user.setRealName(realName);
 
+                if(roleId!=5){
+                    //表示选择的不是普通用户
+                    user.setIsadmin(0);
+                }
+
         if (file != null) {
             String fileName = file.getOriginalFilename();
 
@@ -284,7 +289,6 @@ public class UsersController {
                          @RequestParam(value = "roleId", required = false) Integer roleId,
                          @RequestParam(value = "userId", required = false) Integer userId,
                          @RequestParam(value = "status", required = false) Integer status,
-
                          @RequestParam(value = "myfile", required = false) MultipartFile file
                         ) {
 
@@ -307,6 +311,12 @@ public class UsersController {
                 user.setStatus(status);
                 user.setRole(role);
                 user.setRealName(realName);
+
+
+                if(roleId!=5){
+                //表示选择的不是普通用户
+                    user.setIsadmin(0);
+                }
 
          if (file != null) {
             String fileName = file.getOriginalFilename();
@@ -343,6 +353,19 @@ public class UsersController {
 
 
     }
+
+
+    /**
+     * 查出所有领导级的用户
+     */
+    @RequestMapping("/leadList")
+    @ResponseBody
+    public  Object leadUsersList(){
+
+        return usersService.findUsersByIsadmin(0);
+    }
+
+
 
 
 }

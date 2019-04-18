@@ -14,7 +14,8 @@ public class LeaveApply {
      */
     @Id
     @Column(name="LEAVE_APPLY_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_LeaveApply_sequence", initialValue = 4, allocationSize = 1)
     private Integer leaveApplyId;
 
     /**

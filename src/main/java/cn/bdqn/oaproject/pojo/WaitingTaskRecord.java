@@ -14,7 +14,8 @@ public class WaitingTaskRecord {
      */
     @Id
     @Column(name = "WAITING_TASK_RECORD_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenerator")
+    @SequenceGenerator(name = "mySeqGenerator", sequenceName = "t_WAITING_TASK_role_sequence", initialValue = 3, allocationSize = 1)
     private Integer waitingTaskRecordId;
     /**
      * 任务名称

@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 import java.util.List;
 
@@ -51,4 +52,13 @@ public interface UsersDao extends JpaRepository<Users,Integer>,JpaSpecificationE
 
     @Override
     void deleteById(Integer id);
+
+
+    /**
+     * 所有部门领导,以及高层
+     * @param isadmin
+     * @return
+     */
+    List<Users> findUsersByIsadmin(Integer isadmin);
+
 }

@@ -1,4 +1,4 @@
-package cn.bdqn.oaproject.controller.sysmanage.Role;
+package cn.bdqn.oaproject.controller.sysmanage;
 
 
 import cn.bdqn.oaproject.pojo.Role;
