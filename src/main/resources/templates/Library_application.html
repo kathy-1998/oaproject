@@ -751,7 +751,7 @@
 
   $(function () {
 
-    //init();
+    init();
 
 
     //点击添加时
@@ -779,12 +779,78 @@
         alert("请输入图书编号")
       }else if(isNaN(bookId)){
         alert("请输入数字");
-      }else if(spr=="0"){
+      }else if(bookName==""){
+        alert("请输入图书名称");
+      } else if(spr=="0"){
       alert("请选择审批人");
       }else {
 
         //判断用户输入的图书编号和图书名称是否存在,如果不存在，提示用户
 
+
+
+          $.getJSON("/oaproject/book/findBookById","bookId="+bookId,function (data) {
+
+            if(data!=false){
+
+
+
+              $.getJSON("/oaproject/book/findBookByName","bookName="+bookName,function (data02) {
+
+                if(data02!=false){
+
+
+                   if(data.bookName==bookName){
+
+
+
+
+                 $.getJSON("/oaproject/BookBorrow/Add","userId="+userId+"&deptId="+deptId+"&bookId="+bookId+"&bookName="+bookName+"&time="+time+"&spr="+spr+"&realName="+realName,function (result) {
+
+
+                     if(result==true){
+
+                       alert("添加成功");
+
+
+                       $("#u23 span").html("");
+                       $("#userId").val("0");
+                       $("#deptId").val("0");
+                      $("#u17_input").val("");
+                       $("#u0_input").val("");
+                      $("#u1_input").val("");
+
+                       $("#u12_input option[value='0']").attr("selected", true);
+                     }
+
+
+
+                 })
+
+
+
+                   }else{
+
+                     alert("该图书编号和图书名称不符");
+                   }
+
+
+
+
+                }else{
+                  alert("该图书名称不存在，请重新输入")
+                }
+
+              })
+
+            }else{
+              alert("该图书编号不存在，请重新输入")
+            }
+
+
+
+
+          })
 
 
 
@@ -795,14 +861,7 @@
 
 
 
-     /*
-      $.getJSON("/oaproject/BookBorrow/Add",,function (data) {
 
-
-
-
-
-      })*/
 
 
 

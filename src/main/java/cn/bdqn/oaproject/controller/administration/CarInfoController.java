@@ -182,7 +182,7 @@ public class CarInfoController {
      * @param vehicleNo
      * @return
      */
-    @RequestMapping(value = "/findbycarno",method = RequestMethod.GET)
+    @RequestMapping(value = "/findExitsVehicleNo",method = RequestMethod.GET)
     @ResponseBody
     public Object findExitsVehicleNo(@RequestParam("vehicleNo")String vehicleNo){
         CarInfo carInfo=null;
