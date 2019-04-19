@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 @Service("waitingTaskRecordService")
 @Transactional
@@ -40,11 +41,24 @@ public class WaitingTaskRecordServiceImpl implements WaitingTaskRecordService {
     }
 
     @Override
-    public void modifyInfo(Integer userId, String applyOpinion, Integer id) {
+    public boolean modifyInfo(Integer userId, String applyOpinion, Date finalApprovalTime, Integer id) {
         try {
-            waitingTaskRecordDao.modifyInfo(userId, applyOpinion, id);
+            waitingTaskRecordDao.modifyInfo(userId, applyOpinion,finalApprovalTime,id);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<WaitingTaskRecord> getInfoById(Integer id) {
+        List<WaitingTaskRecord> waitingTaskRecord=null;
+        try {
+            waitingTaskRecord=waitingTaskRecordDao.getInfoById(id);
         }catch (Exception e){
             e.printStackTrace();
         }
+        return waitingTaskRecord;
     }
 }

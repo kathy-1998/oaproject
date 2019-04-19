@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,8 +42,15 @@ public interface WaitingTaskRecordDao extends JpaRepository<WaitingTaskRecord,In
      * @param id
      */
     @Modifying
-    @Query("update WaitingTaskRecord w set w.userId=?1,w.applyOpinion = ?2 where w.waitingTaskRecordId =?3")
-    void modifyInfo(Integer userId,String applyOpinion,Integer id);
+    @Query("update WaitingTaskRecord w set w.userId=?1,w.applyOpinion = ?2,w.finalApprovalTime=?3 where w.waitingTaskRecordId =?4")
+    void modifyInfo(Integer userId, String applyOpinion, Date finalApprovalTime,Integer id);
 
+    /**
+     * 根据Id查询信息
+     * @param id
+     * @return
+     */
+    @Query("select w from WaitingTaskRecord w where w.userId=?1 or w.applyId=?1")
+    List<WaitingTaskRecord> getInfoById(Integer id);
 
 }
