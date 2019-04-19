@@ -23,7 +23,8 @@ public class CarInfo {
      */
     @Id
     @Column(name = "CAR_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_carinfo_seq")
+    @SequenceGenerator(name = "my_carinfo_seq",sequenceName = "carinfo_seq",initialValue = 4,allocationSize = 1)
     private Integer carId;
 
     /**
