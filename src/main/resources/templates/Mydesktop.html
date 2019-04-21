@@ -7147,7 +7147,6 @@
         dataType:"json",
         success:function (data) {
             for(var i=0;i<data.length;i++){
-              alert(data[i].waitingTaskRecordName);
               $tbody.innerHTML+="<tr>" +
                       "<td>"+data[i].waitingTaskRecordName+"</td>" +
                       "<td>"+data[i].status+"</td>" +

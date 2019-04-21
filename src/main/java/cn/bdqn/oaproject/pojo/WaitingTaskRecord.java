@@ -1,5 +1,7 @@
 package cn.bdqn.oaproject.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -37,6 +39,7 @@ public class WaitingTaskRecord {
     /**
      * 申请记录中的申请时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Column(name = "APPLY_TIME")
     private Date applyTime;
 
@@ -61,6 +64,7 @@ public class WaitingTaskRecord {
     /**
      * 最后审批时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @Column(name = "FINAL_APPROVAL_TIME")
     private Date finalApprovalTime;
 

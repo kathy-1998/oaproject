@@ -10,7 +10,7 @@
     <link th:href="@{/files/待处理任务/styles.css}" type="text/css" rel="stylesheet"/>
     <script th:src="@{/resources/scripts/jquery-1.7.1.min.js}"></script>
     <script th:src="@{/resources/scripts/jquery-ui-1.8.10.custom.min.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
+    <!--<script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
     <script th:src="@{/resources/scripts/prototype/globals.js}"></script>
     <script th:src="@{/resources/scripts/axutils.js}"></script>
     <script th:src="@{/resources/scripts/prototype/annotation.js}"></script>
@@ -38,7 +38,7 @@
     <script th:src="@{/resources/scripts/prototype/init.temp.js}"></script>
     <script th:src="@{/files/待处理任务/data.js}"></script>
     <script th:src="@{/resources/scripts/prototype/legacy.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>
+    <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>-->
   </head>
   <body>
 
@@ -58,7 +58,7 @@
 
     <!-- Date Field From (文本框(单行)) -->
     <div id="u3" class="ax_文本框_单行_">
-      <input id="u3_input" type="text" value="07/10/2007" class="text_sketch" data-label="Date Field From"/>
+      <input id="u3_input" type="text" placeholder="2007-07-17" class="text_sketch" data-label="Date Field From"/>
     </div>
 
     <!-- Unnamed (形状) -->
@@ -79,19 +79,12 @@
 
     <!-- Date Field To (文本框(单行)) -->
     <div id="u8" class="ax_文本框_单行_">
-      <input id="u8_input" type="text" value="07/25/2007" class="text_sketch" data-label="Date Field To"/>
+      <input id="u8_input" type="text" placeholder="2007-07-25" class="text_sketch" data-label="Date Field To"/>
     </div>
 
     <!-- Unnamed (下拉列表框) -->
     <div id="u9" class="ax_下拉列表框">
       <select id="u9_input" class="text_sketch">
-        <option value="请假申请">请假申请</option>
-        <option value="出差申请">出差申请</option>
-        <option value="用车管理">用车管理</option>
-        <option value="用章管理">用章管理</option>
-        <option value="图书借阅申请">图书借阅申请</option>
-        <option value="名片印制申请">名片印制申请</option>
-        <option value="收入证明">收入证明</option>
       </select>
     </div>
 
@@ -105,540 +98,571 @@
     </div>
 
     <!-- Data Grid (表格) -->
-    <div id="u13" class="ax_表格" data-label="Data Grid">
+   <!-- <div id="u13" class="ax_表格" data-label="Data Grid">-->
 
       <!-- Unnamed (表格单元) -->
-      <div id="u14" class="ax_表格单元">
+      <!--<div id="u14" class="ax_表格单元">
         <img id="u14_img" class="img " th:src="@{/images/待处理任务/u14.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u15" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">任务名称</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u16" class="ax_表格单元">
         <img id="u16_img" class="img " th:src="@{/images/待处理任务/u16.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u17" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">发起时间</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u18" class="ax_表格单元">
         <img id="u18_img" class="img " th:src="@{/images/待处理任务/u18.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u19" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">发起人</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u20" class="ax_表格单元">
         <img id="u20_img" class="img " th:src="@{/images/待处理任务/u18.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u21" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">最</span><span style="font-family:'Applied Font Bold', 'Applied Font';">后审批时间</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u22" class="ax_表格单元">
         <img id="u22_img" class="img " th:src="@{/images/待处理任务/u18.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u23" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">状态</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u24" class="ax_表格单元">
         <img id="u24_img" class="img " th:src="@{/images/待处理任务/u24.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u25" class="text">
           <p><span style="font-family:'Applied Font Bold', 'Applied Font';">操作</span></p>
         </div>
-      </div>
-
-      <!-- Unnamed (表格单元) -->
+      </div>-->
+        <table id="u13">
+            <thead>
+                <tr style="background-color: #AAAAAA;color: #0000FF;">
+                    <td>任务名称</td>
+                    <td>发起时间</td>
+                    <td>发起人</td>
+                    <td>最后审批时间</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        </table>
+        <table id="u26">
+            <tbody id="t3">
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            </tbody>
+        </table>
+      <!--&lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u26" class="ax_表格单元">
         <img id="u26_img" class="img " th:src="@{/images/待处理任务/u26.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u27" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">张三</span><span style="font-family:'Applied Font Regular', 'Applied Font';">请假</span><span style="font-family:'Applied Font Regular', 'Applied Font';">申请</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u28" class="ax_表格单元">
         <img id="u28_img" class="img " th:src="@{/images/待处理任务/u28.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u29" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">2013-11-28 11:22:55</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u30" class="ax_表格单元">
         <img id="u30_img" class="img " th:src="@{/images/待处理任务/u30.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u31" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">张三</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u32" class="ax_表格单元">
         <img id="u32_img" class="img " th:src="@{/images/待处理任务/u30.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u33" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u34" class="ax_表格单元">
         <img id="u34_img" class="img " th:src="@{/images/待处理任务/u30.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u35" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">待审核</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u36" class="ax_表格单元">
         <img id="u36_img" class="img " th:src="@{/images/待处理任务/u36.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u37" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u38" class="ax_表格单元">
         <img id="u38_img" class="img " th:src="@{/images/待处理任务/u38.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u39" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">李四请假申请</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u40" class="ax_表格单元">
         <img id="u40_img" class="img " th:src="@{/images/待处理任务/u40.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u41" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">2013-10-12 12:11:22</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u42" class="ax_表格单元">
         <img id="u42_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u43" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">李四</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u44" class="ax_表格单元">
         <img id="u44_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u45" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u46" class="ax_表格单元">
         <img id="u46_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u47" class="text">
           <p><span style="font-family:'Applied Font Regular', 'Applied Font';">审核中</span></p>
         </div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u48" class="ax_表格单元">
         <img id="u48_img" class="img " th:src="@{/images/待处理任务/u48.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u49" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u50" class="ax_表格单元">
         <img id="u50_img" class="img " th:src="@{/images/待处理任务/u50.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u51" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u52" class="ax_表格单元">
         <img id="u52_img" class="img " th:src="@{/images/待处理任务/u52.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u53" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u54" class="ax_表格单元">
         <img id="u54_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u55" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u56" class="ax_表格单元">
         <img id="u56_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u57" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u58" class="ax_表格单元">
         <img id="u58_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u59" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u60" class="ax_表格单元">
         <img id="u60_img" class="img " th:src="@{/images/待处理任务/u60.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u61" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u62" class="ax_表格单元">
         <img id="u62_img" class="img " th:src="@{/images/待处理任务/u38.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u63" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u64" class="ax_表格单元">
         <img id="u64_img" class="img " th:src="@{/images/待处理任务/u40.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u65" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u66" class="ax_表格单元">
         <img id="u66_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u67" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u68" class="ax_表格单元">
         <img id="u68_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u69" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u70" class="ax_表格单元">
         <img id="u70_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u71" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u72" class="ax_表格单元">
         <img id="u72_img" class="img " th:src="@{/images/待处理任务/u48.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u73" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u74" class="ax_表格单元">
         <img id="u74_img" class="img " th:src="@{/images/待处理任务/u50.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u75" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u76" class="ax_表格单元">
         <img id="u76_img" class="img " th:src="@{/images/待处理任务/u52.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u77" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u78" class="ax_表格单元">
         <img id="u78_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u79" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u80" class="ax_表格单元">
         <img id="u80_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u81" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u82" class="ax_表格单元">
         <img id="u82_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u83" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u84" class="ax_表格单元">
         <img id="u84_img" class="img " th:src="@{/images/待处理任务/u60.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u85" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u86" class="ax_表格单元">
         <img id="u86_img" class="img " th:src="@{/images/待处理任务/u38.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u87" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u88" class="ax_表格单元">
         <img id="u88_img" class="img " th:src="@{/images/待处理任务/u40.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u89" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u90" class="ax_表格单元">
         <img id="u90_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u91" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u92" class="ax_表格单元">
         <img id="u92_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u93" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u94" class="ax_表格单元">
         <img id="u94_img" class="img " th:src="@{/images/待处理任务/u42.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u95" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u96" class="ax_表格单元">
         <img id="u96_img" class="img " th:src="@{/images/待处理任务/u48.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u97" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u98" class="ax_表格单元">
         <img id="u98_img" class="img " th:src="@{/images/待处理任务/u50.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u99" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u100" class="ax_表格单元">
         <img id="u100_img" class="img " th:src="@{/images/待处理任务/u52.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u101" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u102" class="ax_表格单元">
         <img id="u102_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u103" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u104" class="ax_表格单元">
         <img id="u104_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u105" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u106" class="ax_表格单元">
         <img id="u106_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u107" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u108" class="ax_表格单元">
         <img id="u108_img" class="img " th:src="@{/images/待处理任务/u60.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u109" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u110" class="ax_表格单元">
         <img id="u110_img" class="img " th:src="@{/images/待处理任务/u110.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u111" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u112" class="ax_表格单元">
         <img id="u112_img" class="img " th:src="@{/images/待处理任务/u112.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u113" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u114" class="ax_表格单元">
         <img id="u114_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u115" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u116" class="ax_表格单元">
         <img id="u116_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u117" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u118" class="ax_表格单元">
         <img id="u118_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u119" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u120" class="ax_表格单元">
         <img id="u120_img" class="img " th:src="@{/images/待处理任务/u120.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u121" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u122" class="ax_表格单元">
         <img id="u122_img" class="img " th:src="@{/images/待处理任务/u50.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u123" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u124" class="ax_表格单元">
         <img id="u124_img" class="img " th:src="@{/images/待处理任务/u52.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u125" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u126" class="ax_表格单元">
         <img id="u126_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u127" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u128" class="ax_表格单元">
         <img id="u128_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u129" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u130" class="ax_表格单元">
         <img id="u130_img" class="img " th:src="@{/images/待处理任务/u54.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u131" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u132" class="ax_表格单元">
         <img id="u132_img" class="img " th:src="@{/images/待处理任务/u60.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u133" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u134" class="ax_表格单元">
         <img id="u134_img" class="img " th:src="@{/images/待处理任务/u110.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u135" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u136" class="ax_表格单元">
         <img id="u136_img" class="img " th:src="@{/images/待处理任务/u112.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u137" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u138" class="ax_表格单元">
         <img id="u138_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u139" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u140" class="ax_表格单元">
         <img id="u140_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u141" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u142" class="ax_表格单元">
         <img id="u142_img" class="img " th:src="@{/images/待处理任务/u114.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u143" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u144" class="ax_表格单元">
         <img id="u144_img" class="img " th:src="@{/images/待处理任务/u120.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u145" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u146" class="ax_表格单元">
         <img id="u146_img" class="img " th:src="@{/images/待处理任务/u146.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u147" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u148" class="ax_表格单元">
         <img id="u148_img" class="img " th:src="@{/images/待处理任务/u148.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u149" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u150" class="ax_表格单元">
         <img id="u150_img" class="img " th:src="@{/images/待处理任务/u150.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u151" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u152" class="ax_表格单元">
         <img id="u152_img" class="img " th:src="@{/images/待处理任务/u150.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u153" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u154" class="ax_表格单元">
         <img id="u154_img" class="img " th:src="@{/images/待处理任务/u150.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u155" class="text"></div>
       </div>
 
-      <!-- Unnamed (表格单元) -->
+      &lt;!&ndash; Unnamed (表格单元) &ndash;&gt;
       <div id="u156" class="ax_表格单元">
         <img id="u156_img" class="img " th:src="@{/images/待处理任务/u156.png}"/>
-        <!-- Unnamed () -->
+        &lt;!&ndash; Unnamed () &ndash;&gt;
         <div id="u157" class="text"></div>
-      </div>
-    </div>
+      </div>-->
+    <!--</div>-->
 
     <!-- Unnamed (形状) -->
     <div id="u158" class="ax_形状">
@@ -716,32 +740,32 @@
       <div id="u173" class="text"></div>
     </div>
 
-    <!-- Unnamed (形状) -->
+    <!-- Unnamed (形状)
     <div id="u174" class="ax_文本">
       <img id="u174_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
-      <!-- Unnamed () -->
+      &lt;!&ndash; Unnamed () &ndash;&gt;
       <div id="u175" class="text">
         <p><span style="font-family:'Applied Font Regular', 'Applied Font';">审核</span></p>
       </div>
     </div>
 
-    <!-- Unnamed (形状) -->
+    &lt;!&ndash; Unnamed (形状) &ndash;&gt;
     <div id="u176" class="ax_文本">
       <img id="u176_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
-      <!-- Unnamed () -->
+      &lt;!&ndash; Unnamed () &ndash;&gt;
       <div id="u177" class="text">
         <p><span style="font-family:'Applied Font Regular', 'Applied Font';">查</span><span style="font-family:'Applied Font Regular', 'Applied Font';">看</span></p>
       </div>
     </div>
 
-    <!-- Unnamed (形状) -->
+    &lt;!&ndash; Unnamed (形状) &ndash;&gt;
     <div id="u178" class="ax_文本">
       <img id="u178_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
-      <!-- Unnamed () -->
+      &lt;!&ndash; Unnamed () &ndash;&gt;
       <div id="u179" class="text">
         <p><span style="font-family:'Applied Font Regular', 'Applied Font';">查</span><span style="font-family:'Applied Font Regular', 'Applied Font';">看</span></p>
       </div>
-    </div>
+    </div>-->
 
     <!-- Calendar Picker (动态面板) -->
     <div id="u180" class="ax_动态面板" data-label="Calendar Picker">
@@ -4032,4 +4056,49 @@
       </div>
     </div>
   </body>
+  <script>
+      $(function(){
+            getTaskType();
+          getWaiting();
+      });
+
+      function getTaskType(){
+          $.ajax({
+              type:"GET",
+              url:"/oaproject/taskType/getType.find",
+              data:null,
+              dataType:"json",
+              success:function(data){
+                  var $sel=document.getElementById("u9_input");
+                  $sel.innerHTML="<option value='0'>请选择</option>";
+                  for(var i=0;i<data.length;i++){
+                      $sel.innerHTML+="<option value='"+data[i].taskTypeId+"'>"+data[i].taskTypeName+"</option>";
+                  }
+              }
+          });
+      }
+
+      function getWaiting() {
+          var $tbody=document.getElementById("t3");
+          $tbody.innerHTML="";
+          $.ajax({
+              type: "GET",
+              url: "/oaproject/waiting/getInfoById.find",
+              data: null,
+              dataType: "json",
+              success: function (data) {
+                  for (var i = 0; i < data.length; i++) {
+                      $tbody.innerHTML += "<tr>" +
+                          "<td>" + data[i].waitingTaskRecordName + "</td>" +
+                          "<td>" + data[i].applyTime + "</td>" +
+                          "<td>" + data[i].initiatorId + "</td>" +
+                          "<td>" + data[i].finalApprovalTime + "</td>" +
+                          "<td>" + data[i].status + "</td>" +
+                          "<td><span>审批</span>&nbsp;&nbsp;&nbsp;<span>查看</span></td>" +
+                          "</tr>";
+                  }
+              }
+          });
+      }
+  </script>
 </html>
