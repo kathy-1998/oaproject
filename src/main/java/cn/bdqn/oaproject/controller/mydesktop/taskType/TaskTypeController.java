@@ -28,6 +28,7 @@ public class TaskTypeController {
         String json="";
         List<TaskType> list=taskTypeService.findAll();
         json= JSON.toJSONString(list);
+        System.out.println(json);
         return json;
     }
 }
