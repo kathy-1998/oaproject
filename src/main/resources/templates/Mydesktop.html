@@ -313,19 +313,12 @@
       <div id="u109" class="text"></div>
     </div>
 
-    <!-- Unnamed (图片) -->
-    <div id="u110" class="ax_图片">
-      <img id="u110_img" class="img " th:src="@{/images/我的桌面/u110.png}"/>
-      <!-- Unnamed () -->
-      <div id="u111" class="text"></div>
-    </div>
-
     <!-- Unnamed (形状) -->
     <div id="u112" class="ax_文本">
       <img id="u112_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u113" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">小雨 0~3℃</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';" class="tq">请连接网络</span></p>
       </div>
     </div>
 
@@ -392,7 +385,7 @@
       <img id="u128_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u129" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">周四</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">19</span><span style="font-family:'Applied Font Regular', 'Applied Font';">/</span><span style="font-family:'Applied Font Regular', 'Applied Font';">13</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';" class="rq">网络连接失败</span></p>
       </div>
     </div>
 
@@ -7126,7 +7119,7 @@
   <script>
     $(function(){
         getWaiting();
-
+        getWeather();
         $("#u44").click(function(){
             location.href="http://localhost:8080/oaproject/waiting_task.html";
 
@@ -7156,5 +7149,18 @@
         }
       });
     }
+    //获取天气
+    function getWeather(){
+      $.ajax({
+        url:"http://wthrcdn.etouch.cn/weather_mini",
+        data:{city:"太原市"},
+        dataType:"json",
+        success:function(data){
+            $(".tq").html(data.data.forecast[0].type+"&nbsp;&nbsp;"+data.data.forecast[0].high+"~"+data.data.forecast[0].low);
+            $(".rq").html(data.data.forecast[0].date);
+        }
+      });
+    }
+
   </script>
 </html>
