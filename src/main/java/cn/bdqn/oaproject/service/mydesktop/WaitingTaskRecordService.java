@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,14 +32,22 @@ public interface WaitingTaskRecordService {
      * 审批
      * @param userId
      * @param applyOpinion
+     * @Param finalApprovalTime
      * @param id
      */
-    void modifyInfo(Integer userId,String applyOpinion,Integer id);
-
+    boolean modifyInfo(Integer userId, String applyOpinion, Date finalApprovalTime,Integer id);
 
     /**
-     * 添加待处理任务
+     * 根据待处理Id查询信息
+     * @param id
+     * @return
+     */
+    List<WaitingTaskRecord> getInfoById(Integer id);
+
+    /**
+     * 添加信息
+     * @param waitingTaskRecord
+     * @return
      */
     boolean addInfo(WaitingTaskRecord waitingTaskRecord);
-
 }
