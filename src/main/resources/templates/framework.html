@@ -87,7 +87,7 @@
       <img id="u11_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u12" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">2013-1</span><span style="font-family:'Applied Font Regular', 'Applied Font';">2</span><span style="font-family:'Applied Font Regular', 'Applied Font';">-19 17:10:45</span><span style="font-family:'Applied Font Regular', 'Applied Font';"> 周二</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';" class="time">2013-1</span></p>
       </div>
     </div>
 
@@ -416,7 +416,8 @@
       $(function () {
         $("#u8").attr("src","http://localhost:8080/oaproject/Mydesktop.html");
         getUser();
-
+        getTime();
+        setInterval("getTime()",1000);
         $(".update").click(function () {
             var oldPwd=$("#u81_input").val();//获取旧密码
             var newPwd=$("#u69_input").val(); //获取新密码
@@ -480,6 +481,40 @@
             }
           }
         });
+      }
+      //获取时间
+      function getTime(){
+        var d=new Date();
+        var year=d.getFullYear(); //获取年
+        var month=parseInt(d.getMonth())+1; //获取月
+        var day=d.getDate();  //获取日
+        var hour=d.getHours();  //获取时
+        var min=d.getMinutes();  //获取分
+        var s=d.getSeconds();  //获取秒
+        var w=d.getDay(); //获取星期
+        var a="";
+        if(w=="1"){
+          a="一";
+        }
+        if(w=="2"){
+          a="二";
+        }
+        if(w=="3"){
+          a="三";
+        }
+        if(w=="4"){
+          a="四";
+        }
+        if(w=="5"){
+          a="五";
+        }
+        if(w=="6"){
+          a="六";
+        }
+        if(w=="0"){
+          a="日";
+        }
+        $(".time").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+min+":"+s+"&nbsp;周"+a);
       }
   </script>
 </html>
