@@ -1,9 +1,13 @@
 package cn.bdqn.oaproject.controller.administration;
 
 import cn.bdqn.oaproject.pojo.SealApply;
+import cn.bdqn.oaproject.pojo.SealType;
 import cn.bdqn.oaproject.pojo.Users;
 import cn.bdqn.oaproject.service.administration.SealApplyService;
+import cn.bdqn.oaproject.service.administration.SealTypeService;
+import cn.bdqn.oaproject.service.sysmanage.UsersService;
 import cn.bdqn.oaproject.utils.stringToDateConverter;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +28,11 @@ public class SealApplyController {
     @Autowired
     private SealApplyService sealApplyService;
 
+    @Autowired
+    private SealTypeService sealTypeService;
+    
+    @Autowired
+    private UsersService usersService;
     /**
      * 添加用章申请记录
      * @param applyTime 用章申请时间
@@ -113,11 +123,44 @@ public class SealApplyController {
         return resultMap;
     }
 
+    /**
+     * 获取用户信息
+     * @param session
+     * @return
+     */
+    @RequestMapping("/getUserInfo.find")
+    @ResponseBody
+    public String getUserInfo(HttpSession session){
+        Users users=(Users) session.getAttribute("User");
+        String json= JSON.toJSONString(users);
+        System.out.println(json);
+        return json;
+    }
 
+    /**
+     * 获取用章类型
+     * @return
+     */
+    @RequestMapping("/getSealType.find")
+    @ResponseBody
+    public String getSealType(){
+        List<SealType> list=null;
+        try {
+            list=sealTypeService.findAllSealType();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(JSON.toJSONString(list));
+        return JSON.toJSONString(list);
+    }
 
-
-
-
+    @RequestMapping("/getAdmin.find")
+    @ResponseBody
+    public String getAdmin(){
+        List<Users> list=usersService.findUsersByIsadmin(1);
+        System.out.println(JSON.toJSONString(list));
+        return JSON.toJSONString(list);
+    }
 
 
 

@@ -27,4 +27,12 @@ public class myDesktopController {
     public String waitingPage(){
         return "waiting_task";
     }
+    /**
+     * 访问页面
+     * @return
+     */
+    @RequestMapping("/inchapter_manage.html")
+    public String sealApplyPage(){
+        return "inchapter_manage";
+    }
 }

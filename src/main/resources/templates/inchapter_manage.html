@@ -10,7 +10,7 @@
     <link th:href="@{/files/用章管理/styles.css}" type="text/css" rel="stylesheet"/>
     <script th:src="@{/resources/scripts/jquery-1.7.1.min.js}"></script>
     <script th:src="@{/resources/scripts/jquery-ui-1.8.10.custom.min.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
+    <!--<script th:src="@{/resources/scripts/prototype/axQuery.js}"></script>
     <script th:src="@{/resources/scripts/prototype/globals.js}"></script>
     <script th:src="@{/resources/scripts/axutils.js}"></script>
     <script th:src="@{/resources/scripts/prototype/annotation.js}"></script>
@@ -38,7 +38,7 @@
     <script th:src="@{/resources/scripts/prototype/init.temp.js}"></script>
     <script th:src="@{/files/用章管理/data.js}"></script>
     <script th:src="@{/resources/scripts/prototype/legacy.js}"></script>
-    <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>
+    <script th:src="@{/resources/scripts/prototype/viewer.js}"></script>-->
   </head>
   <body>
 
@@ -51,9 +51,6 @@
     <div id="u1" class="ax_下拉列表框">
       <select id="u1_input" class="text_sketch">
         <option selected value="选择用章">选择用章</option>
-        <option value="公司公章">公司公章</option>
-        <option value="财务用章">财务用章</option>
-        <option value="人事用章">人事用章</option>
       </select>
     </div>
 
@@ -85,7 +82,7 @@
       <img id="u7_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u8" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">姓名：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">申请</span><span style="font-family:'Applied Font Regular', 'Applied Font';">时间：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">部门</span><span style="font-family:'Applied Font Regular', 'Applied Font';">：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">用章类型：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">请假事由：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">姓名：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">申请</span><span style="font-family:'Applied Font Regular', 'Applied Font';">时间：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">部门</span><span style="font-family:'Applied Font Regular', 'Applied Font';">：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">用章类型：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">用章事由：</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p><p><span style="font-family:'Applied Font Regular', 'Applied Font';">&nbsp;</span></p>
       </div>
     </div>
 
@@ -108,8 +105,7 @@
     <!-- Unnamed (下拉列表框) -->
     <div id="u12" class="ax_下拉列表框">
       <select id="u12_input" class="text_sketch">
-        <option value="选择审批人">选择审批人</option>
-        <option value="王五">王五</option>
+        <option value="0">选择审批人</option>
       </select>
     </div>
 
@@ -136,16 +132,7 @@
       <img id="u17_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u18" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">李四</span></p>
-      </div>
-    </div>
-
-    <!-- Unnamed (形状) -->
-    <div id="u19" class="ax_形状">
-      <img id="u19_img" class="img " th:src="@{/images/用车管理/u150.png}"/>
-      <!-- Unnamed () -->
-      <div id="u20" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">系统根据登录信息自动</span><span style="font-family:'Applied Font Regular', 'Applied Font';">补充</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';" class="name">李四</span></p>
       </div>
     </div>
 
@@ -154,16 +141,7 @@
       <img id="u21_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
       <!-- Unnamed () -->
       <div id="u22" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">研发部</span></p>
-      </div>
-    </div>
-
-    <!-- Unnamed (形状) -->
-    <div id="u23" class="ax_形状">
-      <img id="u23_img" class="img " th:src="@{/images/用车管理/u150.png}"/>
-      <!-- Unnamed () -->
-      <div id="u24" class="text">
-        <p><span style="font-family:'Applied Font Regular', 'Applied Font';">系统根据登录信息自动</span><span style="font-family:'Applied Font Regular', 'Applied Font';">补充</span></p>
+        <p><span style="font-family:'Applied Font Regular', 'Applied Font';" class="dept">研发部</span></p>
       </div>
     </div>
 
@@ -727,4 +705,64 @@
       </div>
     </div>
   </body>
+  <script>
+    $(function(){
+        getUserInfo();
+        getSealType();
+        getAdmin();
+    });
+    /**
+     * 获取用户信息
+     */
+    function getUserInfo(){
+      $.ajax({
+        type:"GET",
+        url:"/oaproject/sealapply/getUserInfo.find",
+        data:null,
+        dataType:"json",
+        success:function(data){
+          $(".name").html(data.realName);
+          $(".dept").html(data.dept.deptName);
+        }
+      });
+    }
+
+    /**
+     * 获取用章类型
+     */
+    function getSealType() {
+      $.ajax({
+        type:"GET",
+        url:"/oaproject/sealapply/getSealType.find",
+        data:null,
+        dataType:"json",
+        success:function(data){
+          var $sel=document.getElementById("u1_input");
+          $sel.innerHTML="<option selected value=\"0\">选择用章</option>";
+          for(var i=0;i<data.length;i++){
+            $sel.innerHTML+="<option value='"+data[i].sealTypeId+"'>"+data[i].sealTypeName+"</option>";
+          }
+        }
+      });
+    }
+
+    /**
+     * 获取审批人
+     */
+    function getAdmin(){
+      $.ajax({
+        type:"GET",
+        url:"/oaproject/sealapply/getAdmin.find",
+        data:null,
+        dataType:"json",
+        success:function(data){
+          var $sel=document.getElementById("u12_input");
+          $sel.innerHTML="<option value=\"0\">选择审批人</option>";
+          for(var i=0;i<data.length;i++){
+            $sel.innerHTML+="<option value='"+data[i].userId+"'>"+data[i].realName+"</option>";
+          }
+        }
+      });
+    }
+  </script>
 </html>
