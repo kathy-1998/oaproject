@@ -42,14 +42,18 @@
   </head>
   <body>
 
-    <!-- Unnamed (文本框(单行)) -->
+
+  <input id="userId" type="hidden" value="0">
+  <input id="deptId" type="hidden" value="0">
+
+  <!-- Unnamed (文本框(单行)) -->
     <div id="u0" class="ax_文本框_单行_">
       <input id="u0_input" type="text" value="" class="text_sketch"/>
     </div>
 
     <!-- Unnamed (文本框(多行)) -->
     <div id="u1" class="ax_文本框_多行_">
-      <textarea id="u1_input" class="text_sketch"></textarea>
+      <input id="u1_input" type="text" value="" class="text_sketch"/>
     </div>
 
     <!-- Unnamed (形状) -->
@@ -103,8 +107,8 @@
     <!-- Unnamed (下拉列表框) -->
     <div id="u12" class="ax_下拉列表框">
       <select id="u12_input" class="text_sketch">
-        <option value="请选择">请选择</option>
-        <option value="王五">王五</option>
+        <option value="0">请选择</option>
+        <option value="1">王五</option>
       </select>
     </div>
 
@@ -128,12 +132,12 @@
 
     <!-- textfield - date (文本框(单行)) -->
     <div id="u17" class="ax_文本框_单行_">
-      <input id="u17_input" type="text" value="11/14/2009" class="text_sketch" data-label="textfield - date"/>
+      <input id="u17_input" type="date" value="" class="text_sketch" data-label="textfield - date"/>
     </div>
 
     <!-- button - date picker (图片) -->
     <div id="u18" class="ax_图片" data-label="button - date picker">
-      <img id="u18_img" class="img " th:src="@{/images/我的桌面/button_-_date_picker_u207.png}"/>
+
       <!-- Unnamed () -->
       <div id="u19" class="text"></div>
     </div>
@@ -740,4 +744,167 @@
       </div>
     </div>
   </body>
+
+
+
+<script>
+
+  $(function () {
+
+    init();
+
+
+    //点击添加时
+    $("#u14").click(function () {
+
+      //获取值
+      var realName = $("#u23 span").html();
+      var userId = $("#userId").val();
+      var deptId = $("#deptId").val();
+
+      var time = $("#u17_input").val();
+
+
+      //图书编号
+      var  bookId=$("#u0_input").val();
+
+      //图书名称
+       var  bookName=$("#u1_input").val();
+
+      var spr=$("#u12_input").val();
+
+      if(time==""){
+        alert("请输入借阅时间");
+      }else if(bookId==""){
+        alert("请输入图书编号")
+      }else if(isNaN(bookId)){
+        alert("请输入数字");
+      }else if(bookName==""){
+        alert("请输入图书名称");
+      } else if(spr=="0"){
+      alert("请选择审批人");
+      }else {
+
+        //判断用户输入的图书编号和图书名称是否存在,如果不存在，提示用户
+
+
+
+          $.getJSON("/oaproject/book/findBookById","bookId="+bookId,function (data) {
+
+            if(data!=false){
+
+
+
+              $.getJSON("/oaproject/book/findBookByName","bookName="+bookName,function (data02) {
+
+                if(data02!=false){
+
+
+                   if(data.bookName==bookName){
+
+
+
+
+                 $.getJSON("/oaproject/BookBorrow/Add","userId="+userId+"&deptId="+deptId+"&bookId="+bookId+"&bookName="+bookName+"&time="+time+"&spr="+spr+"&realName="+realName,function (result) {
+
+
+                     if(result==true){
+
+                       alert("添加成功");
+
+
+                       $("#u23 span").html("");
+                       $("#userId").val("0");
+                       $("#deptId").val("0");
+                      $("#u17_input").val("");
+                       $("#u0_input").val("");
+                      $("#u1_input").val("");
+
+                       $("#u12_input option[value='0']").attr("selected", true);
+                     }
+
+
+
+                 })
+
+
+
+                   }else{
+
+                     alert("该图书编号和图书名称不符");
+                   }
+
+
+
+
+                }else{
+                  alert("该图书名称不存在，请重新输入")
+                }
+
+              })
+
+            }else{
+              alert("该图书编号不存在，请重新输入")
+            }
+
+
+
+
+          })
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    })
+
+
+  })
+
+  function  init() {
+
+    $.getJSON("/oaproject/users/sessionInfo.do", function (data) {
+
+      $("#u23 span").html(data.realName);
+
+      $("#u27 span").html(data.dept.deptName);
+      $("#userId").val(data.userId);
+      $("#deptId").val(data.dept.deptId);
+
+    });
+
+    /**
+     * 加载审批人
+     */
+    $.getJSON("/oaproject/users/leadList", function (data) {
+
+
+      $("#u12_input").html();
+
+      var options = "<option value='0'>--请选择--</option>";
+      for (var i = 0; i < data.length; i++) {
+        options += "<option value=\"" + data[i].userId + "\">" + data[i].userName + "</option>";
+      }
+      $("#u12_input").html(options);
+
+
+    });
+
+  }
+
+
+
+</script>
 </html>
