@@ -41,4 +41,10 @@ public interface BoardroomDao extends JpaRepository<Boardroom,Integer> {
      */
     Boardroom findByMeetingroomNo(Integer id);
 
+    /**
+     * 根据多个会议室id获取详情
+     */
+    List<Boardroom> findAllByMeetingroomNoIsNotIn(Integer[] meetingroomtNo);
+
+
 }

@@ -33,8 +33,8 @@ public interface BoardroomOrderService {
 
     /**
      *  查询会议室预订信息（根据预订起始时间，预订结束时间，预订人模糊查、会议室名称模糊查、会议室类型）
-     * @param condition
+     * @param boardroomOrder
      * @return
      */
-    List<BoardroomOrder> findAll(Specification<BoardroomOrder> condition);
+    List<BoardroomOrder> findAll(BoardroomOrder boardroomOrder);
 }

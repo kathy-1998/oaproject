@@ -16,7 +16,7 @@ public class Boardroom {
     @Id
     @Column(name="MEETINGROOM_NO")
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_room_seq")
-    @SequenceGenerator(name = "my_room_seq",sequenceName = "boardroom_seq",initialValue = 3,allocationSize = 1)
+    @SequenceGenerator(name = "my_room_seq",sequenceName = "boardroom_seq",initialValue = 4,allocationSize = 1)
     private Integer meetingroomNo;
 
     /**

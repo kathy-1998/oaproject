@@ -13,7 +13,7 @@ public interface CarApplyService {
      * @param carApply
      * @return
      */
-    boolean addCarApplyRecord(CarApply carApply)throws  Exception;
+    CarApply addCarApplyRecord(CarApply carApply)throws  Exception;
 
     /**
      * 根据申请记录id和任务类型id获取详情

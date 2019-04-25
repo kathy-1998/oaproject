@@ -56,5 +56,5 @@ public interface CarInfoService {
      * @param vehicleNo
      * @return
      */
-    CarInfo findByVehicleNoIsExits(Integer vehicleNo)throws Exception;
+    CarInfo findByVehicleNoIsExits(String vehicleNo)throws Exception;
 }

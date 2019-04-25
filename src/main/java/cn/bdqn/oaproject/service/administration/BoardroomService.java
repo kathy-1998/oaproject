@@ -44,6 +44,10 @@ public interface BoardroomService {
     Boardroom findByMeetingroomNo(Integer id);
 
 
+    /**
+     * 获取未预订的会议室列表
+     */
+    List<Boardroom> findAllByMeetingroomNoIsNotIn(Integer[] meetingroomtNo);
 
 
 }

@@ -263,32 +263,37 @@
           </div>
         </div>
 
-        <!-- Unnamed (单选框) -->
-        <div id="u48" class="ax_单选框">
-          <label for="u48_input">
-            <!-- Unnamed () -->
-            <div id="u49" class="text"></div>
-          </label>
-          <input id="u48_input" type="radio" value="radio" name="u48"/>
+        <div id="allRadio">
+          <!-- Unnamed (单选框) -->
+          <div id="u48" class="ax_单选框">
+            <label for="u48_input">
+              <!-- Unnamed () -->
+              <div id="u49" class="text"></div>
+            </label>
+            <input id="u48_input" type="radio" value="radio" name="u48"/>
+          </div>
+
+          <!-- Unnamed (单选框) -->
+          <div id="u50" class="ax_单选框">
+            <label for="u50_input">
+              <!-- Unnamed () -->
+              <div id="u51" class="text"></div>
+            </label>
+            <input id="u50_input" type="radio" value="radio" name="u48"/>
+          </div>
+
+          <!-- Unnamed (单选框) -->
+          <div id="u52" class="ax_单选框">
+            <label for="u52_input">
+              <!-- Unnamed () -->
+              <div id="u53" class="text"></div>
+            </label>
+            <input id="u52_input" type="radio" value="radio" name="u48"/>
+          </div>
+
+
         </div>
 
-        <!-- Unnamed (单选框) -->
-        <div id="u50" class="ax_单选框">
-          <label for="u50_input">
-            <!-- Unnamed () -->
-            <div id="u51" class="text"></div>
-          </label>
-          <input id="u50_input" type="radio" value="radio" name="u50"/>
-        </div>
-
-        <!-- Unnamed (单选框) -->
-        <div id="u52" class="ax_单选框">
-          <label for="u52_input">
-            <!-- Unnamed () -->
-            <div id="u53" class="text"></div>
-          </label>
-          <input id="u52_input" type="radio" value="radio" name="u52"/>
-        </div>
 
         <!-- Unnamed (形状) -->
         <div id="u54" class="ax_文本">
@@ -318,7 +323,7 @@
 
         <!-- Date Field From (文本框(单行)) -->
         <div id="u59" class="ax_文本框_单行_">
-          <input id="u59_input" type="text" value="07/10/2007" class="text_sketch" data-label="Date Field From"/>
+          <input id="u59_input" type="text"  class="text_sketch" data-label="Date Field From"/>
         </div>
 
         <!-- Unnamed (图片) -->
@@ -330,7 +335,7 @@
 
         <!-- Date Field To (文本框(单行)) -->
         <div id="u62" class="ax_文本框_单行_">
-          <input id="u62_input" type="text" value="07/25/2007" class="text_sketch" data-label="Date Field To"/>
+          <input id="u62_input" type="text"  class="text_sketch" data-label="Date Field To"/>
         </div>
 
         <!-- Calendar Picker (动态面板) -->
@@ -820,7 +825,7 @@
 
         <!-- Unnamed (HTML Button) -->
         <div id="u171" class="ax_html_button">
-          <input id="u171_input" type="submit" value="预定" class="text_sketch"/>
+          <input id="u171_input" type="button" value="预定" class="text_sketch"/>
         </div>
 
         <!-- 1 (形状) -->
@@ -2074,23 +2079,30 @@
           </div>
         </div>
 
-        <!-- Unnamed (形状) -->
-        <div id="u448" class="ax_文本">
-          <img id="u448_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
-          <!-- Unnamed () -->
-          <div id="u449" class="text">
-            <p><span style="font-family:'Applied Font Regular', 'Applied Font';">修改</span></p>
+        <!--操作-->
+        <div id="allOperate">
+          <!-- Unnamed (形状) -->
+          <div id="u448" class="ax_文本">
+            <img id="u448_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
+            <!-- Unnamed () -->
+            <div id="u449" class="text">
+              <p><span style="font-family:'Applied Font Regular', 'Applied Font';">修改</span></p>
+            </div>
           </div>
+
+          <!-- Unnamed (形状) -->
+          <div id="u450" class="ax_文本">
+            <img id="u450_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
+            <!-- Unnamed () -->
+            <div id="u451" class="text">
+              <p><span style="font-family:'Applied Font Regular', 'Applied Font';">删除</span></p>
+            </div>
+          </div>
+
+
         </div>
 
-        <!-- Unnamed (形状) -->
-        <div id="u450" class="ax_文本">
-          <img id="u450_img" class="img " th:src="@{/resources/images/transparent.gif}"/>
-          <!-- Unnamed () -->
-          <div id="u451" class="text">
-            <p><span style="font-family:'Applied Font Regular', 'Applied Font';">删除</span></p>
-          </div>
-        </div>
+
 
         <!-- add (动态面板) -->
         <div id="u452" class="ax_动态面板" data-label="add">
@@ -2291,6 +2303,9 @@
               <!-- Unnamed () -->
               <div id="u499" class="text"></div>
             </div>
+
+            <input type="hidden" id="meetingroomNo"/>
+
           </div>
         </div>
 
@@ -2311,5 +2326,390 @@
         </div>
       </div>
     </div>
+
+  <script>
+    $(function(){
+
+      initAllRoom();  //初始化所有会议室信息
+      initAllConferenceType();  //初始化所有会议类型
+      initBaseInfo(); //初始化所有当前页面所需要的基础信息
+    });
+
+
+    //绑定标题
+    function bindTitle(){
+      //清空表格
+      var $roomDiv=$("#u413").empty();
+      $roomDiv.append(" <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u414\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u414_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u414.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u415\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">序号</span></p>\n" +
+              "            </div>\n" +
+              "          </div>\n" +
+              "\n" +
+              "          <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u416\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u416_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u416.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u417\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">会议室名称</span></p>\n" +
+              "            </div>\n" +
+              "          </div>\n" +
+              "\n" +
+              "          <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u418\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u418_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u418.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u419\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">会</span><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">议室描述</span></p>\n" +
+              "            </div>\n" +
+              "          </div>\n" +
+              "\n" +
+              "          <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u420\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u420_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u420.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u421\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">操</span><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">作</span></p>\n" +
+              "            </div>\n" +
+              "          </div>");
+    }
+
+
+    //初始化所有会议室
+    function initAllRoom(){
+      bindTitle();
+      $.getJSON("/oaproject/room/getallroom",function(data){
+        //获取放所有会议室的div
+        var $roomDiv=$("#u413");
+        var num=422;
+        $.each(data,function(i,e){
+          $roomDiv.append(" <div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
+                  "            <img id=\"u"+num+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u422.png\"/>\n" +
+                  "            <!-- Unnamed () -->\n" +
+                  "            <div id=\"u"+(num+1)+"\" class=\"text\">\n" +
+                  "              <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.meetingroomNo+"</span></p>\n" +
+                  "            </div>\n" +
+                  "          </div>\n" +
+                  "\n" +
+                  "          <!-- Unnamed (表格单元) -->\n" +
+                  "          <div id=\"u"+(num+2)+"\" class=\"ax_表格单元\">\n" +
+                  "            <img id=\"u"+(num+2)+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u424.png\"/>\n" +
+                  "            <!-- Unnamed () -->\n" +
+                  "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
+                  "              <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.meetingroomName+"</span></p>\n" +
+                  "            </div>\n" +
+                  "          </div>\n" +
+                  "\n" +
+                  "          <!-- Unnamed (表格单元) -->\n" +
+                  "          <div id=\"u"+(num+4)+"\" class=\"ax_表格单元\">\n" +
+                  "            <img id=\"u"+(num+4)+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u426.png\"/>\n" +
+                  "            <!-- Unnamed () -->\n" +
+                  "            <div id=\"u"+(num+5)+"\" class=\"text\">\n" +
+                  "              <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.meetingroomDescribe+"</span></p>\n" +
+                  "            </div>\n" +
+                  "          </div>\n" +
+                  "\n" +
+                  "          <!-- Unnamed (表格单元) -->\n" +
+                  "          <div id=\"u"+(num+6)+"\" class=\"ax_表格单元\">\n" +
+                  "            <img id=\"u"+(num+6)+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u428.png\"/>\n" +
+                  "            <!-- Unnamed () -->\n" +
+                  "            <div id=\"u"+(num+7)+"\" class=\"text\"></div>\n" +
+                  "          </div>\n");
+
+
+            if(i==0){
+              $("#u448").attr("name",e.meetingroomNo);
+              $("#u450").attr("name",e.meetingroomNo);
+            }
+            num=Number(num)+8;
+        }); //each -end-
+      });
+    }
+
+
+    //初始化所有会议类型
+    function initAllConferenceType(){
+      //获取存放所有会议类型的下拉框并清空
+      alert(1111);
+      var typeSelect=$("#u6_input").empty();
+      typeSelect.append("<option value='0'>选择会议类型</option>");
+      //发送请求获取数据并绑定到页面
+      $.getJSON("/oaproject/roomtype/getallroomtype",function(data){
+        $.each(data,function(i,e){
+          typeSelect.append("<option value='"+e.typeId+"'>"+e.typeName+"</option>");
+        });
+      });
+    }
+
+    //获取当前登录的用户信息
+    function initBaseInfo(){
+     /* $.getJSON("/oaproject/users/sessionInfo.do",function(data){
+        //将用户绑定到页面上
+        $("#u56_input").val(data.realName);
+      });*/
+      $("#u56_input").val("王五");
+    }
+
+
+
+
+
+    //修改按钮点击事件
+    $("#u448").click(function(){
+      var id=$("#u448").attr("name");
+      //发送请求根据id获取要修改的数据展示到页面
+      $.getJSON("/oaproject/room/getroombyid","id="+id,function tion(data){
+        $("#u494_input").val(data.meetingroomName); //会议室名称
+        $("#u497_input").val(data.meetingroomDescribe); //会议室描述
+        $("#meetingroomNo").val(data.meetingroomNo);
+
+      });
+    });
+
+
+    //删除按钮点击事件
+    $("#u450").click(function(){
+      alert("删除按钮点击事件");
+      var id=$("#u448").attr("name");
+      alert(id);
+      if(confirm("确认删除吗?")){
+        //发送请求删除
+        $.getJSON("/oaproject/room/delroom","id="+id,function(data){
+          if(data.result=="success"){
+            alert("删除成功！");
+          }else
+          {
+            alert("删除失败！");
+          }
+          initAllRoom();
+        });
+      }
+    });
+
+
+    //添加按钮点击事件
+    $("#u464").click(function(){
+      //获取数据
+      var meetingroomName=$("#u470_input").val(); //会议室名称
+      var meetingroomDescribe=$("#u473_input").val(); //描述
+      if(meetingroomName==null||meetingroomName==""){
+        alert("请输入会议室名称!");
+      }else if(meetingroomDescribe==null||meetingroomDescribe==""){
+        alert("请输入会议室描述！");
+      }else
+      {
+        //进行添加操作
+        $.getJSON("/oaproject/room/saveroom","meetingroomName="+meetingroomName+
+                "&meetingroomDescribe="+meetingroomDescribe,function(data){
+            if(data.result=="success"){
+                alert("添加成功！");
+                initAllRoom();
+            }else
+            {
+              alert("添加失败！");
+            }
+        });
+      }
+    });
+
+
+    //修改按钮点击事件进行修改操作
+    $("#u488").click(function(){
+      //获取数据
+      var meetingroomName=$("#u494_input").val(); //会议室名称
+      var meetingroomDescribe=$("#u497_input").val(); //描述
+      var meetingroomNo=$("#meetingroomNo").val();  //会议室编号
+      if(meetingroomName==null||meetingroomName==""){
+        alert("请输入会议室名称!");
+      }else if(meetingroomDescribe==null||meetingroomDescribe==""){
+        alert("请输入会议室描述！");
+      }else
+      {
+        //进行添加操作
+        $.getJSON("/oaproject/room/updateroom","meetingroomName="+meetingroomName+
+                "&meetingroomDescribe="+meetingroomDescribe+"&meetingroomNo="+meetingroomNo,
+                function(data){
+          if(data.result=="success"){
+            alert("修改成功！");
+            initAllRoom();
+          }else
+          {
+            alert("修改失败！");
+          }
+        });
+      }
+    });
+
+
+    //会议室预订页面中的查询按钮
+    $("#u20_input").click(function(){
+      //获取预订起始时间
+      var startTime=$("#u59_input").val();
+      //获取预订结束时间
+      var endTime=$("#u62_input").val();
+    /*  alert("相差天数==========="+Date.prototype.DateDiff(startTime, endTime));*/
+      //判断非空和是否是同一天
+      if(startTime==null||startTime==""){
+        alert("请输入预订时间段!");
+      }else if(endTime==null||endTime==""){
+        alert("请输入预订时间段!");
+      /*}else if(Date.prototype.DateDiff(startTime, endTime)!=0){
+        alert("输入时间必须是同一天！");*/
+      }else
+      {
+        //符合条件则根据预订时间段查询可预订的会议室列表
+        $.getJSON("/oaproject/roomorder/allorder","startTime="+startTime+"&endTime="+endTime,function(data){
+          //获取所有已预订的roomid
+          var roomsNo=new Array();
+          $.each(data,function(i,e){
+            roomsNo.push(e.meetingroomNo);
+          });
+          //判断是否有id，若没有则查询所有会议室
+          if(roomsNo.length==0){
+              $.getJSON("/oaproject/room/getallroom",function(data1){
+                initOrderRoom(data1);
+              })
+          }else
+          {
+            //发送请求根据roomid获取详情
+            $.getJSON("/oaproject/room/findMayOrderRoom/roomsNo="+roomsNo,function(data1){
+              //绑定到页面上
+              initOrderRoom(data1);
+            });
+          }
+
+
+        });
+      }
+    });
+
+    //初始化所有可预订的会议室
+    function initOrderRoom(data){
+      //清空table
+      var table=$("#u23").empty();
+      var allRadio=$("#allRadio").empty(); //清空radio
+      //绑定标题行
+      table.append(" <div id=\"u24\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u24_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u24.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u25\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">选择</span></p>\n" +
+              "            </div>\n" +
+              "          </div>\n" +
+              "\n" +
+              "          <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u26\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u26_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u26.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u27\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">会</span><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">议室名称</span></p>\n" +
+              "            </div>\n" +
+              "          </div>\n" +
+              "\n" +
+              "          <!-- Unnamed (表格单元) -->\n" +
+              "          <div id=\"u28\" class=\"ax_表格单元\">\n" +
+              "            <img id=\"u28_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u28.png\"/>\n" +
+              "            <!-- Unnamed () -->\n" +
+              "            <div id=\"u29\" class=\"text\">\n" +
+              "              <p><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">会</span><span style=\"font-family:'Applied Font Bold', 'Applied Font';\">议室描述</span></p>\n" +
+              "            </div>\n" +
+              "          </div>");
+      var num=30;
+      var count=48;
+      $.each(data,function(i,e){
+        table.append(" <div id=\"u"+num+"\" class=\"ax_表格单元\">\n" +
+                "            <img id=\"u"+num+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u30.png\"/>\n" +
+                "            <!-- Unnamed () -->\n" +
+                "            <div id=\"u"+(num+1)+"\" class=\"text\"></div>\n" +
+                "          </div>\n" +
+                "\n" +
+                "          <!-- Unnamed (表格单元) -->\n" +
+                "          <div id=\"u"+(num+2)+"\" class=\"ax_表格单元\">\n" +
+                "            <img id=\"u"+(num+2)+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u32.png\"/>\n" +
+                "            <!-- Unnamed () -->\n" +
+                "            <div id=\"u"+(num+3)+"\" class=\"text\">\n" +
+                "              <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.meetingroomName+"</span></p>\n" +
+                "            </div>\n" +
+                "          </div>\n" +
+                "\n" +
+                "          <!-- Unnamed (表格单元) -->\n" +
+                "          <div id=\"u"+(num+4)+"\" class=\"ax_表格单元\">\n" +
+                "            <img id=\"u"+(num+4)+"_img\" class=\"img \" src=\"/oaproject/images/会议室管理/u34.png\"/>\n" +
+                "            <!-- Unnamed () -->\n" +
+                "            <div id=\"u"+(num+5)+"\" class=\"text\">\n" +
+                "              <p><span style=\"font-family:'Applied Font Regular', 'Applied Font';\">"+e.meetingroomDescribe+"</span></p>\n" +
+                "            </div>\n" +
+                "          </div>");
+
+        allRadio.append("     <div id=\"u"+count+"\" class=\"ax_单选框\">\n" +
+                "            <label for=\"u"+count+"_input\">\n" +
+                "              <!-- Unnamed () -->\n" +
+                "              <div id=\"u"+(count+1)+"\" class=\"text\"></div>\n" +
+                "            </label>\n" +
+                "            <input id=\"u"+count+"_input\" type=\"radio\"  meetingroomNo='"+e.meetingroomNo+"' value=\"radio\" name=\"u48\"/>\n" +
+                "          </div>");
+        num=Number(num)+6;
+        count=Number(count)+2;
+
+      });
+    }
+
+
+
+    //会议室预订页面中的预订按钮
+    $("#u171_input").click(function(){
+      alert("会议室预订按钮");
+      //判断是否选中某个会议室
+      var meetingroomNo=$("input[name='u48']").attr("meetingroomNo");
+      //获取会议室类型
+      var typeId=$("#u6_input").val();
+      if(meetingroomNo==null||meetingroomNo==""){
+        alert("请选择要预订的会议室！");
+      }else if(typeId==0) {
+        alert("请选择会议类型！");
+      }else {
+        //进行预订
+        //获取预订起始时间
+        var startTime=$("#u59_input").val();
+        //获取预订结束时间
+        var endTime=$("#u62_input").val();
+        var meetingroomNo=$("input[name='u48']").attr("meetingroomNo");
+        //获取会议室类型
+        var typeId=$("#u6_input").val();
+        //进行预订
+        var data="startTime="+startTime+"&endTime="+endTime+"&meetingroomNo="+meetingroomNo+"&typeId="+typeId;
+        $.getJSON("/oaproejct/roomorder/saveroomorder",data,function(resultMap){
+            if(resultMap.result="success"){
+                alert("预订提交成功！");
+            }else
+            {
+                alert("预订提交失败！");
+            }
+
+        });
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
   </body>
 </html>

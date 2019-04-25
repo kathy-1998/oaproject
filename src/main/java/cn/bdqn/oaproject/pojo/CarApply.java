@@ -20,7 +20,7 @@ public class CarApply {
     private Integer carApplyId;
 
     /**
-     *
+     * 车辆编号
      */
     @Column(name="CAR_NO")
     private Integer carNo;

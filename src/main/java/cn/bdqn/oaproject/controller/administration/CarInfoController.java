@@ -4,6 +4,8 @@ import  java.util.*;
 import cn.bdqn.oaproject.pojo.CarInfo;
 import cn.bdqn.oaproject.pojo.Users;
 import cn.bdqn.oaproject.service.administration.CarInfoService;
+import cn.bdqn.oaproject.service.sysmanage.UsersService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,35 @@ public class CarInfoController {
 
     @Autowired
     private CarInfoService carInfoService;
+
+    @Autowired
+    private UsersService usersService;
+
+    @RequestMapping(value = "/baseinfo")
+    @ResponseBody
+    public Object getBaseInfo(HttpSession session){
+        Map<String,Object> resultMap=new HashMap<>();
+        //获取当前登录的用户
+     /*   Users user= (Users) session.getAttribute("Users");
+        resultMap.put("deptName",user.getDept().getDeptName());*/
+        resultMap.put("deptName","质检部");    //设置当前部门名称
+        //获取所有审批人
+        List<Users> allUser=usersService.findUsersByIsadmin(1);
+        resultMap.put("allUser",allUser);
+        return resultMap;
+    }
+
+    /**
+     * 入口
+     * @return
+     */
+    @RequestMapping(value = "/main",method = RequestMethod.GET)
+    public String main(){
+        return "Transport_manage";
+    }
+
+
+
 
     /**
      * 获取所有车辆信息列表
@@ -47,7 +78,7 @@ public class CarInfoController {
      * @param remark 备注
      * @return
      */
-    @RequestMapping(value="/savecar",method = RequestMethod.POST)
+    @RequestMapping(value="/savecar")
     @ResponseBody
     public Object saveCarInfo(@RequestParam("vehicleNo")String vehicleNo,
                               @RequestParam("carType")String carType,
@@ -85,7 +116,7 @@ public class CarInfoController {
      * @param remark 备注
      * @return
      */
-    @RequestMapping(value="/updatecar",method = RequestMethod.POST)
+    @RequestMapping(value="/updatecar")
     @ResponseBody
     public Object updateCarInfo(@RequestParam("carId")String carId,
                                 @RequestParam("vehicleNo")String vehicleNo,
@@ -182,12 +213,12 @@ public class CarInfoController {
      * @param vehicleNo
      * @return
      */
-    @RequestMapping(value = "/findbycarno",method = RequestMethod.GET)
+    @RequestMapping(value = "/findbyvno",method = RequestMethod.GET)
     @ResponseBody
     public Object findExitsVehicleNo(@RequestParam("vehicleNo")String vehicleNo){
         CarInfo carInfo=null;
         try {
-            carInfo=carInfoService.findByVehicleNoIsExits(Integer.parseInt(vehicleNo));
+            carInfo=carInfoService.findByVehicleNoIsExits(vehicleNo);
         }catch (Exception e){
             e.printStackTrace();
         }

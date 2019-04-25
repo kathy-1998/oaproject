@@ -53,7 +53,7 @@ public interface CarInfoDao extends JpaRepository<CarInfo,Integer> {
      * @param vehicleNo
      * @return
      */
-    CarInfo findByVehicleNo(Integer vehicleNo);
+    CarInfo findByVehicleNo(String vehicleNo);
 
 
 

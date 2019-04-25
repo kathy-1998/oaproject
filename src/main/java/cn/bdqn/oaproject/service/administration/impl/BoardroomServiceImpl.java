@@ -94,4 +94,20 @@ public class BoardroomServiceImpl implements BoardroomService {
         }
         return boardroom;
     }
+
+    /**
+     * 获取可以预订的会议室列表
+     * @param meetingroomtNo
+     * @return
+     */
+    @Override
+    public List<Boardroom> findAllByMeetingroomNoIsNotIn(Integer[] meetingroomtNo) {
+        List<Boardroom> list=null;
+        try {
+            list=boardroomDao.findAllByMeetingroomNoIsNotIn(meetingroomtNo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

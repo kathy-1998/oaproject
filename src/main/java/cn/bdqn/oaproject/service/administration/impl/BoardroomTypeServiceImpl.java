@@ -27,7 +27,7 @@ public class BoardroomTypeServiceImpl implements BoardroomTypeService {
     public List<BoardroomType> findAll() throws Exception{
         List<BoardroomType> list=null;
         try {
-            list=boardroomTypeDao.findAllByIsdeleteNot(0);
+            list=boardroomTypeDao.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }

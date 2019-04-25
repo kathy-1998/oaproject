@@ -1026,6 +1026,27 @@ $axure.internal(function($ax) {
     };
     _dynamicPanelManager.compressDelta = _compressDelta;
 
+    var _parentHandlesStyles = function(id) {
+        var parents = $ax('#' + id).getParents(true)[0];
+        if(!parents) return false;
+        var directParent = true;
+        for(var i = 0; i < parents.length; i++) {
+            var parentId = parents[i];
+            // Because state parent panel id is the active state, must strip off the end of it.
+            var itemId = $ax.repeater.getItemIdFromElementId(parentId);
+            parentId = parentId.split('_')[0];
+            if(itemId) parentId = $ax.repeater.createElementId(parentId, itemId);
+            var parentObj = $obj(parentId);
+            /* if(parentObj.type != 'dynamicPanel') continue;*/
+            if(!parentObj.propagate) {
+                directParent = false;
+                continue;
+            }
+            return { id: parentId, direct: directParent };
+        }
+        return false;
+    };
+
     var _compress = function(id, vert, threshold, delta, easing, duration, clamp) {
         if(!easing) {
             easing = 'none';
@@ -1076,27 +1097,6 @@ $axure.internal(function($ax) {
             if(easing == 'none') child.css(props);
             else child.animate(props, duration, easing);
         }
-    };
-
-    var _parentHandlesStyles = function(id) {
-        var parents = $ax('#' + id).getParents(true)[0];
-        if(!parents) return false;
-        var directParent = true;
-        for(var i = 0; i < parents.length; i++) {
-            var parentId = parents[i];
-            // Because state parent panel id is the active state, must strip off the end of it.
-            var itemId = $ax.repeater.getItemIdFromElementId(parentId);
-            parentId = parentId.split('_')[0];
-            if(itemId) parentId = $ax.repeater.createElementId(parentId, itemId);
-            var parentObj = $obj(parentId);
-            if(parentObj.type != 'dynamicPanel') continue;
-            if(!parentObj.propagate) {
-                directParent = false;
-                continue;
-            }
-            return { id: parentId, direct: directParent };
-        }
-        return false;
     };
     _dynamicPanelManager.parentHandlesStyles = _parentHandlesStyles;
 

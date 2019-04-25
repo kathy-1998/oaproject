@@ -2,7 +2,9 @@ package cn.bdqn.oaproject.controller.administration;
 
 import cn.bdqn.oaproject.pojo.CarApply;
 import cn.bdqn.oaproject.pojo.Users;
+import cn.bdqn.oaproject.pojo.WaitingTaskRecord;
 import cn.bdqn.oaproject.service.administration.CarApplyService;
+import cn.bdqn.oaproject.service.mydesktop.WaitingTaskRecordService;
 import cn.bdqn.oaproject.utils.stringToDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,7 +26,11 @@ public class CarApplyController {
     @Autowired
     private CarApplyService carApplyService;
 
-    @RequestMapping(value = "/savecarapply",method = RequestMethod.POST)
+    @Autowired
+    private WaitingTaskRecordService waitingTaskRecordService;
+
+
+    @RequestMapping(value = "/savecarapply")
     @ResponseBody
     public Object saveCarApply(@RequestParam("carNo") String carNo,
                                @RequestParam("transportPeople") String transportPeople,
@@ -38,13 +44,14 @@ public class CarApplyController {
                                @RequestParam("theApproverId")String theApproverId,
                                HttpSession session){
         //获取当前登录 用户
-        Users users=(Users) session.getAttribute("User");
+     /*  Users users=(Users) session.getAttribute("User");*/
         Map<String,Object> resultMap=new HashMap<>();   //存放结果集
         //进行添加操作
         try {
             //封装为对象
             CarApply carApply=new CarApply();
             carApply.setCarNo(Integer.parseInt(carNo));
+            carApply.setTransportPeople(transportPeople);
             carApply.setDestination(destination);
             carApply.setEntourage(entourage);
             carApply.setDriver(driver);
@@ -54,11 +61,17 @@ public class CarApplyController {
             carApply.setStartTime(stringToDateConverter.strToDate(startTime,"yyyy-MM-dd HH:mm:ss"));
             carApply.setEndTime(stringToDateConverter.strToDate(endTime,"yyyy-MM-dd HH:mm:ss"));
             carApply.setIsdelete(1);
-            carApply.setDeptNo(users.getDept().getDeptId());    //设置当前用户所属部门编号
-            carApply.setCreator(users.getUserId());
+           /* carApply.setDeptNo(users.getDept().getDeptId());    //设置当前用户所属部门编号
+            carApply.setCreator(users.getUserId());*/
+            carApply.setStatus(0);   //默认未审批
+            carApply.setTaskId(3);  //任务id
+            carApply.setDeptNo(1);
+            carApply.setCreator(1);
             carApply.setCreationDate(new Date());
-            boolean flag=carApplyService.addCarApplyRecord(carApply);
-            if(flag){
+
+            //添加到用车申请记录表
+            CarApply carApply1=carApplyService.addCarApplyRecord(carApply);
+            if(carApply1!=null){
                 resultMap.put("result","success");
             }else {
                 resultMap.put("result","failed");

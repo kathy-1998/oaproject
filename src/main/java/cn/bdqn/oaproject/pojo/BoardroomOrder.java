@@ -1,5 +1,7 @@
 package cn.bdqn.oaproject.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -35,12 +37,14 @@ public class BoardroomOrder {
      * 预订起始时间（预订时间段必须为同一天）
      */
     @Column(name="START_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 预订截至时间
      */
     @Column(name="END_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**

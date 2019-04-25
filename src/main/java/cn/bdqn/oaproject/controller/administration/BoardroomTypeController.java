@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -21,16 +22,15 @@ public class BoardroomTypeController {
      * @return
      */
     @RequestMapping(value="/getallroomtype",method = RequestMethod.GET)
-    public String getAllRoomType(){
+    @ResponseBody
+    public Object getAllRoomType(){
+        List<BoardroomType> boardroomTypes=null;
         try {
-            List<BoardroomType> boardroomTypes=boardroomTypeService.findAll();
-            for (BoardroomType t:boardroomTypes){
-                System.out.println(t.getTypeId()+"\t"+t.getTypeName());
-            }
+            boardroomTypes=boardroomTypeService.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "Conference_room_manage";
+        return boardroomTypes;
 
     }
 

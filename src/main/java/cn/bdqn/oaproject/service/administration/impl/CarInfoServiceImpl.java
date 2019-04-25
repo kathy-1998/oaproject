@@ -5,9 +5,11 @@ import cn.bdqn.oaproject.pojo.CarInfo;
 import cn.bdqn.oaproject.service.administration.CarInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
+@Transactional
 public class CarInfoServiceImpl implements CarInfoService {
 
     @Autowired
@@ -118,7 +120,7 @@ public class CarInfoServiceImpl implements CarInfoService {
      * @throws Exception
      */
     @Override
-    public CarInfo findByVehicleNoIsExits(Integer vehicleNo)throws Exception {
+    public CarInfo findByVehicleNoIsExits(String vehicleNo)throws Exception {
         CarInfo carInfo=null;
         try {
             carInfo=carInfoDao.findByVehicleNo(vehicleNo);
