@@ -23,5 +23,19 @@ public class SealType {
     @Column(name = "SEAL_TYPE_NAME")
     private String sealTypeName;
 
+    public Integer getSealTypeId() {
+        return sealTypeId;
+    }
 
+    public void setSealTypeId(Integer sealTypeId) {
+        this.sealTypeId = sealTypeId;
+    }
+
+    public String getSealTypeName() {
+        return sealTypeName;
+    }
+
+    public void setSealTypeName(String sealTypeName) {
+        this.sealTypeName = sealTypeName;
+    }
 }

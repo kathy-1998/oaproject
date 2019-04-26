@@ -64,6 +64,11 @@ public class WaitingTaskRecordServiceImpl implements WaitingTaskRecordService {
 
     @Override
     public boolean addInfo(WaitingTaskRecord waitingTaskRecord) {
-        return false;
+        try {
+            waitingTaskRecordDao.save(waitingTaskRecord);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

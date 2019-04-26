@@ -59,7 +59,6 @@ public class WaitingTaskRecordController {
                     predicates.add(cb.equal(root.get("taskTypeId").as(Integer.class),taskTypeId));
                 }
                 predicates.add(cb.equal(root.get("userId").as(Integer.class),users.getUserId()));
-
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };

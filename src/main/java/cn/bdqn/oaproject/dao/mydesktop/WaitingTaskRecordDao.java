@@ -50,7 +50,7 @@ public interface WaitingTaskRecordDao extends JpaRepository<WaitingTaskRecord,In
      * @param id
      * @return
      */
-    @Query("select w from WaitingTaskRecord w where w.userId=?1 or w.applyId=?1")
+    @Query("select w from WaitingTaskRecord w where w.userId=?1 or w.initiatorId=?1")
     List<WaitingTaskRecord> getInfoById(Integer id);
 
     @Override

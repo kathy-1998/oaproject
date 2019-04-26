@@ -4086,14 +4086,33 @@
       url: "/oaproject/waiting/getInfoById.find",
       data: null,
       dataType: "json",
+      async:false,
       success: function (data) {
         for (var i = 0; i < data.length; i++) {
+          var roleName="";
+          $.ajax({
+            type:"GET",
+            url:"/oaproject/users/getRealNameById.find",
+            data:{uid:data[i].initiatorId},
+            async:false,
+            dataType:"text",
+            success:function (d) {
+              roleName=d;
+            }
+          });
+          var statusName="";
+          if(data[i].status == 1){
+            statusName="待审核";
+          }
+          if(data[i].status == 2){
+            statusName="已审核";
+          }
           $tbody.innerHTML += "<tr>" +
                   "<td>" + data[i].waitingTaskRecordName + "</td>" +
                   "<td>" + data[i].applyTime + "</td>" +
-                  "<td>" + data[i].initiatorId + "</td>" +
+                  "<td>" + roleName + "</td>" +
                   "<td>" + data[i].finalApprovalTime + "</td>" +
-                  "<td>" + data[i].status + "</td>" +
+                  "<td>" + statusName + "</td>" +
                   "<td><span>审批</span>&nbsp;&nbsp;&nbsp;<span>查看</span></td>" +
                   "</tr>";
         }

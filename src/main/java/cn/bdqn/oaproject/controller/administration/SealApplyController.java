@@ -42,9 +42,9 @@ public class SealApplyController {
      * @param session 获取当前登录用户
      * @return
      */
-    @RequestMapping(value = "savesealapply",method = RequestMethod.POST)
+    @RequestMapping(value = "/savesealapply.do",method = RequestMethod.POST)
     @ResponseBody
-    public Object saveSealApplyRecord(@RequestParam("applyTime")String applyTime,
+    public String saveSealApplyRecord(@RequestParam("applyTime")String applyTime,
                                       @RequestParam("sealTypeId")String sealTypeId,
                                       @RequestParam("theOriginOfAnIncident")String theOriginOfAnIncident,
                                       @RequestParam("userId")String userId,
@@ -55,7 +55,10 @@ public class SealApplyController {
         try {
             //封装对象
             SealApply sealApply=new SealApply();
-            sealApply.setApplyTime(stringToDateConverter.strToDate(applyTime,"yyyy-MM-dd HH:mm:ss"));
+            sealApply.setUserName(users.getRealName());
+            sealApply.setApplyUserId(users.getUserId());
+            sealApply.setTaskTypeId(4);
+            sealApply.setApplyTime(stringToDateConverter.strToDate(applyTime,"yyyy-MM-dd"));
             sealApply.setSealTypeId(Integer.parseInt(sealTypeId));
             sealApply.setTheOriginOfAnIncident(theOriginOfAnIncident);
             sealApply.setDeptId(users.getDept().getDeptId());
@@ -74,7 +77,9 @@ public class SealApplyController {
             resultMap.put("result","error");
             e.printStackTrace();
         }
-        return resultMap;
+        String json=JSON.toJSONString(resultMap);
+        System.out.println(json);
+        return json;
     }
 
     /**

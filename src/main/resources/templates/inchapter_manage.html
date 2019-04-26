@@ -147,7 +147,7 @@
 
     <!-- textfield - date (文本框(单行)) -->
     <div id="u25" class="ax_文本框_单行_">
-      <input id="u25_input" type="text" value="11/14/2009" class="text_sketch" data-label="textfield - date"/>
+      <input id="u25_input" readonly="readonly" type="text" value="" class="text_sketch" data-label="textfield - date"/>
     </div>
 
     <!-- button - date picker (图片) -->
@@ -710,6 +710,41 @@
         getUserInfo();
         getSealType();
         getAdmin();
+        setTime();
+        $("#u14").click(function () {
+            var applyTime=$("#u25_input").val();  //申请时间
+            var sealTypeId=$("#u1_input").val();  //用章类型
+            var theOriginOfAnIncident=$("#u0_input").val();    //用章事由
+            var userId=$("#u12_input").val();  //获取审批人
+            if(sealTypeId == 0){
+              alert("请选择用章类型!");
+              return;
+            }
+            if(theOriginOfAnIncident == ""){
+              alert("请选择用章事由!");
+              return;
+            }
+            if(userId == 0){
+              alert("请选择审批人!");
+              return;
+            }
+
+            $.ajax({
+              type:"POST",
+              url:"/oaproject/sealapply/savesealapply.do",
+              data:{applyTime:applyTime,
+                    sealTypeId:sealTypeId,
+                    theOriginOfAnIncident:theOriginOfAnIncident,
+                    userId:userId},
+              dataType:"json",
+              success:function (data) {
+                if(data.result=="success"){
+                  alert("申请成功,等待审批人审批!");
+                  location.href="http://localhost:8080/oaproject/Mydesktop.html";
+                }
+              }
+            });
+        });
     });
     /**
      * 获取用户信息
@@ -763,6 +798,11 @@
           }
         }
       });
+    }
+
+    function setTime() {
+      var d=new Date();
+      $("#u25_input").val(d.getFullYear()+"-"+(parseInt(d.getMonth())+1)+"-"+d.getDate());
     }
   </script>
 </html>

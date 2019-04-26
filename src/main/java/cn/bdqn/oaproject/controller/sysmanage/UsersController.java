@@ -9,6 +9,7 @@ import cn.bdqn.oaproject.service.sysmanage.UsersService;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.node.JsonNodeCreator;
 import jdk.nashorn.internal.runtime.JSONFunctions;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -364,7 +365,14 @@ public class UsersController {
 
         return usersService.findUsersByIsadmin(0);
     }
-
+    @RequestMapping("/getRealNameById.find")
+    @ResponseBody
+    public String getRealNameById(Integer uid){
+        String userName="";
+        Users users=usersService.findUsersByUserId(uid);
+        userName=users.getRealName();
+        return userName;
+    }
 
 
 

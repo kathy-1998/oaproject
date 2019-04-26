@@ -14,7 +14,8 @@ public class SealApply {
      */
     @Id
     @Column(name = "SEAL_APPLY_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "seal_apply_sql")
+    @SequenceGenerator(name = "seal_apply_sql",sequenceName = "seal_apply_seq",initialValue = 3,allocationSize = 1)
     private Integer sealApplyId;
 
     /**

@@ -2,6 +2,7 @@ package cn.bdqn.oaproject.pojo;
 
 import javax.persistence.*;
 import java.util.Date;
+import cn.bdqn.oaproject.utils.stringToDateConverter;
 
 /**
  * 待处理任务记录表
