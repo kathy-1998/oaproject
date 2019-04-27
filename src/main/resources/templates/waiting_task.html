@@ -4101,10 +4101,10 @@
             }
           });
           var statusName="";
-          if(data[i].status == 1){
+          if(data[i].status == 0){
             statusName="待审核";
           }
-          if(data[i].status == 2){
+          if(data[i].status == 1){
             statusName="已审核";
           }
           $tbody.innerHTML += "<tr>" +

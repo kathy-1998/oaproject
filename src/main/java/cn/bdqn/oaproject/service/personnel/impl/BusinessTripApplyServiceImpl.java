@@ -51,4 +51,9 @@ public class BusinessTripApplyServiceImpl implements BusinessTripApplyService {
        }
 
     }
+
+    @Override
+    public BusinessTripApply getInfoById(Integer id) {
+        return businessTripApplyDao.findInfoById(id);
+    }
 }

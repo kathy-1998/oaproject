@@ -10,4 +10,6 @@ public interface BookBorrowService {
 
 
     boolean Add(BookBorrow bookBorrow);
+
+    BookBorrow getInfoById(Integer id);
 }

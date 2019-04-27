@@ -43,6 +43,7 @@ public class LeaveApplyServiceImpl implements LeaveApplyService {
             waitingTaskRecord.setStatus(leaveApply.getStatus());  //状态
             waitingTaskRecord.setCreationDate(new Date());  //任务创建时间
             waitingTaskRecord.setCreator(leaveApply.getLeaveApplyUserId());
+            waitingTaskRecord.setStatus(0);
             waitingTaskRecordService.addInfo(waitingTaskRecord);
 
 
@@ -52,5 +53,16 @@ public class LeaveApplyServiceImpl implements LeaveApplyService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public LeaveApply getInfoById(Integer id) {
+        LeaveApply leaveApply=null;
+        try {
+            leaveApply=leaveApplyDao.findInfoById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return leaveApply;
     }
 }

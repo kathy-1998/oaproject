@@ -53,4 +53,9 @@ public class BookBorrowServiceImpl implements BookBorrowService {
                return  false;
            }
     }
+
+    @Override
+    public BookBorrow getInfoById(Integer id) {
+        return bookBorrowDao.findInfoById(id);
+    }
 }

@@ -24,4 +24,6 @@ public interface CarApplyService {
     CarApply findByCarApplyIdAndTaskId(Integer carApplyId,Integer taskId)throws Exception;
 
     boolean approveCarApply(@Param("carApplyId") Integer carApplyId, @Param("status")Integer status)throws  Exception;
+
+    CarApply getInfoById(Integer id);
 }

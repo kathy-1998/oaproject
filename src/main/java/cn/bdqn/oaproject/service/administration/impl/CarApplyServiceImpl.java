@@ -84,4 +84,9 @@ public class CarApplyServiceImpl implements CarApplyService {
             return false;
         }
     }
+
+    @Override
+    public CarApply getInfoById(Integer id) {
+        return carApplyDao.findInfoById(id);
+    }
 }

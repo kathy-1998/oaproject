@@ -1,9 +1,9 @@
 package cn.bdqn.oaproject.controller.mydesktop.waitingTaskRecord;
 
 
-import cn.bdqn.oaproject.pojo.Users;
-import cn.bdqn.oaproject.pojo.WaitingTaskRecord;
+import cn.bdqn.oaproject.pojo.*;
 import cn.bdqn.oaproject.service.mydesktop.WaitingTaskRecordService;
+import cn.bdqn.oaproject.utils.WaitingTaskQueryUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -99,5 +99,47 @@ public class WaitingTaskRecordController {
             message="Yes";
         }
         return message;
+    }
+
+    @RequestMapping("/findInfoById.find")
+    @ResponseBody
+    public String findInfoByTypeIdAndApplyId(Integer applyId,Integer typeId){
+        String json="";
+        Object obj= null;
+        WaitingTaskQueryUtil waitingTaskQueryUtil=new WaitingTaskQueryUtil();
+        List<Object> objects=new ArrayList<Object>();
+        try {
+            obj=waitingTaskQueryUtil.getInfoByTypeIdAndApplyId(typeId,applyId);
+            if(obj instanceof LeaveApply){
+                LeaveApply leaveApply=(LeaveApply) obj;
+                objects.add(leaveApply);
+                objects.add("请假申请");
+            }
+            if(obj instanceof BusinessTripApply){
+                BusinessTripApply businessTripApply=(BusinessTripApply) obj;
+                objects.add(businessTripApply);
+                objects.add("出差申请");
+            }
+            if(obj instanceof CarApply){
+                CarApply carApply=(CarApply) obj;
+                objects.add(carApply);
+                objects.add("用车申请");
+            }
+            if(obj instanceof SealApply){
+                SealApply sealApply=(SealApply) obj;
+                objects.add(sealApply);
+                objects.add("用章申请");
+            }
+            if(obj instanceof BookBorrow){
+                BookBorrow bookBorrow=(BookBorrow) obj;
+                objects.add(bookBorrow);
+                objects.add("图书借阅");
+            }
+            json=JSON.toJSONString(objects);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(json);
+        return json;
     }
 }

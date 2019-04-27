@@ -8,4 +8,6 @@ import cn.bdqn.oaproject.pojo.LeaveApply;
 public interface LeaveApplyService {
 
     boolean add(LeaveApply leaveApply);
+
+    LeaveApply getInfoById(Integer id);
 }

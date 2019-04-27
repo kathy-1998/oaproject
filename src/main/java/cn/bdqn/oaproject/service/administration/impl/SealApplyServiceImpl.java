@@ -35,8 +35,9 @@ public class SealApplyServiceImpl implements SealApplyService {
             record.setTaskTypeId(4);    //任务类型id
             /*  record.setInitiatorId(carApply1.getCreator()); */   //发起人
             record.setUserId(seal.getUserId());    //审批人
-            record.setInitiatorId(seal.getApplyUserId());    //发起人
-            record.setStatus(1);
+            //发起人
+            record.setInitiatorId(seal.getApplyUserId());
+            record.setStatus(0);
             record.setIsdelete(1);  //默认不删除
             //添加待处理任务记录
             waitingTaskRecordService.addInfo(record);
@@ -81,5 +82,12 @@ public class SealApplyServiceImpl implements SealApplyService {
             return false;
         }
 
+    }
+
+    @Override
+    public SealApply getInfoById(Integer id) {
+        System.out.println("任务类型："+id);
+        SealApply sealApply=sealApplyDao.findInfoById(id);
+        return sealApply;
     }
 }

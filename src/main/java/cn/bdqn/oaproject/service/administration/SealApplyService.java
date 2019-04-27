@@ -30,4 +30,5 @@ public interface SealApplyService {
      */
     boolean approveSealApply(@Param("sealTypeId") Integer sealApplyId, @Param("status")Integer status);
 
+    SealApply getInfoById(Integer id);
 }

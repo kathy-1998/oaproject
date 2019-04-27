@@ -40,4 +40,6 @@ public interface CarApplyDao extends JpaRepository<CarApply,Integer> {
     @Query("update CarApply c set c.status=:status where c.carApplyId=:carApplyId")
     void updateStatus(@Param("carApplyId") Integer carApplyId, @Param("status")Integer status);
 
+    @Query("select c from CarApply c where c.carApplyId=?1")
+    CarApply findInfoById(Integer id);
 }

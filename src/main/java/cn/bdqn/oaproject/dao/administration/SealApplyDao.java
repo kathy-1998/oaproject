@@ -41,5 +41,7 @@ public interface SealApplyDao extends JpaRepository<SealApply,Integer> {
     void updateStatus(@Param("sealApplyId") Integer sealApplyId,@Param("status")Integer status);
 
 
+    @Query("select s from SealApply s where s.sealApplyId=?1")
+    SealApply findInfoById(Integer id);
 
 }

@@ -10,4 +10,6 @@ public interface BusinessTripApplyService {
 
 
     boolean add(BusinessTripApply businessTripApply);
+
+    BusinessTripApply getInfoById(Integer id);
 }
